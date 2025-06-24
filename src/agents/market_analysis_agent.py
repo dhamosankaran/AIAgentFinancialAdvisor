@@ -63,18 +63,23 @@ class MarketAnalysisAgent(BaseFinancialAgent):
             if "error" in market_summary:
                 raise ValueError(f"Error analyzing market conditions: {market_summary['error']}")
             
-            # Extract data from sources
-            alpha_data = market_summary["sources"]["alpha_vantage"]
-            spy_data = alpha_data.get("SPY", {})
+            # Extract data from the updated market summary structure
+            # Try to get SPY data from fallback first, then major indices
+            spy_data = {}
+            if "spy_fallback" in market_summary and "error" not in market_summary["spy_fallback"]:
+                spy_data = market_summary["spy_fallback"]
+            elif "major_indices" in market_summary and "^GSPC" in market_summary["major_indices"]:
+                # Use S&P 500 data as proxy for SPY
+                spy_data = market_summary["major_indices"]["^GSPC"]
             
-            # Create structured output
+            # Create structured output with fallback values
             return MarketAnalysisOutput(
                 current_price=float(spy_data.get("price", 0)),
                 daily_change=float(spy_data.get("change", 0)),
                 daily_change_percent=float(spy_data.get("change_percent", 0)),
                 volume=int(spy_data.get("volume", 0)),
-                market_sentiment=market_summary["market_sentiment"],
-                timestamp=market_summary["timestamp"]
+                market_sentiment=market_summary.get("market_sentiment", "Neutral"),
+                timestamp=market_summary.get("timestamp", "")
             )
             
         except Exception as e:

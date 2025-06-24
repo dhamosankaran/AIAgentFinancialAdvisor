@@ -179,38 +179,77 @@ async def update_profile(user_id: str = Path(...), request: UserProfileRequest =
         profile = user_profile_service.load_profile()
         if not profile:
             raise HTTPException(status_code=404, detail="Profile not found")
+        
+        # Update profile fields
         profile.name = request.name
         profile.age = request.age
         profile.income = request.income
         profile.risk_tolerance = request.risk_tolerance
         profile.investment_goal = request.investment_goal
         profile.investment_horizon = request.investment_horizon
-        # Use multi-agent system to generate new allocation
-        portfolio_response = await coordinator.process_message(
-            f"User profile updated: Name: {profile.name}, Age: {profile.age}, Income: {profile.income}, Risk Tolerance: {profile.risk_tolerance}, Investment Goal: {profile.investment_goal}, Investment Horizon: {profile.investment_horizon}. Please propose a personalized investment option with recommended portfolio allocation only as a list (e.g., Stocks: 50%, Bonds: 20%, Cash: 5%, Real Estate: 10%, Commodities: 5%, Cryptocurrency: 3%, ETFs: 5%, REITs: 2%). Include all asset classes, even if the allocation is 0%. In your report, clearly label sections as 'Summary', 'Market Outlook', and 'Recommendations', and ensure the allocation in the report matches the recommended allocation list. Format your output as:\n---\nPortfolio Allocation:\n<list>\n---\nReport:\nSummary:\n<summary>\nMarket Outlook:\n<outlook>\nRecommendations:\n<recommendations>\n---",
-            profile.user_id
-        )
-        # Parse allocation and report
-        alloc_match = re.search(r"Portfolio Allocation:\n([\s\S]*?)---", portfolio_response)
-        report_match = re.search(r"Report:\n([\s\S]*?)---", portfolio_response)
-        allocation_lines = alloc_match.group(1).strip().split("\n") if alloc_match else []
-        allocation = []
-        for line in allocation_lines:
-            m = re.match(r"-?\s*([A-Za-z ]+):\s*(\d+(?:\.\d+)?)%", line)
-            if m:
-                allocation.append({
-                    "asset_type": m.group(1).strip().lower(),
-                    "allocation_percentage": float(m.group(2))
-                })
-        # If report section is missing, use the whole output as the report
-        if report_match:
-            report = report_match.group(1).strip()
-        else:
-            report = portfolio_response.strip()
-        # Save the latest report to the profile and persist
-        profile.last_report = report
+        
+        # Save updated profile BEFORE generating allocation to ensure coordinator uses latest data
         user_profile_service.save_profile(profile)
+        
+        # Generate new allocation using coordinator agent
+        coordinator = CoordinatorAgent(user_profile_service=user_profile_service)
+        user_profile_dict = {
+            "age": profile.age,
+            "risk_tolerance": profile.risk_tolerance,
+            "investment_goal": profile.investment_goal,
+            "investment_horizon": profile.investment_horizon,
+            "name": profile.name,
+            "income": profile.income
+        }
+        
+        # Generate comprehensive report with synchronized data
+        report_data = await coordinator.generate_comprehensive_report(user_profile_dict)
+        
+        # Update profile preferences to match the new allocation
+        if report_data["allocation"]:
+            # Clear existing preferences and add new ones
+            profile.preferences = []
+            for alloc in report_data["allocation"]:
+                from ..models.user_profile import InvestmentPreference
+                preference = InvestmentPreference(
+                    asset_type=alloc["asset_type"],
+                    allocation_percentage=alloc["allocation_percentage"],
+                    risk_tolerance=profile.risk_tolerance,
+                    is_active=True
+                )
+                profile.preferences.append(preference)
+            
+            # Save updated profile with new report
+            profile.last_report = report_data["report"]
+            user_profile_service.save_profile(profile)
+            
+            # Also update the profile portfolio storage with new data
+            profile_portfolio_service.update_profile_portfolio(
+                user_profile={
+                    "name": profile.name,
+                    "age": profile.age,
+                    "income": profile.income,
+                    "risk_tolerance": profile.risk_tolerance,
+                    "investment_goal": profile.investment_goal,
+                    "investment_horizon": profile.investment_horizon
+                },
+                portfolio_allocation=report_data["allocation"],
+                portfolio_summary=report_data["report"]
+            )
+            
+            logger.info(f"Profile and portfolio data updated for user {profile.name}")
+        
+        # Format the response as investment proposal
+        portfolio_response = f"""---
+Portfolio Allocation:
+{chr(10).join([f"- {alloc['asset_type'].replace('_', ' ').title()}: {alloc['allocation_percentage']}%" for alloc in report_data["allocation"]])}
+---
+Report:
+{report_data["report"]}
+---"""
+        
         return InvestmentProposalResponse(user_id=profile.user_id, proposal=portfolio_response)
+        
     except Exception as e:
         logger.error(f"Error updating user profile: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))

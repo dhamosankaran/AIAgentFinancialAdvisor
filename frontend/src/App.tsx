@@ -318,7 +318,6 @@ const App: React.FC = () => {
           const proposal = `---
 Portfolio Allocation:
 ${data.fap_context.portfolio_allocation ? Object.entries(data.fap_context.portfolio_allocation.raw)
-  .filter(([key, value]) => typeof value === 'number' && (value as number) > 0)
   .map(([key, value]) => `- ${key.charAt(0).toUpperCase() + key.slice(1).replace('_', ' ')}: ${((value as number) * 100).toFixed(0)}%`)
   .join('\n') : ''}
 ---
@@ -334,6 +333,105 @@ ${data.fap_context.report}
       }
       
       // Also update the local profile data to stay in sync
+      setProfileData({
+        name: currentProfile.name,
+        age: currentProfile.age || 0,
+        income: currentProfile.income || 0,
+        risk_tolerance: currentProfile.risk_tolerance,
+        investment_goal: currentProfile.investment_goal,
+        investment_horizon: currentProfile.investment_horizon,
+      });
+    } catch (err) {
+      setFapError(err instanceof Error ? err.message : 'An error occurred');
+    } finally {
+      setFapLoading(false);
+    }
+  };
+
+  const runFapAnalysisFromProfile = async () => {
+    setFapLoading(true);
+    setFapError(null);
+    try {
+      // First, get the most up-to-date profile data from the server
+      const profileRes = await fetch('/api/v1/portfolio/summary');
+      if (!profileRes.ok) throw new Error('Failed to get current profile data');
+      const currentProfile = await profileRes.json();
+      
+      if (currentProfile.no_profile) {
+        throw new Error('No profile found. Please create a profile first.');
+      }
+
+      // Now run FAP analysis with the current profile data
+      const res = await fetch('/api/v1/fap/analyze', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: currentProfile.name,
+          age: currentProfile.age,
+          income: currentProfile.income,
+          risk_tolerance: currentProfile.risk_tolerance,
+          investment_goal: currentProfile.investment_goal,
+          investment_horizon: currentProfile.investment_horizon,
+        }),
+      });
+      if (!res.ok) throw new Error('Failed to run Financial Analysis Pipeline');
+      const data = await res.json();
+      setFapContext(data.fap_context);
+      setFapHistory(data.fap_context?.history || []);
+      
+      // Generate Investment Proposal from the FAP analysis result
+      if (data.fap_context && data.fap_context.report) {
+        const proposal = `---
+Portfolio Allocation:
+${data.fap_context.portfolio_allocation ? Object.entries(data.fap_context.portfolio_allocation.raw)
+  .map(([key, value]) => `- ${key.charAt(0).toUpperCase() + key.slice(1).replace('_', ' ')}: ${((value as number) * 100).toFixed(0)}%`)
+  .join('\n') : ''}
+---
+Report:
+${data.fap_context.report}
+---`;
+        setInvestmentProposal(proposal);
+      }
+      
+      // Update profile portfolio storage with new allocation to sync across all tabs
+      if (data.fap_context?.portfolio_allocation?.raw) {
+        const allocation = Object.entries(data.fap_context.portfolio_allocation.raw).map(([asset_type, percentage]) => ({
+          asset_type,
+          allocation_percentage: Math.round((percentage as number) * 100)
+        }));
+        
+        // Generate portfolio summary
+        const portfolioSummary = `Summary:
+Based on your profile (Age: ${currentProfile.age}, Risk Tolerance: ${currentProfile.risk_tolerance}, Investment Goal: ${currentProfile.investment_goal}, Time Horizon: ${currentProfile.investment_horizon}), we recommend a ${currentProfile.risk_tolerance} investment approach.
+
+Market Outlook:
+Current market conditions suggest a balanced approach to asset allocation. Diversification across multiple asset classes helps manage risk while maintaining growth potential.
+
+Recommendations:
+Your recommended portfolio allocation: ${Object.entries(data.fap_context.portfolio_allocation.raw)
+  .map(([asset, percentage]) => `**${asset.charAt(0).toUpperCase() + asset.slice(1).replace('_', ' ')} (${Math.round((percentage as number) * 100)}%)**`)
+  .join(', ')}. This allocation balances risk and return potential based on your ${currentProfile.risk_tolerance} risk profile and ${currentProfile.investment_horizon} investment horizon.`;
+        
+        await fetch('/api/v1/profile/portfolio/save', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            user_profile: currentProfile,
+            portfolio_allocation: allocation,
+            portfolio_summary: portfolioSummary
+          })
+        });
+      }
+      
+      // Trigger refresh of portfolio data to sync with FAP results across all tabs
+      if ((window as any).refreshPortfolio) {
+        (window as any).refreshPortfolio();
+      }
+      
+      // Reload dashboard to reflect new allocation
+      await reloadDashboard();
+      
+      // Update the local profile data to stay in sync
       setProfileData({
         name: currentProfile.name,
         age: currentProfile.age || 0,
@@ -397,39 +495,40 @@ ${data.fap_context.report}
         return <Journal />;
       case 'profile':
         return (
-          <div className="max-w-2xl mx-auto bg-white rounded-lg shadow p-6 mb-8">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">My Profile</h2>
-            {profileData && (
-              <UserProfileForm
-                onSubmit={async () => { await reloadDashboard(); }}
-                initialValues={profileData}
-                mode="edit"
-                userId={userId || ''}
-                onProposal={async (proposal) => {
-                  setInvestmentProposal(proposal)
-                  await reloadDashboard()
-                }}
-              />
-            )}
-          </div>
-        );
-      case 'fap':
-        return (
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-4xl mx-auto space-y-6">
+            {/* Profile Section */}
+            <div className="bg-white rounded-lg shadow p-6">
+              <h2 className="text-2xl font-bold text-gray-800 mb-6">My Profile</h2>
+              {profileData && (
+                <UserProfileForm
+                  onSubmit={async () => { await reloadDashboard(); }}
+                  initialValues={profileData}
+                  mode="edit"
+                  userId={userId || ''}
+                  onProposal={async (proposal) => {
+                    setInvestmentProposal(proposal)
+                    await reloadDashboard()
+                  }}
+                />
+              )}
+            </div>
+            
+            {/* FAP Section */}
             <div className="bg-white shadow rounded-lg p-6">
               <h2 className="text-2xl font-bold mb-4 text-gray-800 flex items-center">
                 <span className="mr-3">🤖</span>
-                Financial Analysis Pipeline
+                Generate Portfolio Allocation
               </h2>
               <p className="text-gray-600 mb-6">
-                Run a comprehensive analysis to get personalized investment recommendations based on your profile and current market conditions.
+                Run a comprehensive analysis to generate personalized investment recommendations based on your current profile and market conditions. 
+                This will update your portfolio allocation across all tabs.
               </p>
               <button
                 className={`px-6 py-3 rounded-lg font-semibold text-white ${fapLoading ? 'bg-blue-300' : 'bg-blue-700 hover:bg-blue-800'}`}
-                onClick={runFapAnalysis}
+                onClick={runFapAnalysisFromProfile}
                 disabled={fapLoading}
               >
-                {fapLoading ? 'Analyzing...' : 'Run Financial Analysis Pipeline'}
+                {fapLoading ? 'Analyzing...' : 'Generate New Portfolio Allocation'}
               </button>
               {fapError && (
                 <div className="mt-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
@@ -472,16 +571,7 @@ ${data.fap_context.report}
               >
                 Dashboard
               </button>
-              <button
-                className={`py-4 px-1 border-b-2 font-medium text-sm ${
-                  activeTab === 'fap'
-                    ? 'border-blue-500 text-blue-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                }`}
-                onClick={() => setActiveTab('fap')}
-              >
-                FAP
-              </button>
+
               <button
                 className={`py-4 px-1 border-b-2 font-medium text-sm ${
                   activeTab === 'markets'

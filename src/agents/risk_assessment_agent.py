@@ -107,7 +107,7 @@ class RiskAssessmentAgent(BaseFinancialAgent):
         saved_profile = profile_service.load_profile()
         
         if saved_profile:
-            # Use saved profile data
+            # Use saved profile data - ensure fresh data is loaded
             profile_data = {
                 "age": saved_profile.age,
                 "income": saved_profile.income,
@@ -115,15 +115,21 @@ class RiskAssessmentAgent(BaseFinancialAgent):
                 "investment_goals": saved_profile.investment_goal,
                 "time_horizon": saved_profile.investment_horizon
             }
+            
+            # Log the profile data being used for debugging
+            self.logger.info(f"Using saved profile: Age {saved_profile.age}, Risk: {saved_profile.risk_tolerance}, Income: {saved_profile.income}")
         else:
-            # Fallback to default values if no saved profile
+            # Fallback to default values if no saved profile - use reasonable defaults
             profile_data = {
-                "age": 30,
-                "income": 100000,
+                "age": 35,
+                "income": 75000,
                 "risk_tolerance": "moderate",
-                "investment_goals": "retirement",
-                "time_horizon": "long_term"
+                "investment_goals": "balanced_growth",
+                "time_horizon": "medium-term"
             }
+            
+            # Log when using defaults
+            self.logger.warning("No saved profile found, using default values")
             
             # Try to extract from string as backup
             # Extract age

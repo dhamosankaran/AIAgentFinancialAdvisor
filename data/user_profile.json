@@ -1,10 +1,10 @@
 {
   "user_id": "671f1cc2-1949-4842-b9dd-b87dcafa171c",
-  "name": "Yashu",
-  "age": 18,
-  "income": 100000.0,
+  "name": "Shrinidhi",
+  "age": 22,
+  "income": 10000.0,
   "risk_tolerance": "conservative",
-  "investment_goal": "preservation",
+  "investment_goal": "growth",
   "investment_horizon": "long-term",
   "preferences": [
     {
@@ -57,6 +57,6 @@
     }
   ],
   "created_at": "2025-06-22 11:24:36.923172",
-  "updated_at": "2025-06-24 12:17:25.385505",
-  "last_report": "Summary:\nBased on your profile (Age: 18, Risk Tolerance: conservative, Investment Goal: preservation, Time Horizon: long-term), we recommend a conservative investment approach.\n\nMarket Outlook:\nCurrent market conditions suggest a balanced approach to asset allocation. Diversification across multiple asset classes helps manage risk while maintaining growth potential.\n\nRecommendations:\nYour recommended portfolio allocation: **Stocks (25%)**, **Bonds (45%)**, **Cash (15%)**, **Real Estate (5%)**, **Commodities (5%)**, **Cryptocurrency (0%)**, **ETFs (3%)**, **REITs (2%)**. This allocation balances risk and return potential based on your conservative risk profile and long-term investment horizon."
+  "updated_at": "2025-06-24 18:01:20.263743",
+  "last_report": "Summary:\nBased on your profile (Age: 22, Risk Tolerance: conservative, Investment Goal: growth, Time Horizon: long-term), we recommend a conservative investment approach.\n\nMarket Outlook:\nCurrent market conditions suggest a balanced approach to asset allocation. Diversification across multiple asset classes helps manage risk while maintaining growth potential.\n\nRecommendations:\nYour recommended portfolio allocation: **Stocks (25%)**, **Bonds (45%)**, **Cash (15%)**, **Real Estate (5%)**, **Commodities (5%)**, **Cryptocurrency (0%)**, **ETFs (3%)**, **REITs (2%)**. This allocation balances risk and return potential based on your conservative risk profile and long-term investment horizon."
 }

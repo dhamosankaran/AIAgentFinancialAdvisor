@@ -1,25 +1,25 @@
 {
-  "id": "fap_1750737597",
-  "timestamp": "2025-06-23T22:59:57.419055",
+  "id": "fap_1750805511",
+  "timestamp": "2025-06-24T17:51:51.575011",
   "fap_context": {
     "user_profile": {
-      "name": "Shri",
+      "name": "Shrinidhi",
       "age": 22,
-      "income": 100000.0,
-      "risk_tolerance": "moderate",
-      "investment_goal": "balanced_growth",
+      "income": 10000.0,
+      "risk_tolerance": "conservative",
+      "investment_goal": "growth",
       "investment_horizon": "long-term"
     },
-    "session_id": "9af5fee0-4565-42d7-86cf-4f19da7f4a5d",
+    "session_id": "8fdaeda1-b614-454e-b63b-fc6c2539644b",
     "risk_assessment": {
       "raw": {
-        "risk_score": 0.5333333333333333,
+        "risk_score": 0.43333333333333335,
         "risk_level": "Moderate",
         "profile_analysis": {
           "age": "22 years",
-          "income": "$100,000",
-          "risk_tolerance": "Moderate",
-          "investment_goals": "balanced_growth",
+          "income": "$10,000",
+          "risk_tolerance": "Conservative",
+          "investment_goals": "growth",
           "time_horizon": "long-term"
         },
         "recommendations": [
@@ -31,47 +31,47 @@
     },
     "market_analysis": {
       "raw": {
-        "current_price": 600.15,
-        "daily_change": 5.87,
-        "daily_change_percent": 0.9877,
-        "volume": 87426039,
-        "market_sentiment": "Slightly Positive",
-        "timestamp": "2025-06-23T22:59:57.418166"
+        "current_price": 606.780029296875,
+        "daily_change": 2.45001220703125,
+        "daily_change_percent": 0.40540964998384565,
+        "volume": 66822171,
+        "market_sentiment": "Neutral",
+        "timestamp": "2025-06-24T17:51:51.573657"
       }
     },
     "portfolio_allocation": {
       "raw": {
-        "stocks": 0.5,
-        "bonds": 0.25,
-        "cash": 0.1,
+        "stocks": 0.25,
+        "bonds": 0.45,
+        "cash": 0.15,
         "real_estate": 0.05,
         "commodities": 0.05,
-        "cryptocurrency": 0.02,
-        "etfs": 0.02,
-        "reits": 0.01
+        "cryptocurrency": 0.0,
+        "etfs": 0.03,
+        "reits": 0.02
       }
     },
-    "report": "Financial Analysis Report\n==================================================\n\nRisk Assessment Summary:\nrisk_score=0.5333333333333333 risk_level='Moderate' profile_analysis={'age': '22 years', 'income': '$100,000', 'risk_tolerance': 'Moderate', 'investment_goals': 'balanced_growth', 'time_horizon': 'long-term'} recommendations=['Balanced portfolio of stocks and bonds', 'Consider index funds for core holdings', 'Quarterly portfolio review recommended']\n\nMarket Outlook:\ncurrent_price=600.15 daily_change=5.87 daily_change_percent=0.9877 volume=87426039 market_sentiment='Slightly Positive' timestamp='2025-06-23T22:59:57.418166'\n\nRecommended Portfolio Allocation:\nstocks=0.5 bonds=0.25 cash=0.1 real_estate=0.05 commodities=0.05 cryptocurrency=0.02 etfs=0.02 reits=0.01",
+    "report": "Financial Analysis Report\n==================================================\n\nRisk Assessment Summary:\nrisk_score=0.43333333333333335 risk_level='Moderate' profile_analysis={'age': '22 years', 'income': '$10,000', 'risk_tolerance': 'Conservative', 'investment_goals': 'growth', 'time_horizon': 'long-term'} recommendations=['Balanced portfolio of stocks and bonds', 'Consider index funds for core holdings', 'Quarterly portfolio review recommended']\n\nMarket Outlook:\ncurrent_price=606.780029296875 daily_change=2.45001220703125 daily_change_percent=0.40540964998384565 volume=66822171 market_sentiment='Neutral' timestamp='2025-06-24T17:51:51.573657'\n\nRecommended Portfolio Allocation:\nstocks=0.25 bonds=0.45 cash=0.15 real_estate=0.05 commodities=0.05 cryptocurrency=0.0 etfs=0.03 reits=0.02",
     "history": [
       {
         "user_profile": {
-          "name": "Shri",
+          "name": "Shrinidhi",
           "age": 22,
-          "income": 100000.0,
-          "risk_tolerance": "moderate",
-          "investment_goal": "balanced_growth",
+          "income": 10000.0,
+          "risk_tolerance": "conservative",
+          "investment_goal": "growth",
           "investment_horizon": "long-term"
         },
-        "session_id": "9af5fee0-4565-42d7-86cf-4f19da7f4a5d",
+        "session_id": "8fdaeda1-b614-454e-b63b-fc6c2539644b",
         "risk_assessment": {
           "raw": {
-            "risk_score": 0.5333333333333333,
+            "risk_score": 0.43333333333333335,
             "risk_level": "Moderate",
             "profile_analysis": {
               "age": "22 years",
-              "income": "$100,000",
-              "risk_tolerance": "Moderate",
-              "investment_goals": "balanced_growth",
+              "income": "$10,000",
+              "risk_tolerance": "Conservative",
+              "investment_goals": "growth",
               "time_horizon": "long-term"
             },
             "recommendations": [
@@ -88,23 +88,23 @@
       },
       {
         "user_profile": {
-          "name": "Shri",
+          "name": "Shrinidhi",
           "age": 22,
-          "income": 100000.0,
-          "risk_tolerance": "moderate",
-          "investment_goal": "balanced_growth",
+          "income": 10000.0,
+          "risk_tolerance": "conservative",
+          "investment_goal": "growth",
           "investment_horizon": "long-term"
         },
-        "session_id": "9af5fee0-4565-42d7-86cf-4f19da7f4a5d",
+        "session_id": "8fdaeda1-b614-454e-b63b-fc6c2539644b",
         "risk_assessment": {
           "raw": {
-            "risk_score": 0.5333333333333333,
+            "risk_score": 0.43333333333333335,
             "risk_level": "Moderate",
             "profile_analysis": {
               "age": "22 years",
-              "income": "$100,000",
-              "risk_tolerance": "Moderate",
-              "investment_goals": "balanced_growth",
+              "income": "$10,000",
+              "risk_tolerance": "Conservative",
+              "investment_goals": "growth",
               "time_horizon": "long-term"
             },
             "recommendations": [
@@ -116,12 +116,12 @@
         },
         "market_analysis": {
           "raw": {
-            "current_price": 600.15,
-            "daily_change": 5.87,
-            "daily_change_percent": 0.9877,
-            "volume": 87426039,
-            "market_sentiment": "Slightly Positive",
-            "timestamp": "2025-06-23T22:59:57.418166"
+            "current_price": 606.780029296875,
+            "daily_change": 2.45001220703125,
+            "daily_change_percent": 0.40540964998384565,
+            "volume": 66822171,
+            "market_sentiment": "Neutral",
+            "timestamp": "2025-06-24T17:51:51.573657"
           }
         },
         "portfolio_allocation": null,
@@ -129,23 +129,23 @@
         "history": [
           {
             "user_profile": {
-              "name": "Shri",
+              "name": "Shrinidhi",
               "age": 22,
-              "income": 100000.0,
-              "risk_tolerance": "moderate",
-              "investment_goal": "balanced_growth",
+              "income": 10000.0,
+              "risk_tolerance": "conservative",
+              "investment_goal": "growth",
               "investment_horizon": "long-term"
             },
-            "session_id": "9af5fee0-4565-42d7-86cf-4f19da7f4a5d",
+            "session_id": "8fdaeda1-b614-454e-b63b-fc6c2539644b",
             "risk_assessment": {
               "raw": {
-                "risk_score": 0.5333333333333333,
+                "risk_score": 0.43333333333333335,
                 "risk_level": "Moderate",
                 "profile_analysis": {
                   "age": "22 years",
-                  "income": "$100,000",
-                  "risk_tolerance": "Moderate",
-                  "investment_goals": "balanced_growth",
+                  "income": "$10,000",
+                  "risk_tolerance": "Conservative",
+                  "investment_goals": "growth",
                   "time_horizon": "long-term"
                 },
                 "recommendations": [
@@ -164,23 +164,23 @@
       },
       {
         "user_profile": {
-          "name": "Shri",
+          "name": "Shrinidhi",
           "age": 22,
-          "income": 100000.0,
-          "risk_tolerance": "moderate",
-          "investment_goal": "balanced_growth",
+          "income": 10000.0,
+          "risk_tolerance": "conservative",
+          "investment_goal": "growth",
           "investment_horizon": "long-term"
         },
-        "session_id": "9af5fee0-4565-42d7-86cf-4f19da7f4a5d",
+        "session_id": "8fdaeda1-b614-454e-b63b-fc6c2539644b",
         "risk_assessment": {
           "raw": {
-            "risk_score": 0.5333333333333333,
+            "risk_score": 0.43333333333333335,
             "risk_level": "Moderate",
             "profile_analysis": {
               "age": "22 years",
-              "income": "$100,000",
-              "risk_tolerance": "Moderate",
-              "investment_goals": "balanced_growth",
+              "income": "$10,000",
+              "risk_tolerance": "Conservative",
+              "investment_goals": "growth",
               "time_horizon": "long-term"
             },
             "recommendations": [
@@ -192,47 +192,47 @@
         },
         "market_analysis": {
           "raw": {
-            "current_price": 600.15,
-            "daily_change": 5.87,
-            "daily_change_percent": 0.9877,
-            "volume": 87426039,
-            "market_sentiment": "Slightly Positive",
-            "timestamp": "2025-06-23T22:59:57.418166"
+            "current_price": 606.780029296875,
+            "daily_change": 2.45001220703125,
+            "daily_change_percent": 0.40540964998384565,
+            "volume": 66822171,
+            "market_sentiment": "Neutral",
+            "timestamp": "2025-06-24T17:51:51.573657"
           }
         },
         "portfolio_allocation": {
           "raw": {
-            "stocks": 0.5,
-            "bonds": 0.25,
-            "cash": 0.1,
+            "stocks": 0.25,
+            "bonds": 0.45,
+            "cash": 0.15,
             "real_estate": 0.05,
             "commodities": 0.05,
-            "cryptocurrency": 0.02,
-            "etfs": 0.02,
-            "reits": 0.01
+            "cryptocurrency": 0.0,
+            "etfs": 0.03,
+            "reits": 0.02
           }
         },
         "report": null,
         "history": [
           {
             "user_profile": {
-              "name": "Shri",
+              "name": "Shrinidhi",
               "age": 22,
-              "income": 100000.0,
-              "risk_tolerance": "moderate",
-              "investment_goal": "balanced_growth",
+              "income": 10000.0,
+              "risk_tolerance": "conservative",
+              "investment_goal": "growth",
               "investment_horizon": "long-term"
             },
-            "session_id": "9af5fee0-4565-42d7-86cf-4f19da7f4a5d",
+            "session_id": "8fdaeda1-b614-454e-b63b-fc6c2539644b",
             "risk_assessment": {
               "raw": {
-                "risk_score": 0.5333333333333333,
+                "risk_score": 0.43333333333333335,
                 "risk_level": "Moderate",
                 "profile_analysis": {
                   "age": "22 years",
-                  "income": "$100,000",
-                  "risk_tolerance": "Moderate",
-                  "investment_goals": "balanced_growth",
+                  "income": "$10,000",
+                  "risk_tolerance": "Conservative",
+                  "investment_goals": "growth",
                   "time_horizon": "long-term"
                 },
                 "recommendations": [
@@ -249,23 +249,23 @@
           },
           {
             "user_profile": {
-              "name": "Shri",
+              "name": "Shrinidhi",
               "age": 22,
-              "income": 100000.0,
-              "risk_tolerance": "moderate",
-              "investment_goal": "balanced_growth",
+              "income": 10000.0,
+              "risk_tolerance": "conservative",
+              "investment_goal": "growth",
               "investment_horizon": "long-term"
             },
-            "session_id": "9af5fee0-4565-42d7-86cf-4f19da7f4a5d",
+            "session_id": "8fdaeda1-b614-454e-b63b-fc6c2539644b",
             "risk_assessment": {
               "raw": {
-                "risk_score": 0.5333333333333333,
+                "risk_score": 0.43333333333333335,
                 "risk_level": "Moderate",
                 "profile_analysis": {
                   "age": "22 years",
-                  "income": "$100,000",
-                  "risk_tolerance": "Moderate",
-                  "investment_goals": "balanced_growth",
+                  "income": "$10,000",
+                  "risk_tolerance": "Conservative",
+                  "investment_goals": "growth",
                   "time_horizon": "long-term"
                 },
                 "recommendations": [
@@ -277,12 +277,12 @@
             },
             "market_analysis": {
               "raw": {
-                "current_price": 600.15,
-                "daily_change": 5.87,
-                "daily_change_percent": 0.9877,
-                "volume": 87426039,
-                "market_sentiment": "Slightly Positive",
-                "timestamp": "2025-06-23T22:59:57.418166"
+                "current_price": 606.780029296875,
+                "daily_change": 2.45001220703125,
+                "daily_change_percent": 0.40540964998384565,
+                "volume": 66822171,
+                "market_sentiment": "Neutral",
+                "timestamp": "2025-06-24T17:51:51.573657"
               }
             },
             "portfolio_allocation": null,
@@ -290,23 +290,23 @@
             "history": [
               {
                 "user_profile": {
-                  "name": "Shri",
+                  "name": "Shrinidhi",
                   "age": 22,
-                  "income": 100000.0,
-                  "risk_tolerance": "moderate",
-                  "investment_goal": "balanced_growth",
+                  "income": 10000.0,
+                  "risk_tolerance": "conservative",
+                  "investment_goal": "growth",
                   "investment_horizon": "long-term"
                 },
-                "session_id": "9af5fee0-4565-42d7-86cf-4f19da7f4a5d",
+                "session_id": "8fdaeda1-b614-454e-b63b-fc6c2539644b",
                 "risk_assessment": {
                   "raw": {
-                    "risk_score": 0.5333333333333333,
+                    "risk_score": 0.43333333333333335,
                     "risk_level": "Moderate",
                     "profile_analysis": {
                       "age": "22 years",
-                      "income": "$100,000",
-                      "risk_tolerance": "Moderate",
-                      "investment_goals": "balanced_growth",
+                      "income": "$10,000",
+                      "risk_tolerance": "Conservative",
+                      "investment_goals": "growth",
                       "time_horizon": "long-term"
                     },
                     "recommendations": [
@@ -327,23 +327,23 @@
       },
       {
         "user_profile": {
-          "name": "Shri",
+          "name": "Shrinidhi",
           "age": 22,
-          "income": 100000.0,
-          "risk_tolerance": "moderate",
-          "investment_goal": "balanced_growth",
+          "income": 10000.0,
+          "risk_tolerance": "conservative",
+          "investment_goal": "growth",
           "investment_horizon": "long-term"
         },
-        "session_id": "9af5fee0-4565-42d7-86cf-4f19da7f4a5d",
+        "session_id": "8fdaeda1-b614-454e-b63b-fc6c2539644b",
         "risk_assessment": {
           "raw": {
-            "risk_score": 0.5333333333333333,
+            "risk_score": 0.43333333333333335,
             "risk_level": "Moderate",
             "profile_analysis": {
               "age": "22 years",
-              "income": "$100,000",
-              "risk_tolerance": "Moderate",
-              "investment_goals": "balanced_growth",
+              "income": "$10,000",
+              "risk_tolerance": "Conservative",
+              "investment_goals": "growth",
               "time_horizon": "long-term"
             },
             "recommendations": [
@@ -355,47 +355,47 @@
         },
         "market_analysis": {
           "raw": {
-            "current_price": 600.15,
-            "daily_change": 5.87,
-            "daily_change_percent": 0.9877,
-            "volume": 87426039,
-            "market_sentiment": "Slightly Positive",
-            "timestamp": "2025-06-23T22:59:57.418166"
+            "current_price": 606.780029296875,
+            "daily_change": 2.45001220703125,
+            "daily_change_percent": 0.40540964998384565,
+            "volume": 66822171,
+            "market_sentiment": "Neutral",
+            "timestamp": "2025-06-24T17:51:51.573657"
           }
         },
         "portfolio_allocation": {
           "raw": {
-            "stocks": 0.5,
-            "bonds": 0.25,
-            "cash": 0.1,
+            "stocks": 0.25,
+            "bonds": 0.45,
+            "cash": 0.15,
             "real_estate": 0.05,
             "commodities": 0.05,
-            "cryptocurrency": 0.02,
-            "etfs": 0.02,
-            "reits": 0.01
+            "cryptocurrency": 0.0,
+            "etfs": 0.03,
+            "reits": 0.02
           }
         },
-        "report": "Financial Analysis Report\n==================================================\n\nRisk Assessment Summary:\nrisk_score=0.5333333333333333 risk_level='Moderate' profile_analysis={'age': '22 years', 'income': '$100,000', 'risk_tolerance': 'Moderate', 'investment_goals': 'balanced_growth', 'time_horizon': 'long-term'} recommendations=['Balanced portfolio of stocks and bonds', 'Consider index funds for core holdings', 'Quarterly portfolio review recommended']\n\nMarket Outlook:\ncurrent_price=600.15 daily_change=5.87 daily_change_percent=0.9877 volume=87426039 market_sentiment='Slightly Positive' timestamp='2025-06-23T22:59:57.418166'\n\nRecommended Portfolio Allocation:\nstocks=0.5 bonds=0.25 cash=0.1 real_estate=0.05 commodities=0.05 cryptocurrency=0.02 etfs=0.02 reits=0.01",
+        "report": "Financial Analysis Report\n==================================================\n\nRisk Assessment Summary:\nrisk_score=0.43333333333333335 risk_level='Moderate' profile_analysis={'age': '22 years', 'income': '$10,000', 'risk_tolerance': 'Conservative', 'investment_goals': 'growth', 'time_horizon': 'long-term'} recommendations=['Balanced portfolio of stocks and bonds', 'Consider index funds for core holdings', 'Quarterly portfolio review recommended']\n\nMarket Outlook:\ncurrent_price=606.780029296875 daily_change=2.45001220703125 daily_change_percent=0.40540964998384565 volume=66822171 market_sentiment='Neutral' timestamp='2025-06-24T17:51:51.573657'\n\nRecommended Portfolio Allocation:\nstocks=0.25 bonds=0.45 cash=0.15 real_estate=0.05 commodities=0.05 cryptocurrency=0.0 etfs=0.03 reits=0.02",
         "history": [
           {
             "user_profile": {
-              "name": "Shri",
+              "name": "Shrinidhi",
               "age": 22,
-              "income": 100000.0,
-              "risk_tolerance": "moderate",
-              "investment_goal": "balanced_growth",
+              "income": 10000.0,
+              "risk_tolerance": "conservative",
+              "investment_goal": "growth",
               "investment_horizon": "long-term"
             },
-            "session_id": "9af5fee0-4565-42d7-86cf-4f19da7f4a5d",
+            "session_id": "8fdaeda1-b614-454e-b63b-fc6c2539644b",
             "risk_assessment": {
               "raw": {
-                "risk_score": 0.5333333333333333,
+                "risk_score": 0.43333333333333335,
                 "risk_level": "Moderate",
                 "profile_analysis": {
                   "age": "22 years",
-                  "income": "$100,000",
-                  "risk_tolerance": "Moderate",
-                  "investment_goals": "balanced_growth",
+                  "income": "$10,000",
+                  "risk_tolerance": "Conservative",
+                  "investment_goals": "growth",
                   "time_horizon": "long-term"
                 },
                 "recommendations": [
@@ -412,23 +412,23 @@
           },
           {
             "user_profile": {
-              "name": "Shri",
+              "name": "Shrinidhi",
               "age": 22,
-              "income": 100000.0,
-              "risk_tolerance": "moderate",
-              "investment_goal": "balanced_growth",
+              "income": 10000.0,
+              "risk_tolerance": "conservative",
+              "investment_goal": "growth",
               "investment_horizon": "long-term"
             },
-            "session_id": "9af5fee0-4565-42d7-86cf-4f19da7f4a5d",
+            "session_id": "8fdaeda1-b614-454e-b63b-fc6c2539644b",
             "risk_assessment": {
               "raw": {
-                "risk_score": 0.5333333333333333,
+                "risk_score": 0.43333333333333335,
                 "risk_level": "Moderate",
                 "profile_analysis": {
                   "age": "22 years",
-                  "income": "$100,000",
-                  "risk_tolerance": "Moderate",
-                  "investment_goals": "balanced_growth",
+                  "income": "$10,000",
+                  "risk_tolerance": "Conservative",
+                  "investment_goals": "growth",
                   "time_horizon": "long-term"
                 },
                 "recommendations": [
@@ -440,12 +440,12 @@
             },
             "market_analysis": {
               "raw": {
-                "current_price": 600.15,
-                "daily_change": 5.87,
-                "daily_change_percent": 0.9877,
-                "volume": 87426039,
-                "market_sentiment": "Slightly Positive",
-                "timestamp": "2025-06-23T22:59:57.418166"
+                "current_price": 606.780029296875,
+                "daily_change": 2.45001220703125,
+                "daily_change_percent": 0.40540964998384565,
+                "volume": 66822171,
+                "market_sentiment": "Neutral",
+                "timestamp": "2025-06-24T17:51:51.573657"
               }
             },
             "portfolio_allocation": null,
@@ -453,23 +453,23 @@
             "history": [
               {
                 "user_profile": {
-                  "name": "Shri",
+                  "name": "Shrinidhi",
                   "age": 22,
-                  "income": 100000.0,
-                  "risk_tolerance": "moderate",
-                  "investment_goal": "balanced_growth",
+                  "income": 10000.0,
+                  "risk_tolerance": "conservative",
+                  "investment_goal": "growth",
                   "investment_horizon": "long-term"
                 },
-                "session_id": "9af5fee0-4565-42d7-86cf-4f19da7f4a5d",
+                "session_id": "8fdaeda1-b614-454e-b63b-fc6c2539644b",
                 "risk_assessment": {
                   "raw": {
-                    "risk_score": 0.5333333333333333,
+                    "risk_score": 0.43333333333333335,
                     "risk_level": "Moderate",
                     "profile_analysis": {
                       "age": "22 years",
-                      "income": "$100,000",
-                      "risk_tolerance": "Moderate",
-                      "investment_goals": "balanced_growth",
+                      "income": "$10,000",
+                      "risk_tolerance": "Conservative",
+                      "investment_goals": "growth",
                       "time_horizon": "long-term"
                     },
                     "recommendations": [
@@ -488,23 +488,23 @@
           },
           {
             "user_profile": {
-              "name": "Shri",
+              "name": "Shrinidhi",
               "age": 22,
-              "income": 100000.0,
-              "risk_tolerance": "moderate",
-              "investment_goal": "balanced_growth",
+              "income": 10000.0,
+              "risk_tolerance": "conservative",
+              "investment_goal": "growth",
               "investment_horizon": "long-term"
             },
-            "session_id": "9af5fee0-4565-42d7-86cf-4f19da7f4a5d",
+            "session_id": "8fdaeda1-b614-454e-b63b-fc6c2539644b",
             "risk_assessment": {
               "raw": {
-                "risk_score": 0.5333333333333333,
+                "risk_score": 0.43333333333333335,
                 "risk_level": "Moderate",
                 "profile_analysis": {
                   "age": "22 years",
-                  "income": "$100,000",
-                  "risk_tolerance": "Moderate",
-                  "investment_goals": "balanced_growth",
+                  "income": "$10,000",
+                  "risk_tolerance": "Conservative",
+                  "investment_goals": "growth",
                   "time_horizon": "long-term"
                 },
                 "recommendations": [
@@ -516,47 +516,47 @@
             },
             "market_analysis": {
               "raw": {
-                "current_price": 600.15,
-                "daily_change": 5.87,
-                "daily_change_percent": 0.9877,
-                "volume": 87426039,
-                "market_sentiment": "Slightly Positive",
-                "timestamp": "2025-06-23T22:59:57.418166"
+                "current_price": 606.780029296875,
+                "daily_change": 2.45001220703125,
+                "daily_change_percent": 0.40540964998384565,
+                "volume": 66822171,
+                "market_sentiment": "Neutral",
+                "timestamp": "2025-06-24T17:51:51.573657"
               }
             },
             "portfolio_allocation": {
               "raw": {
-                "stocks": 0.5,
-                "bonds": 0.25,
-                "cash": 0.1,
+                "stocks": 0.25,
+                "bonds": 0.45,
+                "cash": 0.15,
                 "real_estate": 0.05,
                 "commodities": 0.05,
-                "cryptocurrency": 0.02,
-                "etfs": 0.02,
-                "reits": 0.01
+                "cryptocurrency": 0.0,
+                "etfs": 0.03,
+                "reits": 0.02
               }
             },
             "report": null,
             "history": [
               {
                 "user_profile": {
-                  "name": "Shri",
+                  "name": "Shrinidhi",
                   "age": 22,
-                  "income": 100000.0,
-                  "risk_tolerance": "moderate",
-                  "investment_goal": "balanced_growth",
+                  "income": 10000.0,
+                  "risk_tolerance": "conservative",
+                  "investment_goal": "growth",
                   "investment_horizon": "long-term"
                 },
-                "session_id": "9af5fee0-4565-42d7-86cf-4f19da7f4a5d",
+                "session_id": "8fdaeda1-b614-454e-b63b-fc6c2539644b",
                 "risk_assessment": {
                   "raw": {
-                    "risk_score": 0.5333333333333333,
+                    "risk_score": 0.43333333333333335,
                     "risk_level": "Moderate",
                     "profile_analysis": {
                       "age": "22 years",
-                      "income": "$100,000",
-                      "risk_tolerance": "Moderate",
-                      "investment_goals": "balanced_growth",
+                      "income": "$10,000",
+                      "risk_tolerance": "Conservative",
+                      "investment_goals": "growth",
                       "time_horizon": "long-term"
                     },
                     "recommendations": [
@@ -573,23 +573,23 @@
               },
               {
                 "user_profile": {
-                  "name": "Shri",
+                  "name": "Shrinidhi",
                   "age": 22,
-                  "income": 100000.0,
-                  "risk_tolerance": "moderate",
-                  "investment_goal": "balanced_growth",
+                  "income": 10000.0,
+                  "risk_tolerance": "conservative",
+                  "investment_goal": "growth",
                   "investment_horizon": "long-term"
                 },
-                "session_id": "9af5fee0-4565-42d7-86cf-4f19da7f4a5d",
+                "session_id": "8fdaeda1-b614-454e-b63b-fc6c2539644b",
                 "risk_assessment": {
                   "raw": {
-                    "risk_score": 0.5333333333333333,
+                    "risk_score": 0.43333333333333335,
                     "risk_level": "Moderate",
                     "profile_analysis": {
                       "age": "22 years",
-                      "income": "$100,000",
-                      "risk_tolerance": "Moderate",
-                      "investment_goals": "balanced_growth",
+                      "income": "$10,000",
+                      "risk_tolerance": "Conservative",
+                      "investment_goals": "growth",
                       "time_horizon": "long-term"
                     },
                     "recommendations": [
@@ -601,12 +601,12 @@
                 },
                 "market_analysis": {
                   "raw": {
-                    "current_price": 600.15,
-                    "daily_change": 5.87,
-                    "daily_change_percent": 0.9877,
-                    "volume": 87426039,
-                    "market_sentiment": "Slightly Positive",
-                    "timestamp": "2025-06-23T22:59:57.418166"
+                    "current_price": 606.780029296875,
+                    "daily_change": 2.45001220703125,
+                    "daily_change_percent": 0.40540964998384565,
+                    "volume": 66822171,
+                    "market_sentiment": "Neutral",
+                    "timestamp": "2025-06-24T17:51:51.573657"
                   }
                 },
                 "portfolio_allocation": null,
@@ -614,23 +614,23 @@
                 "history": [
                   {
                     "user_profile": {
-                      "name": "Shri",
+                      "name": "Shrinidhi",
                       "age": 22,
-                      "income": 100000.0,
-                      "risk_tolerance": "moderate",
-                      "investment_goal": "balanced_growth",
+                      "income": 10000.0,
+                      "risk_tolerance": "conservative",
+                      "investment_goal": "growth",
                       "investment_horizon": "long-term"
                     },
-                    "session_id": "9af5fee0-4565-42d7-86cf-4f19da7f4a5d",
+                    "session_id": "8fdaeda1-b614-454e-b63b-fc6c2539644b",
                     "risk_assessment": {
                       "raw": {
-                        "risk_score": 0.5333333333333333,
+                        "risk_score": 0.43333333333333335,
                         "risk_level": "Moderate",
                         "profile_analysis": {
                           "age": "22 years",
-                          "income": "$100,000",
-                          "risk_tolerance": "Moderate",
-                          "investment_goals": "balanced_growth",
+                          "income": "$10,000",
+                          "risk_tolerance": "Conservative",
+                          "investment_goals": "growth",
                           "time_horizon": "long-term"
                         },
                         "recommendations": [
@@ -654,14 +654,14 @@
     ]
   },
   "user_profile": {
-    "name": "Shri",
+    "name": "Shrinidhi",
     "age": 22,
-    "income": 100000.0,
-    "risk_tolerance": "moderate",
-    "investment_goal": "balanced_growth",
+    "income": 10000.0,
+    "risk_tolerance": "conservative",
+    "investment_goal": "growth",
     "investment_horizon": "long-term"
   },
   "session_active": false,
   "session_restored": true,
-  "last_accessed": "2025-06-24T12:16:35.490657"
+  "last_accessed": "2025-06-24T18:01:20.110515"
 }

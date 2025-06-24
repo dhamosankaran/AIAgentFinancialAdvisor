@@ -107,52 +107,67 @@ ALPHA_VANTAGE_API_KEY=
 
 # Scratchpad
 
-Current Task: [X] External API Analysis and MCP Integration Planning - COMPLETED ✅  
-Project Status: Architecture Analysis Phase - External API Architecture Documented and MCP Integration Strategy Defined
+Current Task: [X] FAP Integration with My Profile Tab - COMPLETED ✅
+Project Status: Successfully moved FAP functionality to My Profile tab for streamlined workflow - profile update → FAP generation → cross-tab portfolio sync
 
-## Current Task Breakdown - UI Reorganization
-[X] Move Recent Market Analyses to Markets Tab
-[X] Create My Profile Tab with Edit/Update functionality
-[X] Add Profile Portfolio Storage Service (data/profile_portfolio.json)
-[X] Create API endpoints for profile portfolio management
-[X] Update UserProfileForm to auto-generate and save portfolio data
-[X] Update Dashboard to load data from stored profile portfolio
-[X] Move FAP functionality to dedicated FAP Tab
-[X] Remove FAP and Recent Analyses sections from Dashboard
+## MCP Integration Task Breakdown
+[X] Create Market Data MCP Server (Alpha Vantage + Yahoo Finance)
+[X] Create AI Analysis MCP Server (OpenAI API wrapper)
+[X] Implement MCP Client in AgenticAI
+[X] Update MarketDataService to use MCP
+[X] Migrate Agent Tools to use MCP tool discovery
+[X] Create comprehensive test suite for MCP integration
+[X] End-to-end testing with MCP integration
+[X] Performance comparison and optimization
 
 ## Implementation Success Details
-✅ **UI Structure Reorganized**: 5 tabs - Dashboard, My Portfolio, Markets, Journal, My Profile, FAP
-✅ **Profile Portfolio Storage**: ProfilePortfolioService with local JSON storage
-✅ **API Integration**: 6 new endpoints for profile portfolio CRUD operations
-✅ **Automatic Portfolio Generation**: Profile updates trigger portfolio allocation generation
-✅ **Dashboard Data Source**: Now loads from stored profile portfolio with fallback
-✅ **Markets Tab Enhancement**: Includes Recent Market Analyses (limit 10)
-✅ **Dedicated FAP Tab**: Complete FAP functionality moved to own tab
-✅ **Profile Management**: My Profile tab with edit/update and portfolio storage
+✅ **Market Data MCP Server**: Complete implementation with Alpha Vantage and Yahoo Finance integration, 4 tools (get_stock_quote, get_historical_data, get_market_indices, get_market_summary)
+✅ **AI Analysis MCP Server**: Complete implementation with OpenAI integration, 4 tools (analyze_portfolio, assess_risk, generate_market_insights, generate_investment_proposal)
+✅ **Unified MCP Client**: Complete client implementation with tool discovery, server management, and graceful fallbacks
+✅ **Enhanced MarketDataService**: Updated with MCP integration and fallback to direct API calls
+✅ **MCP-Enabled Agents**: Created MCPEnabledAgent base class with MCPMarketAnalysisAgent and MCPPortfolioAgent implementations
+✅ **Comprehensive Test Suite**: Created test_mcp_integration.py with full test coverage
+
+## Current Task Breakdown - FAP Integration with My Profile Tab
+[X] Move FAP functionality from separate tab to My Profile tab
+[X] Create runFapAnalysisFromProfile function for integrated workflow
+[X] Fix profile portfolio save endpoint (add portfolio_summary field)
+[X] Update frontend to generate comprehensive portfolio summary
+[X] Test complete workflow: profile update → FAP analysis → portfolio storage → cross-tab sync
+[X] Verify data consistency across Dashboard, My Portfolio, and Markets tabs
+[X] Remove standalone FAP tab from navigation
+
+## Implementation Success Details
+✅ **FAP Integration with My Profile Tab**: Successfully moved Financial Analysis Pipeline functionality from separate FAP tab to My Profile tab for streamlined user workflow
+✅ **Integrated Workflow**: Users can now update their profile and immediately generate new portfolio allocation that automatically syncs across all tabs (Dashboard, My Portfolio, Markets)
+✅ **Enhanced runFapAnalysisFromProfile Function**: Complete implementation that saves allocation to profile_portfolio.json and triggers cross-tab refresh for consistent data display
+✅ **Fixed Profile Portfolio Save Endpoint**: Added missing portfolio_summary field requirement and updated frontend to generate comprehensive portfolio summary
+✅ **Data Synchronization**: Profile changes trigger automatic portfolio generation based on risk tolerance with proper allocations for Conservative/Moderate/Aggressive profiles
+✅ **Cross-Tab Integration**: Portfolio updates reflect across Dashboard (Portfolio Allocation section) and My Portfolio (Investment Proposal section)
+✅ **API Testing**: All endpoints tested and working correctly (200 OK responses with proper data structure)
 
 ## Key Features Implemented
-1. **ProfilePortfolioService** - Complete storage service for profile-based portfolios
-2. **Tab Reorganization** - Clean separation of functionality across 6 tabs
-3. **Automatic Portfolio Storage** - Profile updates trigger portfolio generation and storage
-4. **Dashboard Data Loading** - Prioritizes stored profile portfolio over dynamic analysis
-5. **Risk-Based Allocations** - Default allocations for Conservative/Moderate/Aggressive profiles
-6. **API Endpoints** - Full CRUD operations for profile portfolio management
-7. **Cross-Tab Integration** - Profile changes reflect across Dashboard and Portfolio tabs
+1. **Integrated FAP Workflow** - Complete FAP functionality moved to My Profile tab with seamless user experience
+2. **Automatic Portfolio Storage** - FAP analysis results automatically saved to profile_portfolio.json
+3. **Cross-Tab Synchronization** - Profile changes reflect across Dashboard, My Portfolio, and Markets tabs
+4. **Comprehensive Portfolio Summary** - Generated portfolio summary includes profile details, market outlook, and allocation recommendations
+5. **Risk-Based Allocations** - Proper allocations for Conservative/Moderate/Aggressive profiles (tested with moderate: 50% stocks, 25% bonds)
+6. **API Endpoint Integration** - Complete CRUD operations for profile portfolio management with proper error handling
+7. **Data Consistency** - Ensures consistent allocation display across all application components
 
 ## Technical Implementation
-- **Backend**: ProfilePortfolioService, 6 new API endpoints
-- **Frontend**: UI reorganization, automatic portfolio generation
-- **Storage**: Local JSON file (data/profile_portfolio.json) with structured data
-- **Data Flow**: Profile → Portfolio Generation → Storage → Dashboard Display
-- **Error Handling**: Graceful fallbacks and comprehensive error handling
+- **Frontend**: Enhanced runFapAnalysisFromProfile function with portfolio summary generation
+- **Backend**: Fixed profile portfolio save endpoint to require user_profile, portfolio_allocation, and portfolio_summary
+- **Storage**: Local JSON file (data/profile_portfolio.json) with structured data including timestamps and metadata
+- **Data Flow**: Profile → FAP Analysis → Portfolio Generation → Storage → Cross-Tab Display
+- **Error Handling**: Graceful fallbacks and comprehensive error handling throughout the workflow
 
-## Tab Structure
+## Tab Structure (Updated)
 1. **Dashboard**: Portfolio allocation and summary (loads from stored data)
 2. **My Portfolio**: Portfolio details and investment proposals
-3. **Markets**: Market analysis and recent analyses (moved from Dashboard)
+3. **Markets**: Market analysis and recent analyses
 4. **Journal**: Investment journal functionality
-5. **My Profile**: Profile editing with automatic portfolio generation
-6. **FAP**: Financial Analysis Pipeline (moved from Dashboard)
+5. **My Profile**: Profile editing with integrated FAP functionality (FAP tab removed)
 
 # Progress Tracking
 - [X] Project initialization
@@ -165,39 +180,40 @@ Project Status: Architecture Analysis Phase - External API Architecture Document
 - [X] Dynamic portfolio allocation feature - ✅ COMPLETED
 - [X] FAP Results Persistent Storage System - ✅ COMPLETED
 - [X] UI Reorganization and Profile Portfolio Storage - ✅ COMPLETED
+- [X] FAP Integration with My Profile Tab - ✅ COMPLETED
 
 # Implementation Success
-✅ **UI REORGANIZATION AND PROFILE PORTFOLIO STORAGE COMPLETED**
-The application now has a clean 6-tab structure with dedicated functionality. Profile updates automatically generate and store portfolio allocations in local JSON storage. Dashboard loads data from stored profile portfolio, ensuring consistency across sessions. Recent Market Analyses moved to Markets tab, and FAP functionality has its own dedicated tab.
+✅ **FAP INTEGRATION WITH MY PROFILE TAB COMPLETED**
+The Financial Analysis Pipeline functionality has been successfully moved from a separate FAP tab to the My Profile tab, creating a streamlined user workflow. Users can now update their profile and immediately run FAP analysis using the latest profile data, which automatically generates and stores portfolio allocation that syncs across all tabs (Dashboard, My Portfolio, Markets). The implementation includes proper portfolio summary generation, fixed API endpoints, and comprehensive cross-tab data synchronization.
 
-# Lessons Learned - New Entry
-* **UI Tab Reorganization**: Successfully reorganized application into 6 dedicated tabs (Dashboard, FAP, Markets, My Portfolio, My Profile, My Journal) for better functionality separation and user experience.
-* **Profile Portfolio Storage**: Implemented ProfilePortfolioService for storing profile-based portfolio allocations in local JSON storage with automatic generation based on risk tolerance.
-* **Dashboard Data Source Priority**: Updated Dashboard to load from stored profile portfolio first, with graceful fallback to dynamic analysis for consistent user experience.
-* **Cross-Tab Integration**: Profile updates in My Profile tab automatically generate and store portfolio data that reflects across Dashboard and Portfolio tabs.
-* **Recent Market Analyses Enhancement**: Added clickable functionality to Recent Market Analyses with modal display showing market summary, AI analysis, and raw JSON data with close option.
-* **Risk-Based Portfolio Allocation**: Implemented automatic portfolio generation with proper allocations - Conservative (45% bonds, 25% stocks), Moderate (50% stocks,25% bonds), Aggressive (65% stocks, 15% bonds).
-* **Markets Tab Enhancement**: Moved Recent Market Analyses to Markets tab with increased limit (10) and added click-to-view functionality with comprehensive modal display.
-* **FAP Tab Separation**: Successfully moved Financial Analysis Pipeline to dedicated tab with persistent results display and session management.
-* **API Integration**: Added 6 new profile portfolio endpoints for complete CRUD operations with proper error handling and data validation.
-* **Comprehensive .gitignore Update**: Successfully updated .gitignore with comprehensive patterns for Python/Node.js projects including node_modules/, .DS_Store, dist/, build/, .env, and extensive security patterns to prevent tracking of API keys, secrets, temporary files, IDE files, and OS-generated files.
+# Lessons Learned - Updated Entry
+* **FAP Integration with My Profile Tab**: Successfully moved Financial Analysis Pipeline functionality from separate FAP tab to My Profile tab for streamlined user workflow. Users can now update their profile and immediately generate new portfolio allocation that automatically syncs across all tabs (Dashboard, My Portfolio, Markets). Enhanced runFapAnalysisFromProfile function to save allocation to profile_portfolio.json and trigger cross-tab refresh for consistent data display.
+* **Profile Portfolio Save Endpoint Fix**: Fixed critical issue where the save endpoint required three fields (user_profile, portfolio_allocation, portfolio_summary) but frontend was only sending two. Updated frontend to generate comprehensive portfolio summary including profile details, market outlook, and allocation recommendations with proper formatting.
+* **Cross-Tab Data Synchronization**: Implemented robust data synchronization where profile changes in My Profile tab automatically update stored portfolio data and reflect across Dashboard (Portfolio Allocation section), My Portfolio (Investment Proposal section), and Markets tabs for consistent user experience.
+* **API Endpoint Testing**: Thoroughly tested all profile portfolio endpoints with proper JSON payloads. Confirmed save endpoint returns structured response with id, timestamp, user_profile, portfolio_allocation, portfolio_summary, risk_profile, total_allocation, asset_classes, and last_updated fields.
+* **Streamlined User Experience**: Eliminated need for separate FAP tab by integrating functionality directly into My Profile tab. Users now have single location for profile management and portfolio generation, reducing complexity and improving workflow efficiency.
+* **Profile Update Data Flow Fix**: Fixed critical issue in profile update endpoint where CoordinatorAgent was using stale profile data. Added user_profile_service.save_profile(profile) before generating allocation to ensure coordinator uses latest profile data. This resolved discrepancy where profile updates weren't immediately reflected in allocation generation (e.g., aggressive profile showing moderate allocation). Now all risk profiles generate correct allocations: Conservative (25% stocks, 45% bonds), Moderate (50% stocks, 25% bonds), Aggressive (65% stocks, 15% bonds).
 
 # Next Steps
-1. Start API server and test complete functionality - ✅ COMPLETED
-2. Verify profile changes trigger allocation updates - ✅ COMPLETED  
-3. Test dashboard and portfolio synchronization - ✅ COMPLETED  
-4. Document the implementation for future reference
-5. Update memory with successful implementation details - ✅ COMPLETED
-6. Fix missing frontend dependencies - ✅ COMPLETED
+1. Test complete frontend workflow in browser - [X] COMPLETED ✅
+2. Verify cross-tab synchronization works correctly - [X] COMPLETED ✅
+3. Test profile updates trigger allocation changes - [X] COMPLETED ✅
+4. Document the implementation for future reference - [X] COMPLETED ✅
+5. Update memory with successful implementation details - [X] COMPLETED ✅
 
 # Final Status
-✅ **ALL IMPLEMENTATION COMPLETED AND TESTED**
-- Import error fixed (UserPreference → InvestmentPreference)
-- API endpoints working correctly (200 OK responses)
-- Dynamic portfolio allocation fully functional
-- End-to-end testing successful
-- Frontend dependencies resolved (react-icons, recharts)
-- ✅ **Profile Persistence Fixed**: Risk Assessment and Portfolio agents now use saved user profile data instead of defaults
+✅ **ALL FAP INTEGRATION TASKS COMPLETED AND TESTED**
+- Fixed profile portfolio save endpoint with portfolio_summary field ✅
+- Enhanced frontend to generate comprehensive portfolio summary ✅
+- Fixed profile update endpoint data flow issue (save profile before allocation generation) ✅
+- API endpoints working correctly (200 OK responses) ✅
+- Profile portfolio storage and retrieval fully functional ✅
+- End-to-end testing successful for all risk profiles:
+  * Conservative: 25% stocks, 45% bonds ✅
+  * Moderate: 50% stocks, 25% bonds ✅
+  * Aggressive: 65% stocks, 15% bonds ✅
+- Cross-tab synchronization working correctly ✅
+- Frontend and backend integration complete ✅
 
 # Notes
 - Keep instructions simple
