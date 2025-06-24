@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Activate virtual environment
+if [ -d "venv" ]; then
+  source venv/bin/activate
+else
+  echo "Virtual environment not found! Please create one with 'python -m venv venv'"
+  exit 1
+fi
+
+# Set PYTHONPATH and run pytest with any arguments passed to the script
+PYTHONPATH=src pytest "$@" 

@@ -1,0 +1,14 @@
+{
+  "transactions": [
+    {
+      "id": "48147766-c616-41c2-8e8d-104e6a38472f",
+      "date": "2025-06-21 00:20:49.234181",
+      "type": "buy",
+      "symbol": "AAPl",
+      "shares": 1.0,
+      "price": 230.0,
+      "total": 230.0,
+      "notes": ""
+    }
+  ]
+}

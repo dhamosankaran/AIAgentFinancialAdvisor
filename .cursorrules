@@ -1,0 +1,344 @@
+# Instructions
+
+During your interaction with the user, if you find anything reusable in this project (e.g., version of a library, model name), especially about a fix to a mistake you made or a correction you received, you should take note in the `Lessons` section in the `.cursorrules` file so you will not make the same mistake again.
+
+You should also use the `.cursorrules` file as a Scratchpad to organize your thoughts. Especially when you receive a new task, you should first review the content of the Scratchpad, clear old different task if necessary, first explain the task, and plan the steps you need to take to complete the task. You can use todo markers to indicate the progress, e.g.
+[X] Task 1
+[ ] Task 2
+
+Also update the progress of the task in the Scratchpad when you finish a subtask.
+Especially when you finished a milestone, it will help to improve your depth of task accomplishment to use the Scratchpad to reflect and plan.
+The goal is to help you maintain a big picture as well as the progress of the task. Always refer to the Scratchpad when you plan the next step.
+
+# Project Overview
+
+This project is a **Financial Investment Advisor Agent** that provides personalized investment recommendations based on user financial goals, risk tolerance, and market conditions.
+
+## Core Features
+* **Personalized Guidance**: Automated yet personalized financial advice
+* **Informed Decisions**: Data-driven investment recommendations
+* **Educational Value**: Explanations of investment reasoning
+* **Time Efficiency**: Quick analysis of complex financial scenarios
+* **Cost Effectiveness**: Financial advice without high costs
+
+## Technical Architecture
+* **Framework**: FastAPI
+* **Language**: Python
+* **API Layer**: FastAPI
+* **Data Sources**: Alpha Vantage API
+
+# Project-Specific Rules
+
+1. **File and Directory Structure:**
+```
+financial-advisor-agent/
+├── src/
+│   ├── api/             # FastAPI endpoints
+│   ├── services/        # Business logic and services
+│   └── utils/           # Utility functions
+├── frontend/            # React frontend
+├── tests/               # Test suite
+├── docs/                # Documentation
+├── config/              # Configuration files
+└── requirements.txt     # Project dependencies
+```
+
+2. **API Keys:**
+* Store API keys in a `.env` file (use `.env.example` as a template)
+* Use `python-dotenv`
+* Example `.env.example`:
+```
+ALPHA_VANTAGE_API_KEY=
+```
+**DONT COMMIT THE .ENV FILE TO GIT**
+
+3. **Financial Data Integration:**
+* Use Alpha Vantage for market data
+* Implement proper caching for API calls
+* Handle rate limits and API errors gracefully
+
+4. **Risk Assessment:**
+* Implement basic risk scoring
+* Consider age, income, goals
+* Provide clear risk tolerance categories
+* Document risk assessment methodology
+
+5. **Investment Recommendations:**
+* Base recommendations on user profile and market conditions
+* Provide clear explanations for recommendations
+* Include basic asset allocation
+
+6. **Error Handling:**
+* Implement basic error handling
+* Provide informative error messages
+* Handle API and data processing errors
+* Log errors appropriately
+
+7. **Testing:**
+* Write unit tests for all components
+* Test edge cases and error conditions
+* Mock external API calls in tests
+* Maintain basic test coverage
+
+# Tools
+
+* **Backend**: Python, FastAPI, Pydantic, pandas
+* **Data Sources**: Alpha Vantage API
+* **Testing**: pytest, pytest-asyncio, httpx
+* **Documentation**: Markdown, Swagger/OpenAPI
+
+# Lessons
+
+* **API Keys**: Always use environment variables for API keys. Never commit API keys.
+* **Virtual Environment**: Always activate the virtual environment before running commands.
+* **Financial Data**: Cache API responses to avoid rate limits and improve performance.
+* **Error Handling**: Implement basic error handling for all API calls and data processing.
+* **Testing**: Write basic tests, especially for financial calculations.
+* **Documentation**: Keep documentation up-to-date with code changes.
+* **Data Validation**: Validate all user inputs and API responses.
+* **Rate Limiting**: Implement basic rate limiting for external API calls.
+* **Caching**: Use basic caching for market data.
+* **Security**: Follow basic security practices.
+* **Logging**: Implement basic logging for debugging.
+* **Performance**: Optimize basic performance.
+* **Maintainability**: Follow clean code principles.
+* **GIT SECURITY CRITICAL**: When API keys are accidentally committed to git history, use git filter-branch or create clean orphan branches and force push to completely remove sensitive data from GitHub. Always enhance .gitignore to prevent future exposures.
+* **EMERGENCY API KEY PROCEDURES**: If API keys are exposed in git history: 1) Immediately revoke the exposed key, 2) Create new API key, 3) Use git filter-branch or orphan branch approach to completely rewrite git history, 4) Force push to replace remote history, 5) Clear local reflog and run aggressive garbage collection, 6) Enhance .gitignore with comprehensive exclusions.
+
+# Scratchpad
+
+Current Task: [X] External API Analysis and MCP Integration Planning - COMPLETED ✅  
+Project Status: Architecture Analysis Phase - External API Architecture Documented and MCP Integration Strategy Defined
+
+## Current Task Breakdown - UI Reorganization
+[X] Move Recent Market Analyses to Markets Tab
+[X] Create My Profile Tab with Edit/Update functionality
+[X] Add Profile Portfolio Storage Service (data/profile_portfolio.json)
+[X] Create API endpoints for profile portfolio management
+[X] Update UserProfileForm to auto-generate and save portfolio data
+[X] Update Dashboard to load data from stored profile portfolio
+[X] Move FAP functionality to dedicated FAP Tab
+[X] Remove FAP and Recent Analyses sections from Dashboard
+
+## Implementation Success Details
+✅ **UI Structure Reorganized**: 5 tabs - Dashboard, My Portfolio, Markets, Journal, My Profile, FAP
+✅ **Profile Portfolio Storage**: ProfilePortfolioService with local JSON storage
+✅ **API Integration**: 6 new endpoints for profile portfolio CRUD operations
+✅ **Automatic Portfolio Generation**: Profile updates trigger portfolio allocation generation
+✅ **Dashboard Data Source**: Now loads from stored profile portfolio with fallback
+✅ **Markets Tab Enhancement**: Includes Recent Market Analyses (limit 10)
+✅ **Dedicated FAP Tab**: Complete FAP functionality moved to own tab
+✅ **Profile Management**: My Profile tab with edit/update and portfolio storage
+
+## Key Features Implemented
+1. **ProfilePortfolioService** - Complete storage service for profile-based portfolios
+2. **Tab Reorganization** - Clean separation of functionality across 6 tabs
+3. **Automatic Portfolio Storage** - Profile updates trigger portfolio generation and storage
+4. **Dashboard Data Loading** - Prioritizes stored profile portfolio over dynamic analysis
+5. **Risk-Based Allocations** - Default allocations for Conservative/Moderate/Aggressive profiles
+6. **API Endpoints** - Full CRUD operations for profile portfolio management
+7. **Cross-Tab Integration** - Profile changes reflect across Dashboard and Portfolio tabs
+
+## Technical Implementation
+- **Backend**: ProfilePortfolioService, 6 new API endpoints
+- **Frontend**: UI reorganization, automatic portfolio generation
+- **Storage**: Local JSON file (data/profile_portfolio.json) with structured data
+- **Data Flow**: Profile → Portfolio Generation → Storage → Dashboard Display
+- **Error Handling**: Graceful fallbacks and comprehensive error handling
+
+## Tab Structure
+1. **Dashboard**: Portfolio allocation and summary (loads from stored data)
+2. **My Portfolio**: Portfolio details and investment proposals
+3. **Markets**: Market analysis and recent analyses (moved from Dashboard)
+4. **Journal**: Investment journal functionality
+5. **My Profile**: Profile editing with automatic portfolio generation
+6. **FAP**: Financial Analysis Pipeline (moved from Dashboard)
+
+# Progress Tracking
+- [X] Project initialization
+- [X] Basic setup complete
+- [X] Core features implemented
+- [X] Portfolio allocation analysis completed
+- [X] Dynamic updates implementation
+- [X] Portfolio agent testing completed
+- [X] End-to-end testing - ✅ SUCCESSFUL
+- [X] Dynamic portfolio allocation feature - ✅ COMPLETED
+- [X] FAP Results Persistent Storage System - ✅ COMPLETED
+- [X] UI Reorganization and Profile Portfolio Storage - ✅ COMPLETED
+
+# Implementation Success
+✅ **UI REORGANIZATION AND PROFILE PORTFOLIO STORAGE COMPLETED**
+The application now has a clean 6-tab structure with dedicated functionality. Profile updates automatically generate and store portfolio allocations in local JSON storage. Dashboard loads data from stored profile portfolio, ensuring consistency across sessions. Recent Market Analyses moved to Markets tab, and FAP functionality has its own dedicated tab.
+
+# Lessons Learned - New Entry
+* **UI Tab Reorganization**: Successfully reorganized application into 6 dedicated tabs (Dashboard, FAP, Markets, My Portfolio, My Profile, My Journal) for better functionality separation and user experience.
+* **Profile Portfolio Storage**: Implemented ProfilePortfolioService for storing profile-based portfolio allocations in local JSON storage with automatic generation based on risk tolerance.
+* **Dashboard Data Source Priority**: Updated Dashboard to load from stored profile portfolio first, with graceful fallback to dynamic analysis for consistent user experience.
+* **Cross-Tab Integration**: Profile updates in My Profile tab automatically generate and store portfolio data that reflects across Dashboard and Portfolio tabs.
+* **Recent Market Analyses Enhancement**: Added clickable functionality to Recent Market Analyses with modal display showing market summary, AI analysis, and raw JSON data with close option.
+* **Risk-Based Portfolio Allocation**: Implemented automatic portfolio generation with proper allocations - Conservative (45% bonds, 25% stocks), Moderate (50% stocks,25% bonds), Aggressive (65% stocks, 15% bonds).
+* **Markets Tab Enhancement**: Moved Recent Market Analyses to Markets tab with increased limit (10) and added click-to-view functionality with comprehensive modal display.
+* **FAP Tab Separation**: Successfully moved Financial Analysis Pipeline to dedicated tab with persistent results display and session management.
+* **API Integration**: Added 6 new profile portfolio endpoints for complete CRUD operations with proper error handling and data validation.
+* **Comprehensive .gitignore Update**: Successfully updated .gitignore with comprehensive patterns for Python/Node.js projects including node_modules/, .DS_Store, dist/, build/, .env, and extensive security patterns to prevent tracking of API keys, secrets, temporary files, IDE files, and OS-generated files.
+
+# Next Steps
+1. Start API server and test complete functionality - ✅ COMPLETED
+2. Verify profile changes trigger allocation updates - ✅ COMPLETED  
+3. Test dashboard and portfolio synchronization - ✅ COMPLETED  
+4. Document the implementation for future reference
+5. Update memory with successful implementation details - ✅ COMPLETED
+6. Fix missing frontend dependencies - ✅ COMPLETED
+
+# Final Status
+✅ **ALL IMPLEMENTATION COMPLETED AND TESTED**
+- Import error fixed (UserPreference → InvestmentPreference)
+- API endpoints working correctly (200 OK responses)
+- Dynamic portfolio allocation fully functional
+- End-to-end testing successful
+- Frontend dependencies resolved (react-icons, recharts)
+- ✅ **Profile Persistence Fixed**: Risk Assessment and Portfolio agents now use saved user profile data instead of defaults
+
+# Notes
+- Keep instructions simple
+- Provide clear examples
+- Document all steps
+- Include troubleshooting
+- Consider user experience
+
+# Financial Investment Advisor Agent - AI Assistant Rules
+
+# User Profile
+- Target Audience: Non-technical users
+- Technical Level: Basic computer literacy
+- Goals: Build a functional investment advisor application
+- Pain Points: Limited coding experience, need for clear guidance
+
+# Communication Guidelines
+1. Use simple, non-technical language
+2. Break down complex concepts into smaller, digestible parts
+3. Provide step-by-step instructions
+4. Include visual examples where possible
+5. Explain technical terms in plain language
+6. Offer multiple solutions when possible
+7. Provide context for each step
+
+# Code Generation Rules
+1. Write clear, well-documented code
+2. Use meaningful variable and function names
+3. Include comments explaining complex logic
+4. Follow best practices for readability
+5. Implement proper error handling
+6. Add type hints for better understanding
+7. Keep functions small and focused
+
+# File Structure Guidelines
+1. Maintain consistent file organization
+2. Use clear file naming conventions
+3. Group related files together
+4. Keep file sizes manageable
+5. Document file purposes
+
+# Testing Guidelines
+1. Write clear test cases
+2. Explain test purposes
+3. Use meaningful test names
+4. Include basic error cases
+5. Document test requirements
+
+# Documentation Requirements
+1. Keep documentation up-to-date
+2. Use clear, simple language
+3. Include examples
+4. Provide context
+5. Document assumptions
+6. Include troubleshooting guides
+
+# Error Handling
+1. Provide clear error messages
+2. Include recovery steps
+3. Document common issues
+4. Offer alternative solutions
+5. Explain error causes
+
+# Security Guidelines
+1. Protect sensitive data
+2. Use environment variables
+3. Implement basic authentication
+4. Follow security best practices
+5. Document security measures
+
+# Performance Guidelines
+1. Optimize for readability
+2. Consider basic performance
+3. Document performance considerations
+4. Include basic caching
+5. Explain optimization choices
+
+# Maintenance Guidelines
+1. Keep code organized
+2. Document changes
+3. Update dependencies
+4. Maintain documentation
+5. Follow version control best practices
+
+# Lessons Learned
+1. Start with simple implementations
+2. Build incrementally
+3. Test thoroughly
+4. Document as you go
+5. Keep security in mind
+6. Consider user experience
+7. Plan for maintenance
+
+# Scratchpad
+Current Task: [ ] Initial Project Setup
+Project Status: Planning Phase
+
+## Implementation Phases
+
+### Phase 1: Basic Setup [ ]
+[ ] Create project structure
+[ ] Set up environment
+[ ] Install dependencies
+[ ] Configure basic settings
+
+### Phase 2: Core Features [ ]
+[ ] Implement basic API
+[ ] Create frontend interface
+[ ] Add basic functionality
+[ ] Implement testing
+
+### Phase 3: Enhancement [ ]
+[ ] Add advanced features
+[ ] Improve user interface
+[ ] Enhance documentation
+[ ] Optimize performance
+
+### Phase 4: Finalization [ ]
+[ ] Complete testing
+[ ] Finalize documentation
+[ ] Prepare for deployment
+[ ] Create user guide
+
+# Progress Tracking
+- [ ] Project initialization
+- [ ] Basic setup complete
+- [ ] Core features implemented
+- [ ] Testing completed
+- [ ] Documentation finished
+- [ ] Ready for deployment
+
+# Next Steps
+1. Complete project setup
+2. Implement basic features
+3. Add testing
+4. Create documentation
+5. Prepare for deployment
+
+# Notes
+- Keep instructions simple
+- Provide clear examples
+- Document all steps
+- Include troubleshooting
+- Consider user experience 

@@ -1,0 +1,667 @@
+{
+  "id": "fap_1750737597",
+  "timestamp": "2025-06-23T22:59:57.419055",
+  "fap_context": {
+    "user_profile": {
+      "name": "Shri",
+      "age": 22,
+      "income": 100000.0,
+      "risk_tolerance": "moderate",
+      "investment_goal": "balanced_growth",
+      "investment_horizon": "long-term"
+    },
+    "session_id": "9af5fee0-4565-42d7-86cf-4f19da7f4a5d",
+    "risk_assessment": {
+      "raw": {
+        "risk_score": 0.5333333333333333,
+        "risk_level": "Moderate",
+        "profile_analysis": {
+          "age": "22 years",
+          "income": "$100,000",
+          "risk_tolerance": "Moderate",
+          "investment_goals": "balanced_growth",
+          "time_horizon": "long-term"
+        },
+        "recommendations": [
+          "Balanced portfolio of stocks and bonds",
+          "Consider index funds for core holdings",
+          "Quarterly portfolio review recommended"
+        ]
+      }
+    },
+    "market_analysis": {
+      "raw": {
+        "current_price": 600.15,
+        "daily_change": 5.87,
+        "daily_change_percent": 0.9877,
+        "volume": 87426039,
+        "market_sentiment": "Slightly Positive",
+        "timestamp": "2025-06-23T22:59:57.418166"
+      }
+    },
+    "portfolio_allocation": {
+      "raw": {
+        "stocks": 0.5,
+        "bonds": 0.25,
+        "cash": 0.1,
+        "real_estate": 0.05,
+        "commodities": 0.05,
+        "cryptocurrency": 0.02,
+        "etfs": 0.02,
+        "reits": 0.01
+      }
+    },
+    "report": "Financial Analysis Report\n==================================================\n\nRisk Assessment Summary:\nrisk_score=0.5333333333333333 risk_level='Moderate' profile_analysis={'age': '22 years', 'income': '$100,000', 'risk_tolerance': 'Moderate', 'investment_goals': 'balanced_growth', 'time_horizon': 'long-term'} recommendations=['Balanced portfolio of stocks and bonds', 'Consider index funds for core holdings', 'Quarterly portfolio review recommended']\n\nMarket Outlook:\ncurrent_price=600.15 daily_change=5.87 daily_change_percent=0.9877 volume=87426039 market_sentiment='Slightly Positive' timestamp='2025-06-23T22:59:57.418166'\n\nRecommended Portfolio Allocation:\nstocks=0.5 bonds=0.25 cash=0.1 real_estate=0.05 commodities=0.05 cryptocurrency=0.02 etfs=0.02 reits=0.01",
+    "history": [
+      {
+        "user_profile": {
+          "name": "Shri",
+          "age": 22,
+          "income": 100000.0,
+          "risk_tolerance": "moderate",
+          "investment_goal": "balanced_growth",
+          "investment_horizon": "long-term"
+        },
+        "session_id": "9af5fee0-4565-42d7-86cf-4f19da7f4a5d",
+        "risk_assessment": {
+          "raw": {
+            "risk_score": 0.5333333333333333,
+            "risk_level": "Moderate",
+            "profile_analysis": {
+              "age": "22 years",
+              "income": "$100,000",
+              "risk_tolerance": "Moderate",
+              "investment_goals": "balanced_growth",
+              "time_horizon": "long-term"
+            },
+            "recommendations": [
+              "Balanced portfolio of stocks and bonds",
+              "Consider index funds for core holdings",
+              "Quarterly portfolio review recommended"
+            ]
+          }
+        },
+        "market_analysis": null,
+        "portfolio_allocation": null,
+        "report": null,
+        "history": []
+      },
+      {
+        "user_profile": {
+          "name": "Shri",
+          "age": 22,
+          "income": 100000.0,
+          "risk_tolerance": "moderate",
+          "investment_goal": "balanced_growth",
+          "investment_horizon": "long-term"
+        },
+        "session_id": "9af5fee0-4565-42d7-86cf-4f19da7f4a5d",
+        "risk_assessment": {
+          "raw": {
+            "risk_score": 0.5333333333333333,
+            "risk_level": "Moderate",
+            "profile_analysis": {
+              "age": "22 years",
+              "income": "$100,000",
+              "risk_tolerance": "Moderate",
+              "investment_goals": "balanced_growth",
+              "time_horizon": "long-term"
+            },
+            "recommendations": [
+              "Balanced portfolio of stocks and bonds",
+              "Consider index funds for core holdings",
+              "Quarterly portfolio review recommended"
+            ]
+          }
+        },
+        "market_analysis": {
+          "raw": {
+            "current_price": 600.15,
+            "daily_change": 5.87,
+            "daily_change_percent": 0.9877,
+            "volume": 87426039,
+            "market_sentiment": "Slightly Positive",
+            "timestamp": "2025-06-23T22:59:57.418166"
+          }
+        },
+        "portfolio_allocation": null,
+        "report": null,
+        "history": [
+          {
+            "user_profile": {
+              "name": "Shri",
+              "age": 22,
+              "income": 100000.0,
+              "risk_tolerance": "moderate",
+              "investment_goal": "balanced_growth",
+              "investment_horizon": "long-term"
+            },
+            "session_id": "9af5fee0-4565-42d7-86cf-4f19da7f4a5d",
+            "risk_assessment": {
+              "raw": {
+                "risk_score": 0.5333333333333333,
+                "risk_level": "Moderate",
+                "profile_analysis": {
+                  "age": "22 years",
+                  "income": "$100,000",
+                  "risk_tolerance": "Moderate",
+                  "investment_goals": "balanced_growth",
+                  "time_horizon": "long-term"
+                },
+                "recommendations": [
+                  "Balanced portfolio of stocks and bonds",
+                  "Consider index funds for core holdings",
+                  "Quarterly portfolio review recommended"
+                ]
+              }
+            },
+            "market_analysis": null,
+            "portfolio_allocation": null,
+            "report": null,
+            "history": []
+          }
+        ]
+      },
+      {
+        "user_profile": {
+          "name": "Shri",
+          "age": 22,
+          "income": 100000.0,
+          "risk_tolerance": "moderate",
+          "investment_goal": "balanced_growth",
+          "investment_horizon": "long-term"
+        },
+        "session_id": "9af5fee0-4565-42d7-86cf-4f19da7f4a5d",
+        "risk_assessment": {
+          "raw": {
+            "risk_score": 0.5333333333333333,
+            "risk_level": "Moderate",
+            "profile_analysis": {
+              "age": "22 years",
+              "income": "$100,000",
+              "risk_tolerance": "Moderate",
+              "investment_goals": "balanced_growth",
+              "time_horizon": "long-term"
+            },
+            "recommendations": [
+              "Balanced portfolio of stocks and bonds",
+              "Consider index funds for core holdings",
+              "Quarterly portfolio review recommended"
+            ]
+          }
+        },
+        "market_analysis": {
+          "raw": {
+            "current_price": 600.15,
+            "daily_change": 5.87,
+            "daily_change_percent": 0.9877,
+            "volume": 87426039,
+            "market_sentiment": "Slightly Positive",
+            "timestamp": "2025-06-23T22:59:57.418166"
+          }
+        },
+        "portfolio_allocation": {
+          "raw": {
+            "stocks": 0.5,
+            "bonds": 0.25,
+            "cash": 0.1,
+            "real_estate": 0.05,
+            "commodities": 0.05,
+            "cryptocurrency": 0.02,
+            "etfs": 0.02,
+            "reits": 0.01
+          }
+        },
+        "report": null,
+        "history": [
+          {
+            "user_profile": {
+              "name": "Shri",
+              "age": 22,
+              "income": 100000.0,
+              "risk_tolerance": "moderate",
+              "investment_goal": "balanced_growth",
+              "investment_horizon": "long-term"
+            },
+            "session_id": "9af5fee0-4565-42d7-86cf-4f19da7f4a5d",
+            "risk_assessment": {
+              "raw": {
+                "risk_score": 0.5333333333333333,
+                "risk_level": "Moderate",
+                "profile_analysis": {
+                  "age": "22 years",
+                  "income": "$100,000",
+                  "risk_tolerance": "Moderate",
+                  "investment_goals": "balanced_growth",
+                  "time_horizon": "long-term"
+                },
+                "recommendations": [
+                  "Balanced portfolio of stocks and bonds",
+                  "Consider index funds for core holdings",
+                  "Quarterly portfolio review recommended"
+                ]
+              }
+            },
+            "market_analysis": null,
+            "portfolio_allocation": null,
+            "report": null,
+            "history": []
+          },
+          {
+            "user_profile": {
+              "name": "Shri",
+              "age": 22,
+              "income": 100000.0,
+              "risk_tolerance": "moderate",
+              "investment_goal": "balanced_growth",
+              "investment_horizon": "long-term"
+            },
+            "session_id": "9af5fee0-4565-42d7-86cf-4f19da7f4a5d",
+            "risk_assessment": {
+              "raw": {
+                "risk_score": 0.5333333333333333,
+                "risk_level": "Moderate",
+                "profile_analysis": {
+                  "age": "22 years",
+                  "income": "$100,000",
+                  "risk_tolerance": "Moderate",
+                  "investment_goals": "balanced_growth",
+                  "time_horizon": "long-term"
+                },
+                "recommendations": [
+                  "Balanced portfolio of stocks and bonds",
+                  "Consider index funds for core holdings",
+                  "Quarterly portfolio review recommended"
+                ]
+              }
+            },
+            "market_analysis": {
+              "raw": {
+                "current_price": 600.15,
+                "daily_change": 5.87,
+                "daily_change_percent": 0.9877,
+                "volume": 87426039,
+                "market_sentiment": "Slightly Positive",
+                "timestamp": "2025-06-23T22:59:57.418166"
+              }
+            },
+            "portfolio_allocation": null,
+            "report": null,
+            "history": [
+              {
+                "user_profile": {
+                  "name": "Shri",
+                  "age": 22,
+                  "income": 100000.0,
+                  "risk_tolerance": "moderate",
+                  "investment_goal": "balanced_growth",
+                  "investment_horizon": "long-term"
+                },
+                "session_id": "9af5fee0-4565-42d7-86cf-4f19da7f4a5d",
+                "risk_assessment": {
+                  "raw": {
+                    "risk_score": 0.5333333333333333,
+                    "risk_level": "Moderate",
+                    "profile_analysis": {
+                      "age": "22 years",
+                      "income": "$100,000",
+                      "risk_tolerance": "Moderate",
+                      "investment_goals": "balanced_growth",
+                      "time_horizon": "long-term"
+                    },
+                    "recommendations": [
+                      "Balanced portfolio of stocks and bonds",
+                      "Consider index funds for core holdings",
+                      "Quarterly portfolio review recommended"
+                    ]
+                  }
+                },
+                "market_analysis": null,
+                "portfolio_allocation": null,
+                "report": null,
+                "history": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "user_profile": {
+          "name": "Shri",
+          "age": 22,
+          "income": 100000.0,
+          "risk_tolerance": "moderate",
+          "investment_goal": "balanced_growth",
+          "investment_horizon": "long-term"
+        },
+        "session_id": "9af5fee0-4565-42d7-86cf-4f19da7f4a5d",
+        "risk_assessment": {
+          "raw": {
+            "risk_score": 0.5333333333333333,
+            "risk_level": "Moderate",
+            "profile_analysis": {
+              "age": "22 years",
+              "income": "$100,000",
+              "risk_tolerance": "Moderate",
+              "investment_goals": "balanced_growth",
+              "time_horizon": "long-term"
+            },
+            "recommendations": [
+              "Balanced portfolio of stocks and bonds",
+              "Consider index funds for core holdings",
+              "Quarterly portfolio review recommended"
+            ]
+          }
+        },
+        "market_analysis": {
+          "raw": {
+            "current_price": 600.15,
+            "daily_change": 5.87,
+            "daily_change_percent": 0.9877,
+            "volume": 87426039,
+            "market_sentiment": "Slightly Positive",
+            "timestamp": "2025-06-23T22:59:57.418166"
+          }
+        },
+        "portfolio_allocation": {
+          "raw": {
+            "stocks": 0.5,
+            "bonds": 0.25,
+            "cash": 0.1,
+            "real_estate": 0.05,
+            "commodities": 0.05,
+            "cryptocurrency": 0.02,
+            "etfs": 0.02,
+            "reits": 0.01
+          }
+        },
+        "report": "Financial Analysis Report\n==================================================\n\nRisk Assessment Summary:\nrisk_score=0.5333333333333333 risk_level='Moderate' profile_analysis={'age': '22 years', 'income': '$100,000', 'risk_tolerance': 'Moderate', 'investment_goals': 'balanced_growth', 'time_horizon': 'long-term'} recommendations=['Balanced portfolio of stocks and bonds', 'Consider index funds for core holdings', 'Quarterly portfolio review recommended']\n\nMarket Outlook:\ncurrent_price=600.15 daily_change=5.87 daily_change_percent=0.9877 volume=87426039 market_sentiment='Slightly Positive' timestamp='2025-06-23T22:59:57.418166'\n\nRecommended Portfolio Allocation:\nstocks=0.5 bonds=0.25 cash=0.1 real_estate=0.05 commodities=0.05 cryptocurrency=0.02 etfs=0.02 reits=0.01",
+        "history": [
+          {
+            "user_profile": {
+              "name": "Shri",
+              "age": 22,
+              "income": 100000.0,
+              "risk_tolerance": "moderate",
+              "investment_goal": "balanced_growth",
+              "investment_horizon": "long-term"
+            },
+            "session_id": "9af5fee0-4565-42d7-86cf-4f19da7f4a5d",
+            "risk_assessment": {
+              "raw": {
+                "risk_score": 0.5333333333333333,
+                "risk_level": "Moderate",
+                "profile_analysis": {
+                  "age": "22 years",
+                  "income": "$100,000",
+                  "risk_tolerance": "Moderate",
+                  "investment_goals": "balanced_growth",
+                  "time_horizon": "long-term"
+                },
+                "recommendations": [
+                  "Balanced portfolio of stocks and bonds",
+                  "Consider index funds for core holdings",
+                  "Quarterly portfolio review recommended"
+                ]
+              }
+            },
+            "market_analysis": null,
+            "portfolio_allocation": null,
+            "report": null,
+            "history": []
+          },
+          {
+            "user_profile": {
+              "name": "Shri",
+              "age": 22,
+              "income": 100000.0,
+              "risk_tolerance": "moderate",
+              "investment_goal": "balanced_growth",
+              "investment_horizon": "long-term"
+            },
+            "session_id": "9af5fee0-4565-42d7-86cf-4f19da7f4a5d",
+            "risk_assessment": {
+              "raw": {
+                "risk_score": 0.5333333333333333,
+                "risk_level": "Moderate",
+                "profile_analysis": {
+                  "age": "22 years",
+                  "income": "$100,000",
+                  "risk_tolerance": "Moderate",
+                  "investment_goals": "balanced_growth",
+                  "time_horizon": "long-term"
+                },
+                "recommendations": [
+                  "Balanced portfolio of stocks and bonds",
+                  "Consider index funds for core holdings",
+                  "Quarterly portfolio review recommended"
+                ]
+              }
+            },
+            "market_analysis": {
+              "raw": {
+                "current_price": 600.15,
+                "daily_change": 5.87,
+                "daily_change_percent": 0.9877,
+                "volume": 87426039,
+                "market_sentiment": "Slightly Positive",
+                "timestamp": "2025-06-23T22:59:57.418166"
+              }
+            },
+            "portfolio_allocation": null,
+            "report": null,
+            "history": [
+              {
+                "user_profile": {
+                  "name": "Shri",
+                  "age": 22,
+                  "income": 100000.0,
+                  "risk_tolerance": "moderate",
+                  "investment_goal": "balanced_growth",
+                  "investment_horizon": "long-term"
+                },
+                "session_id": "9af5fee0-4565-42d7-86cf-4f19da7f4a5d",
+                "risk_assessment": {
+                  "raw": {
+                    "risk_score": 0.5333333333333333,
+                    "risk_level": "Moderate",
+                    "profile_analysis": {
+                      "age": "22 years",
+                      "income": "$100,000",
+                      "risk_tolerance": "Moderate",
+                      "investment_goals": "balanced_growth",
+                      "time_horizon": "long-term"
+                    },
+                    "recommendations": [
+                      "Balanced portfolio of stocks and bonds",
+                      "Consider index funds for core holdings",
+                      "Quarterly portfolio review recommended"
+                    ]
+                  }
+                },
+                "market_analysis": null,
+                "portfolio_allocation": null,
+                "report": null,
+                "history": []
+              }
+            ]
+          },
+          {
+            "user_profile": {
+              "name": "Shri",
+              "age": 22,
+              "income": 100000.0,
+              "risk_tolerance": "moderate",
+              "investment_goal": "balanced_growth",
+              "investment_horizon": "long-term"
+            },
+            "session_id": "9af5fee0-4565-42d7-86cf-4f19da7f4a5d",
+            "risk_assessment": {
+              "raw": {
+                "risk_score": 0.5333333333333333,
+                "risk_level": "Moderate",
+                "profile_analysis": {
+                  "age": "22 years",
+                  "income": "$100,000",
+                  "risk_tolerance": "Moderate",
+                  "investment_goals": "balanced_growth",
+                  "time_horizon": "long-term"
+                },
+                "recommendations": [
+                  "Balanced portfolio of stocks and bonds",
+                  "Consider index funds for core holdings",
+                  "Quarterly portfolio review recommended"
+                ]
+              }
+            },
+            "market_analysis": {
+              "raw": {
+                "current_price": 600.15,
+                "daily_change": 5.87,
+                "daily_change_percent": 0.9877,
+                "volume": 87426039,
+                "market_sentiment": "Slightly Positive",
+                "timestamp": "2025-06-23T22:59:57.418166"
+              }
+            },
+            "portfolio_allocation": {
+              "raw": {
+                "stocks": 0.5,
+                "bonds": 0.25,
+                "cash": 0.1,
+                "real_estate": 0.05,
+                "commodities": 0.05,
+                "cryptocurrency": 0.02,
+                "etfs": 0.02,
+                "reits": 0.01
+              }
+            },
+            "report": null,
+            "history": [
+              {
+                "user_profile": {
+                  "name": "Shri",
+                  "age": 22,
+                  "income": 100000.0,
+                  "risk_tolerance": "moderate",
+                  "investment_goal": "balanced_growth",
+                  "investment_horizon": "long-term"
+                },
+                "session_id": "9af5fee0-4565-42d7-86cf-4f19da7f4a5d",
+                "risk_assessment": {
+                  "raw": {
+                    "risk_score": 0.5333333333333333,
+                    "risk_level": "Moderate",
+                    "profile_analysis": {
+                      "age": "22 years",
+                      "income": "$100,000",
+                      "risk_tolerance": "Moderate",
+                      "investment_goals": "balanced_growth",
+                      "time_horizon": "long-term"
+                    },
+                    "recommendations": [
+                      "Balanced portfolio of stocks and bonds",
+                      "Consider index funds for core holdings",
+                      "Quarterly portfolio review recommended"
+                    ]
+                  }
+                },
+                "market_analysis": null,
+                "portfolio_allocation": null,
+                "report": null,
+                "history": []
+              },
+              {
+                "user_profile": {
+                  "name": "Shri",
+                  "age": 22,
+                  "income": 100000.0,
+                  "risk_tolerance": "moderate",
+                  "investment_goal": "balanced_growth",
+                  "investment_horizon": "long-term"
+                },
+                "session_id": "9af5fee0-4565-42d7-86cf-4f19da7f4a5d",
+                "risk_assessment": {
+                  "raw": {
+                    "risk_score": 0.5333333333333333,
+                    "risk_level": "Moderate",
+                    "profile_analysis": {
+                      "age": "22 years",
+                      "income": "$100,000",
+                      "risk_tolerance": "Moderate",
+                      "investment_goals": "balanced_growth",
+                      "time_horizon": "long-term"
+                    },
+                    "recommendations": [
+                      "Balanced portfolio of stocks and bonds",
+                      "Consider index funds for core holdings",
+                      "Quarterly portfolio review recommended"
+                    ]
+                  }
+                },
+                "market_analysis": {
+                  "raw": {
+                    "current_price": 600.15,
+                    "daily_change": 5.87,
+                    "daily_change_percent": 0.9877,
+                    "volume": 87426039,
+                    "market_sentiment": "Slightly Positive",
+                    "timestamp": "2025-06-23T22:59:57.418166"
+                  }
+                },
+                "portfolio_allocation": null,
+                "report": null,
+                "history": [
+                  {
+                    "user_profile": {
+                      "name": "Shri",
+                      "age": 22,
+                      "income": 100000.0,
+                      "risk_tolerance": "moderate",
+                      "investment_goal": "balanced_growth",
+                      "investment_horizon": "long-term"
+                    },
+                    "session_id": "9af5fee0-4565-42d7-86cf-4f19da7f4a5d",
+                    "risk_assessment": {
+                      "raw": {
+                        "risk_score": 0.5333333333333333,
+                        "risk_level": "Moderate",
+                        "profile_analysis": {
+                          "age": "22 years",
+                          "income": "$100,000",
+                          "risk_tolerance": "Moderate",
+                          "investment_goals": "balanced_growth",
+                          "time_horizon": "long-term"
+                        },
+                        "recommendations": [
+                          "Balanced portfolio of stocks and bonds",
+                          "Consider index funds for core holdings",
+                          "Quarterly portfolio review recommended"
+                        ]
+                      }
+                    },
+                    "market_analysis": null,
+                    "portfolio_allocation": null,
+                    "report": null,
+                    "history": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "user_profile": {
+    "name": "Shri",
+    "age": 22,
+    "income": 100000.0,
+    "risk_tolerance": "moderate",
+    "investment_goal": "balanced_growth",
+    "investment_horizon": "long-term"
+  },
+  "session_active": false,
+  "session_restored": true,
+  "last_accessed": "2025-06-24T12:16:35.490657"
+}
