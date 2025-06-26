@@ -6,6 +6,8 @@ import Journal from './components/Journal'
 import Markets from './components/Markets'
 import ChatBubble from './components/ChatBubble'
 import ChatWindow from './components/ChatWindow'
+import EnterpriseChatWindow from './components/EnterpriseChatWindow'
+import PluginManager from './components/PluginManager'
 import FAPResultsDisplay from './components/FAPResultsDisplay'
 
 interface UserProfileData {
@@ -176,19 +178,59 @@ const App: React.FC = () => {
   const [fapError, setFapError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState('dashboard');
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [useEnterpriseChat, setUseEnterpriseChat] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [backendMode, setBackendMode] = useState<'standard' | 'enterprise' | 'detecting'>('detecting');
+  const [enterpriseFeatures, setEnterpriseFeatures] = useState<any>({});
 
   useEffect(() => {
+    // Detect backend mode first
+    const detectBackendMode = async () => {
+      try {
+        const res = await fetch('/api/v1/backend/mode')
+        if (res.ok) {
+          const modeData = await res.json()
+          setBackendMode(modeData.mode)
+          setEnterpriseFeatures(modeData.features)
+          
+          // Only enable enterprise features if backend supports them
+          if (modeData.mode === 'standard') {
+            setUseEnterpriseChat(false)
+            setIsAdmin(false)
+          }
+        } else {
+          // Fallback: assume standard mode if endpoint doesn't exist
+          setBackendMode('standard')
+          setEnterpriseFeatures({})
+          setUseEnterpriseChat(false)
+          setIsAdmin(false)
+        }
+      } catch (error) {
+        console.log('Backend mode detection failed, assuming standard mode')
+        setBackendMode('standard')
+        setEnterpriseFeatures({})
+        setUseEnterpriseChat(false)
+        setIsAdmin(false)
+      }
+    }
+
     // Check if user profile exists
     const checkProfile = async () => {
       try {
+        console.log('🔧 App: Checking profile...')
         const res = await fetch('/api/v1/portfolio/summary')
         if (res.ok) {
           const data = await res.json()
+          console.log('🔧 App: Profile response:', data)
+          console.log('🔧 App: data.no_profile value:', data.no_profile)
+          
           if (data.no_profile) {
+            console.log('🔧 App: No profile found, setting hasProfile = false')
             setHasProfile(false)
             setUserId(null)
             setProfileData(null)
           } else {
+            console.log('🔧 App: Profile found, setting hasProfile = true')
             setHasProfile(true)
             setUserId(data.user_id)
             setProfileData({
@@ -199,13 +241,47 @@ const App: React.FC = () => {
               investment_goal: data.investment_goal,
               investment_horizon: data.investment_horizon,
             })
+            console.log('🔧 App: Profile data set:', {
+              name: data.name,
+              age: data.age,
+              risk_tolerance: data.risk_tolerance
+            })
+          }
+        } else {
+          console.log('🔧 App: Profile check failed with status:', res.status)
+        }
+      } catch (err) {
+        console.error('🔧 App: Error checking profile:', err)
+      }
+    }
+
+    // Load existing FAP results if available
+    const loadExistingFapResults = async () => {
+      try {
+        const res = await fetch('/api/v1/fap/results')
+        if (res.ok) {
+          const data = await res.json()
+          // Handle both direct fap_context and nested results.fap_context structure
+          const fapContext = data.fap_context || data.results?.fap_context
+          if (fapContext) {
+            console.log('🏢 App: Loading existing FAP results from backend')
+            setFapContext(fapContext)
+            setFapHistory(fapContext?.history || [])
           }
         }
       } catch (err) {
-        console.error('Error checking profile:', err)
+        console.log('🏢 App: No existing FAP results found or error loading:', err)
       }
     }
-    checkProfile()
+
+    // Run backend detection first, then check profile and load FAP results
+    const initializeApp = async () => {
+      await detectBackendMode()
+      await checkProfile()
+      await loadExistingFapResults()
+    }
+
+    initializeApp()
   }, [])
 
   const reloadDashboard = async () => {
@@ -229,6 +305,22 @@ const App: React.FC = () => {
             investment_horizon: data.investment_horizon,
           })
         }
+      }
+      
+      // Also reload FAP results
+      try {
+        const fapRes = await fetch('/api/v1/fap/results')
+        if (fapRes.ok) {
+          const fapData = await fapRes.json()
+          // Handle both direct fap_context and nested results.fap_context structure
+          const fapContext = fapData.fap_context || fapData.results?.fap_context
+          if (fapContext) {
+            setFapContext(fapContext)
+            setFapHistory(fapContext?.history || [])
+          }
+        }
+      } catch (fapErr) {
+        console.log('Error reloading FAP results:', fapErr)
       }
     } catch (err) {
       console.error('Error reloading dashboard:', err)
@@ -448,6 +540,8 @@ Your recommended portfolio allocation: ${Object.entries(data.fap_context.portfol
   };
 
   const renderContent = () => {
+    console.log('🔧 App: renderContent called - hasProfile:', hasProfile, 'backendMode:', backendMode, 'activeTab:', activeTab)
+    
     if (!hasProfile) {
       return (
         <div className="flex flex-col items-center justify-center min-h-[60vh]">
@@ -483,16 +577,20 @@ Your recommended portfolio allocation: ${Object.entries(data.fap_context.portfol
         return (
           <>
             <div className="mb-8">
-              <Dashboard fapContext={fapContext} fapHistory={fapHistory} />
+              <Dashboard 
+                fapContext={fapContext} 
+                fapHistory={fapHistory} 
+                backendMode={backendMode === 'detecting' ? 'standard' : backendMode}
+              />
             </div>
           </>
         );
       case 'portfolio':
-        return <Portfolio />;
+        return <Portfolio backendMode={backendMode === 'detecting' ? 'standard' : backendMode} />;
       case 'markets':
-        return <Markets />;
+        return <Markets backendMode={backendMode === 'detecting' ? 'standard' : backendMode} />;
       case 'journal':
-        return <Journal />;
+        return <Journal backendMode={backendMode === 'detecting' ? 'standard' : backendMode} />;
       case 'profile':
         return (
           <div className="max-w-4xl mx-auto space-y-6">
@@ -546,6 +644,12 @@ Your recommended portfolio allocation: ${Object.entries(data.fap_context.portfol
                 }}
               />
             </div>
+          </div>
+        );
+      case 'plugins':
+        return isAdmin ? <PluginManager /> : (
+          <div className="text-center py-12">
+            <p className="text-gray-600">Access denied. Admin privileges required.</p>
           </div>
         );
       default:
@@ -612,6 +716,68 @@ Your recommended portfolio allocation: ${Object.entries(data.fap_context.portfol
               >
                 My Journal
               </button>
+              
+              {/* Enterprise Features - Only show if backend supports them */}
+              {backendMode === 'enterprise' && (
+                <>
+                  {/* Enterprise Plugin Manager (Admin Only) */}
+                  {isAdmin && enterpriseFeatures.plugin_manager && (
+                    <button
+                      className={`py-4 px-1 border-b-2 font-medium text-sm ${
+                        activeTab === 'plugins'
+                          ? 'border-purple-500 text-purple-600'
+                          : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                      }`}
+                      onClick={() => setActiveTab('plugins')}
+                    >
+                      🏢 Plugin Manager
+                    </button>
+                  )}
+                  
+                  {/* Enterprise Mode Toggle */}
+                  {enterpriseFeatures.enterprise_chat && (
+                    <div className="flex items-center ml-4">
+                      <label className="flex items-center gap-2 text-sm text-gray-600">
+                        <input
+                          type="checkbox"
+                          checked={useEnterpriseChat}
+                          onChange={(e) => setUseEnterpriseChat(e.target.checked)}
+                          className="rounded"
+                        />
+                        Enterprise Mode
+                      </label>
+                    </div>
+                  )}
+                  
+                  {/* Admin Mode Toggle */}
+                  {enterpriseFeatures.plugin_manager && (
+                    <div className="flex items-center ml-2">
+                      <label className="flex items-center gap-2 text-sm text-gray-600">
+                        <input
+                          type="checkbox"
+                          checked={isAdmin}
+                          onChange={(e) => setIsAdmin(e.target.checked)}
+                          className="rounded"
+                        />
+                        Admin Access
+                      </label>
+                    </div>
+                  )}
+                </>
+              )}
+              
+              {/* Backend Mode Indicator */}
+              <div className="flex items-center ml-4">
+                <span className={`text-xs px-2 py-1 rounded ${
+                  backendMode === 'enterprise' 
+                    ? 'bg-purple-100 text-purple-800' 
+                    : backendMode === 'standard'
+                    ? 'bg-blue-100 text-blue-800'
+                    : 'bg-gray-100 text-gray-800'
+                }`}>
+                  {backendMode === 'detecting' ? 'Detecting...' : `${backendMode.charAt(0).toUpperCase() + backendMode.slice(1)} Mode`}
+                </span>
+              </div>
             </nav>
           </div>
         )}
@@ -623,11 +789,19 @@ Your recommended portfolio allocation: ${Object.entries(data.fap_context.portfol
         {hasProfile && (
           <>
             <ChatBubble onClick={() => setIsChatOpen(true)} />
-            <ChatWindow 
-              isOpen={isChatOpen} 
-              onClose={() => setIsChatOpen(false)}
-              userId={userId}
-            />
+            {useEnterpriseChat ? (
+              <EnterpriseChatWindow 
+                isOpen={isChatOpen} 
+                onClose={() => setIsChatOpen(false)}
+                userId={userId}
+              />
+            ) : (
+              <ChatWindow 
+                isOpen={isChatOpen} 
+                onClose={() => setIsChatOpen(false)}
+                userId={userId}
+              />
+            )}
           </>
         )}
       </div>

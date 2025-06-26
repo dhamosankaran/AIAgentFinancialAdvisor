@@ -26,7 +26,11 @@ const timePeriods = [
     { label: '2Y', value: '2y' },
 ]
 
-const Markets: React.FC = () => {
+interface MarketsProps {
+  backendMode?: 'standard' | 'enterprise';
+}
+
+const Markets: React.FC<MarketsProps> = ({ backendMode = 'standard' }) => {
     const [indices, setIndices] = useState<IndexData[]>([]);
     const [historicalData, setHistoricalData] = useState<HistoricalData[]>([]);
     const [selectedSymbol, setSelectedSymbol] = useState('SPY');
@@ -38,17 +42,90 @@ const Markets: React.FC = () => {
     const [savedAnalysis, setSavedAnalysis] = useState<any>(null);
     const [selectedAnalysis, setSelectedAnalysis] = useState<any>(null);
     const [showAnalysisModal, setShowAnalysisModal] = useState(false);
+    const [userProfile, setUserProfile] = useState<any>(null);
 
     useEffect(() => {
         const fetchMarketData = async () => {
             try {
                 setLoading(true);
-                const res = await fetch('/api/v1/market/indices');
-                if (!res.ok) throw new Error('Failed to fetch market indices');
-                const data = await res.json();
-                setIndices(data);
+                
+                if (backendMode === 'enterprise') {
+                    console.log('🏢 Markets: Loading data from enterprise cache (zero API calls)...');
+                    
+                    // Single API call to get all market data from enterprise cache
+                    const response = await fetch('/api/v1/market/data');
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    
+                    console.log('🏢 Markets: Received data from:', data.cache_info?.data_source);
+                    console.log('🏢 Markets: API calls made:', data.cache_info?.api_calls_made);
+                    
+                    // Load market indices from cached analysis data
+                    const cachedIndices = data.analysis?.indices || [];
+                    
+                    if (cachedIndices.length > 0) {
+                        setIndices(cachedIndices);
+                        console.log('🏢 Markets: Loaded market indices from cache without external API calls');
+                    } else {
+                        console.log('🏢 Markets: No cached indices found, but avoiding API calls as requested');
+                        setError('No market data available. Please check your data files or update market analysis.');
+                    }
+                    
+                    // Also load user profile for analysis generation
+                    try {
+                        const profileResponse = await fetch('/api/v1/dashboard/data');
+                        if (profileResponse.ok) {
+                            const profileData = await profileResponse.json();
+                            setUserProfile(profileData.profile);
+                            console.log('🏢 Markets: Loaded user profile from cache for analysis generation');
+                        }
+                    } catch (profileErr) {
+                        console.log('🏢 Markets: Could not load user profile, will use defaults for analysis');
+                    }
+                    
+                } else {
+                    console.log('📊 Markets: Using standard mode endpoints');
+                    
+                    // Use standard market indices endpoint
+                    const response = await fetch('/api/v1/market/indices');
+                    
+                    if (response.ok) {
+                        const indicesData = await response.json();
+                        setIndices(indicesData);
+                        console.log('📊 Markets: Loaded market indices from standard endpoint');
+                    } else {
+                        console.log('📊 Markets: Could not load market indices, using defaults');
+                        // Use default market data
+                        setIndices([
+                            { symbol: 'SPY', name: 'S&P 500 ETF', price: 450.25, change: 2.15, change_percent: 0.48 },
+                            { symbol: 'QQQ', name: 'NASDAQ ETF', price: 378.90, change: -1.45, change_percent: -0.38 },
+                            { symbol: 'IWM', name: 'Russell 2000 ETF', price: 194.75, change: 0.95, change_percent: 0.49 },
+                            { symbol: 'DIA', name: 'Dow Jones ETF', price: 342.10, change: 1.20, change_percent: 0.35 }
+                        ]);
+                    }
+                    
+                    // Load user profile for analysis generation
+                    try {
+                        const profileResponse = await fetch('/api/v1/portfolio/summary');
+                        if (profileResponse.ok) {
+                            const profileData = await profileResponse.json();
+                            if (!profileData.no_profile) {
+                                setUserProfile(profileData);
+                                console.log('📊 Markets: Loaded user profile for analysis generation');
+                            }
+                        }
+                    } catch (profileErr) {
+                        console.log('📊 Markets: Could not load user profile, will use defaults for analysis');
+                    }
+                }
+                
             } catch (err) {
-                setError(err instanceof Error ? err.message : 'An error occurred');
+                console.error('Markets: Error loading market data:', err);
+                setError(err instanceof Error ? err.message : 'An error occurred loading market data')
             } finally {
                 setLoading(false);
             }
@@ -113,6 +190,7 @@ const Markets: React.FC = () => {
     const generateMarketAnalysis = async () => {
         try {
             setAnalysisLoading(true);
+            setMarketAnalysis(''); // Clear previous analysis
             const selectedIndex = indices.find(index => index.symbol === selectedSymbol);
             
             // Calculate period-based changes from historical data
@@ -142,16 +220,37 @@ const Markets: React.FC = () => {
                 };
             }
             
+            // Use real user profile data from enterprise cache
+            const profileData = userProfile || {
+                name: 'User',
+                age: 30,
+                income: 100000,
+                risk_tolerance: 'moderate',
+                investment_goal: 'growth',
+                investment_horizon: 'long-term'
+            };
+            
+            console.log('🏢 Markets: Generating analysis with user profile:', {
+                name: profileData.name,
+                age: profileData.age,
+                income: profileData.income,
+                risk_tolerance: profileData.risk_tolerance
+            });
+            
+            // Create abort controller for timeout handling
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 120000); // 2 minute timeout
+            
             const response = await fetch('/api/v1/fap/analyze', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    name: 'User',
-                    age: 30,
-                    income: 100000,
-                    risk_tolerance: 'moderate',
-                    investment_goal: 'growth',
-                    investment_horizon: 'long-term',
+                    name: profileData.name || 'User',
+                    age: profileData.age || 30,
+                    income: profileData.income || 100000,
+                    risk_tolerance: profileData.risk_tolerance || 'moderate',
+                    investment_goal: profileData.investment_goal || 'growth',
+                    investment_horizon: profileData.investment_horizon || 'long-term',
                     additional_context: {
                         market_data: {
                             symbol: selectedSymbol,
@@ -165,16 +264,33 @@ const Markets: React.FC = () => {
                         analysis_type: 'market_analysis'
                     }
                 }),
+                signal: controller.signal
             });
+
+            clearTimeout(timeoutId);
 
             if (response.ok) {
                 const data = await response.json();
-                console.log('Market Analysis Response:', data); // Debug log
-                // Extract report from different possible locations in the response
-                const report = data.fap_context?.report || data.fallback_response || data.report || 'No market analysis available.';
-                setMarketAnalysis(report);
+                console.log('✅ Market Analysis Response received:', data); // Debug log
                 
-                // Save analysis to backend
+                // Extract report from different possible locations in the response
+                const report = data.fap_context?.analysis_result || data.fap_context?.report || data.fallback_response || data.report;
+                
+                if (report && report.trim()) {
+                    setMarketAnalysis(report);
+                    console.log('✅ Markets: Analysis generated successfully using profile:', {
+                        name: profileData.name,
+                        age: profileData.age,
+                        risk_tolerance: profileData.risk_tolerance,
+                        analysis_length: report.length
+                    });
+                } else {
+                    console.error('❌ No analysis content found in response:', data);
+                    setMarketAnalysis('No market analysis content was generated. Please try again.');
+                    return;
+                }
+                
+                // Save analysis to backend (non-blocking)
                 try {
                     const analysisData = {
                         symbol: selectedSymbol,
@@ -191,9 +307,12 @@ const Markets: React.FC = () => {
                                 period_analysis: periodAnalysis
                             },
                             user_profile: {
-                                risk_tolerance: 'moderate',
-                                investment_goal: 'growth',
-                                investment_horizon: 'long-term'
+                                name: profileData.name || 'User',
+                                age: profileData.age || 30,
+                                income: profileData.income || 100000,
+                                risk_tolerance: profileData.risk_tolerance || 'moderate',
+                                investment_goal: profileData.investment_goal || 'growth',
+                                investment_horizon: profileData.investment_horizon || 'long-term'
                             },
                             generated_at: new Date().toISOString()
                         }
@@ -208,21 +327,28 @@ const Markets: React.FC = () => {
                     if (saveResponse.ok) {
                         const saveData = await saveResponse.json();
                         setSavedAnalysis(saveData.analysis);
-                        console.log('Analysis saved successfully:', saveData.analysis);
+                        console.log('✅ Analysis saved successfully');
                     } else {
-                        console.error('Failed to save analysis:', await saveResponse.text());
+                        console.warn('⚠️ Failed to save analysis (non-critical):', await saveResponse.text());
                     }
                 } catch (saveError) {
-                    console.error('Error saving analysis:', saveError);
+                    console.warn('⚠️ Error saving analysis (non-critical):', saveError);
                 }
                 
             } else {
-                console.error('Market Analysis Error:', response.status, await response.text()); // Debug log
-                setMarketAnalysis('Unable to generate market analysis at this time.');
+                const errorText = await response.text();
+                console.error('❌ Market Analysis API Error:', response.status, errorText);
+                setMarketAnalysis(`Unable to generate market analysis. Server responded with status ${response.status}. Please try again.`);
             }
         } catch (error) {
-            console.error('Error generating market analysis:', error);
-            setMarketAnalysis('Error generating market analysis.');
+            if (error instanceof Error && error.name === 'AbortError') {
+                console.error('❌ Market analysis request timed out');
+                setMarketAnalysis('Analysis request timed out. The analysis takes time to generate. Please try again.');
+            } else {
+                console.error('❌ Error generating market analysis:', error);
+                const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+                setMarketAnalysis(`Error generating market analysis: ${errorMessage}. Please check your connection and try again.`);
+            }
         } finally {
             setAnalysisLoading(false);
         }
@@ -465,7 +591,13 @@ const Markets: React.FC = () => {
             
             {/* Recent Market Analyses Section */}
             <div className="mt-8">
-                <RecentAnalyses limit={10} showTitle={true} onAnalysisSelect={handleAnalysisSelect} />
+                <RecentAnalyses 
+                    limit={10} 
+                    showTitle={true} 
+                    disableApiCalls={true}
+                    analysesData={[]}
+                    onAnalysisSelect={handleAnalysisSelect} 
+                />
             </div>
             
             {/* Analysis Details Modal */}

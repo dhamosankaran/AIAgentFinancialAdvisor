@@ -9,7 +9,11 @@ interface JournalEntry {
   tags: string[];
 }
 
-const Journal: React.FC = () => {
+interface JournalProps {
+  backendMode?: 'standard' | 'enterprise';
+}
+
+const Journal: React.FC<JournalProps> = ({ backendMode = 'standard' }) => {
   const [entries, setEntries] = useState<JournalEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -26,13 +30,46 @@ const Journal: React.FC = () => {
   const fetchEntries = async () => {
     try {
       setLoading(true);
-      const res = await fetch('/api/v1/journal');
-      if (!res.ok) {
-        throw new Error('Failed to fetch journal entries');
+      
+      if (backendMode === 'enterprise') {
+        console.log('🏢 Journal: Loading data from enterprise cache (zero API calls)...');
+        
+        // Single API call to get all journal data from enterprise cache
+        const response = await fetch('/api/v1/journal/data');
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        console.log('🏢 Journal: Received data from:', data.cache_info?.data_source);
+        console.log('🏢 Journal: API calls made:', data.cache_info?.api_calls_made);
+        
+        // Load journal entries from cache
+        const journalEntries = data.entries?.list || [];
+        setEntries(journalEntries);
+        
+        console.log('🏢 Journal: Loaded from cache without any external API calls');
+        
+      } else {
+        console.log('📊 Journal: Using standard mode endpoint');
+        
+        // Use standard journal endpoint
+        const response = await fetch('/api/v1/journal');
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const journalEntries = await response.json();
+        setEntries(journalEntries);
+        
+        console.log('📊 Journal: Standard journal data loaded successfully');
       }
-      const data = await res.json();
-      setEntries(data);
+      
     } catch (err) {
+      console.error('Error fetching journal entries:', err);
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setLoading(false);

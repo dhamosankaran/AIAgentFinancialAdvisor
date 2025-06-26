@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # =============================================================================
-# AgenticAI Standard Startup Script
-# Starts the basic financial advisor system
+# Enterprise AgenticAI Startup Script
+# Starts the complete enterprise system with all features
 # =============================================================================
 
 # Colors for output
@@ -10,17 +10,17 @@ GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 YELLOW='\033[1;33m'
 RED='\033[0;31m'
-CYAN='\033[0;36m'
+PURPLE='\033[0;35m'
 NC='\033[0m' # No Color
 
-# Standard banner
-echo -e "${CYAN}💰============================================================${NC}"
-echo -e "${CYAN}💰  AgenticAI - Financial Investment Advisor${NC}"
-echo -e "${CYAN}💰  Standard Mode - Core Features${NC}"
-echo -e "${CYAN}💰============================================================${NC}"
+# Enterprise banner
+echo -e "${PURPLE}🏢============================================================${NC}"
+echo -e "${PURPLE}🏢  Enterprise AgenticAI - Complete System Startup${NC}"
+echo -e "${PURPLE}🏢  Bank-grade Financial AI with Enterprise Features${NC}"
+echo -e "${PURPLE}🏢============================================================${NC}"
 
 # Create necessary directories
-mkdir -p logs data cache backups
+mkdir -p logs data cache/plugins backups
 
 # Function to check if a command exists
 command_exists() {
@@ -88,14 +88,14 @@ sleep 2
 
 # Start servers
 timestamp=$(date +"%Y%m%d_%H%M%S")
-backend_log="logs/backend_${timestamp}.log"
-frontend_log="logs/frontend_${timestamp}.log"
+backend_log="logs/enterprise_backend_${timestamp}.log"
+frontend_log="logs/enterprise_frontend_${timestamp}.log"
 
-echo -e "${BLUE}🚀 Starting standard servers...${NC}"
+echo -e "${BLUE}🚀 Starting enterprise servers...${NC}"
 
-# Start backend (standard version)
-echo -e "${GREEN}   Starting API Server (Standard Mode)...${NC}"
-uvicorn src.api.main_backup:app --reload --host 0.0.0.0 --port 8000 > "$backend_log" 2>&1 &
+# Start backend
+echo -e "${GREEN}   Starting Enterprise API Server...${NC}"
+uvicorn src.api.main:app --reload --host 0.0.0.0 --port 8000 > "$backend_log" 2>&1 &
 backend_pid=$!
 
 # Start frontend
@@ -111,22 +111,20 @@ sleep 8
 
 if check_port 8000 && check_port 5173; then
     echo ""
-    echo -e "${CYAN}🎉 AgenticAI Successfully Started (Standard Mode)!${NC}"
+    echo -e "${PURPLE}🎉 Enterprise AgenticAI Successfully Started!${NC}"
     echo ""
     echo -e "${GREEN}🌐 URLs:${NC}"
     echo -e "${GREEN}   • Frontend:     http://localhost:5173${NC}"
     echo -e "${GREEN}   • API Docs:     http://localhost:8000/docs${NC}"
-    echo -e "${GREEN}   • Health Check: http://localhost:8000/api/v1/health${NC}"
+    echo -e "${GREEN}   • Health Check: http://localhost:8000/api/v2/health/enterprise${NC}"
     echo ""
-    echo -e "${BLUE}💰 Standard Features:${NC}"
-    echo -e "${BLUE}   • Financial investment advice${NC}"
-    echo -e "${BLUE}   • Portfolio management and tracking${NC}"
-    echo -e "${BLUE}   • Market data and analysis${NC}"
-    echo -e "${BLUE}   • User profiles and risk assessment${NC}"
-    echo -e "${BLUE}   • Investment journal and history${NC}"
+    echo -e "${BLUE}🏢 Enterprise Features:${NC}"
+    echo -e "${BLUE}   • Toggle 'Enterprise Mode' ON${NC}"
+    echo -e "${BLUE}   • Toggle 'Admin Access' ON for Plugin Manager${NC}"
+    echo -e "${BLUE}   • Responsible AI with content moderation${NC}"
+    echo -e "${BLUE}   • Hot-swappable plugin architecture${NC}"
     echo ""
     echo -e "${YELLOW}⚡ Press Ctrl+C to stop${NC}"
-    echo -e "${YELLOW}💡 Want enterprise features? Use: ./start_enterprise.sh${NC}"
     
     # Open browser
     if [[ "$OSTYPE" == "darwin"* ]]; then

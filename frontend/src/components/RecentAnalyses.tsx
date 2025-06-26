@@ -25,20 +25,33 @@ interface RecentAnalysesProps {
     limit?: number;
     showTitle?: boolean;
     onAnalysisSelect?: (analysis: AnalysisData) => void;
+    analysesData?: AnalysisData[]; // Add prop to receive cached data
+    disableApiCalls?: boolean; // Add flag to disable API calls for enterprise mode
 }
 
 const RecentAnalyses: React.FC<RecentAnalysesProps> = ({ 
     limit = 5, 
     showTitle = true, 
-    onAnalysisSelect 
+    onAnalysisSelect,
+    analysesData,
+    disableApiCalls = false
 }) => {
     const [analyses, setAnalyses] = useState<AnalysisData[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        fetchRecentAnalyses();
-    }, [limit]);
+        if (disableApiCalls && analysesData) {
+            // Use provided cached data instead of making API calls
+            console.log('🏢 RecentAnalyses: Using cached data (zero API calls)...');
+            setAnalyses(analysesData.slice(0, limit));
+            setLoading(false);
+            setError(null);
+        } else {
+            // Fallback to API calls for standard mode
+            fetchRecentAnalyses();
+        }
+    }, [limit, analysesData, disableApiCalls]);
 
     const fetchRecentAnalyses = async () => {
         try {

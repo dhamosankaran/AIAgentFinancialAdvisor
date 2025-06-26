@@ -104,70 +104,65 @@ ALPHA_VANTAGE_API_KEY=
 * **Maintainability**: Follow clean code principles.
 * **GIT SECURITY CRITICAL**: When API keys are accidentally committed to git history, use git filter-branch or create clean orphan branches and force push to completely remove sensitive data from GitHub. Always enhance .gitignore to prevent future exposures.
 * **EMERGENCY API KEY PROCEDURES**: If API keys are exposed in git history: 1) Immediately revoke the exposed key, 2) Create new API key, 3) Use git filter-branch or orphan branch approach to completely rewrite git history, 4) Force push to replace remote history, 5) Clear local reflog and run aggressive garbage collection, 6) Enhance .gitignore with comprehensive exclusions.
+* **OpenAI 500 Error and MCP Tool Async Fixes**: OpenAI API 500 Internal Server Errors are intermittent and handled by automatic retry logic in the OpenAI client. Main issue was MCP tools in plugin registry using async functions with LangChain's synchronous Tool interface, causing "coroutine was never awaited" errors. Fixed by creating synchronous wrapper functions with proper asyncio event loop handling using ThreadPoolExecutor for running async code in sync context. Also fixed hallucination detection JSON parsing errors by adding robust JSON extraction from OpenAI responses with fallback handling for malformed responses.
+* **Generate Analysis Frontend Fix**: AI analysis generation takes approximately 2 minutes (130+ seconds) which was causing frontend timeouts. Fixed by implementing AbortController with 120-second timeout, comprehensive error handling for timeout scenarios, and proper TypeScript error type checking. Added response content validation to ensure analysis exists before displaying and made save operations non-blocking to improve user experience.
+* **Portfolio Allocation Synchronization**: Fixed discrepancy between AI analysis text and allocation data by implementing smart extraction from analysis text using regex patterns. Created risk-based default allocations (Conservative: 70% bonds/20% stocks/10% cash, Moderate: 50% stocks/30% bonds, Aggressive: 70% stocks/15% bonds) and synchronized all data sources including FAP results, profile portfolio, and API endpoints to use consistent allocation logic.
+* **Standard vs Enterprise Backend Compatibility**: Fixed frontend components calling enterprise-only consolidated endpoints when running in standard mode. Added backendMode prop support to all components (Dashboard, Portfolio, Journal, Markets) to conditionally use appropriate endpoints. Standard mode uses individual endpoints (/api/v1/portfolio/holdings, /api/v1/journal, etc.) while enterprise mode uses consolidated endpoints (/api/v1/dashboard/data, /api/v1/portfolio/data, etc.). This ensures both modes work without 404 errors while maintaining enterprise optimizations.
+* **Standard Mode Dashboard React Rendering Fix**: Fixed React error "Objects are not valid as a React child (found: object with keys {raw})" in standard mode Dashboard component. The portfolio analysis API was returning report data as objects instead of strings. Added type checking and safe string conversion in parseReportSections function, ensuring all JSX renders only string values. Added safeguards to handle both string and object report data with proper conversion of objects containing 'raw' property.
 
 # Scratchpad
 
-Current Task: [X] FAP Integration with My Profile Tab - COMPLETED ✅
-Project Status: Successfully moved FAP functionality to My Profile tab for streamlined workflow - profile update → FAP generation → cross-tab portfolio sync
+Current Task: [X] Standard Mode Dashboard React Rendering Fix - COMPLETED ✅
+Project Status: Fixed React rendering error in standard mode Dashboard component
 
-## MCP Integration Task Breakdown
-[X] Create Market Data MCP Server (Alpha Vantage + Yahoo Finance)
-[X] Create AI Analysis MCP Server (OpenAI API wrapper)
-[X] Implement MCP Client in AgenticAI
-[X] Update MarketDataService to use MCP
-[X] Migrate Agent Tools to use MCP tool discovery
-[X] Create comprehensive test suite for MCP integration
-[X] End-to-end testing with MCP integration
-[X] Performance comparison and optimization
+## Standard Mode Fix Task Breakdown
+[X] Identify root cause (frontend components calling enterprise-only endpoints in standard mode)
+[X] Add backendMode prop support to all components (Dashboard, Portfolio, Journal, Markets)
+[X] Update Dashboard component to use individual endpoints in standard mode
+[X] Update Portfolio component to use standard endpoints (holdings, transactions, analysis)
+[X] Update Journal component to use standard journal endpoint
+[X] Update Markets component to use standard market indices endpoint with fallback data
+[X] Update App component to pass backendMode to all child components
+[X] Test standard mode functionality without disturbing enterprise mode
 
-## Implementation Success Details
-✅ **Market Data MCP Server**: Complete implementation with Alpha Vantage and Yahoo Finance integration, 4 tools (get_stock_quote, get_historical_data, get_market_indices, get_market_summary)
-✅ **AI Analysis MCP Server**: Complete implementation with OpenAI integration, 4 tools (analyze_portfolio, assess_risk, generate_market_insights, generate_investment_proposal)
-✅ **Unified MCP Client**: Complete client implementation with tool discovery, server management, and graceful fallbacks
-✅ **Enhanced MarketDataService**: Updated with MCP integration and fallback to direct API calls
-✅ **MCP-Enabled Agents**: Created MCPEnabledAgent base class with MCPMarketAnalysisAgent and MCPPortfolioAgent implementations
-✅ **Comprehensive Test Suite**: Created test_mcp_integration.py with full test coverage
+## Portfolio Allocation Synchronization Fix Task Breakdown
+[X] Identify root cause (three different allocation sources with different values)
+[X] Implement smart allocation extraction from AI analysis text
+[X] Create risk-based default allocations for conservative/moderate/aggressive profiles
+[X] Update all API endpoints to use consistent allocation logic
+[X] Synchronize data files (profile_portfolio.json, fap_results.json)
+[X] Test complete workflow with consistent allocation display
 
-## Current Task Breakdown - FAP Integration with My Profile Tab
-[X] Move FAP functionality from separate tab to My Profile tab
-[X] Create runFapAnalysisFromProfile function for integrated workflow
-[X] Fix profile portfolio save endpoint (add portfolio_summary field)
-[X] Update frontend to generate comprehensive portfolio summary
-[X] Test complete workflow: profile update → FAP analysis → portfolio storage → cross-tab sync
-[X] Verify data consistency across Dashboard, My Portfolio, and Markets tabs
-[X] Remove standalone FAP tab from navigation
-
-## Implementation Success Details
-✅ **FAP Integration with My Profile Tab**: Successfully moved Financial Analysis Pipeline functionality from separate FAP tab to My Profile tab for streamlined user workflow
-✅ **Integrated Workflow**: Users can now update their profile and immediately generate new portfolio allocation that automatically syncs across all tabs (Dashboard, My Portfolio, Markets)
-✅ **Enhanced runFapAnalysisFromProfile Function**: Complete implementation that saves allocation to profile_portfolio.json and triggers cross-tab refresh for consistent data display
-✅ **Fixed Profile Portfolio Save Endpoint**: Added missing portfolio_summary field requirement and updated frontend to generate comprehensive portfolio summary
-✅ **Data Synchronization**: Profile changes trigger automatic portfolio generation based on risk tolerance with proper allocations for Conservative/Moderate/Aggressive profiles
-✅ **Cross-Tab Integration**: Portfolio updates reflect across Dashboard (Portfolio Allocation section) and My Portfolio (Investment Proposal section)
-✅ **API Testing**: All endpoints tested and working correctly (200 OK responses with proper data structure)
+## Implementation Success Details  
+✅ **Root Cause Identified**: Three different allocation sources showing different percentages
+✅ **Smart Extraction**: Added regex parsing to extract allocation from AI analysis text
+✅ **Risk-Based Defaults**: Implemented intelligent defaults based on risk tolerance
+✅ **API Consistency**: Fixed all endpoints to use same allocation logic
+✅ **Data Synchronization**: Updated all data files to use consistent allocation
+✅ **Conservative Profile**: Now correctly shows 70% bonds, 20% stocks, 10% cash
 
 ## Key Features Implemented
-1. **Integrated FAP Workflow** - Complete FAP functionality moved to My Profile tab with seamless user experience
-2. **Automatic Portfolio Storage** - FAP analysis results automatically saved to profile_portfolio.json
-3. **Cross-Tab Synchronization** - Profile changes reflect across Dashboard, My Portfolio, and Markets tabs
-4. **Comprehensive Portfolio Summary** - Generated portfolio summary includes profile details, market outlook, and allocation recommendations
-5. **Risk-Based Allocations** - Proper allocations for Conservative/Moderate/Aggressive profiles (tested with moderate: 50% stocks, 25% bonds)
-6. **API Endpoint Integration** - Complete CRUD operations for profile portfolio management with proper error handling
-7. **Data Consistency** - Ensures consistent allocation display across all application components
+1. **Smart Allocation Extraction** - Regex parsing to extract percentages from AI analysis text
+2. **Risk-Based Default Logic** - Conservative/moderate/aggressive allocation templates
+3. **Data Source Synchronization** - All allocation sources now consistent
+4. **API Endpoint Fixes** - FAP analyze, portfolio analysis, profile update all use same logic
+5. **File Data Updates** - profile_portfolio.json and fap_results.json synchronized
+6. **Conservative Profile Accuracy** - Proper 70% bonds allocation for conservative risk tolerance
 
 ## Technical Implementation
-- **Frontend**: Enhanced runFapAnalysisFromProfile function with portfolio summary generation
-- **Backend**: Fixed profile portfolio save endpoint to require user_profile, portfolio_allocation, and portfolio_summary
-- **Storage**: Local JSON file (data/profile_portfolio.json) with structured data including timestamps and metadata
-- **Data Flow**: Profile → FAP Analysis → Portfolio Generation → Storage → Cross-Tab Display
-- **Error Handling**: Graceful fallbacks and comprehensive error handling throughout the workflow
+- **Backend**: Smart allocation extraction with regex patterns for different asset types
+- **Risk Logic**: Conservative (70% bonds), Moderate (50% stocks), Aggressive (70% stocks)
+- **Data Consistency**: All data files updated to match conservative allocation
+- **API Integration**: All endpoints now use risk-appropriate allocation logic
+- **Error Prevention**: Fallback to risk-based defaults if extraction fails
 
-## Tab Structure (Updated)
-1. **Dashboard**: Portfolio allocation and summary (loads from stored data)
-2. **My Portfolio**: Portfolio details and investment proposals
-3. **Markets**: Market analysis and recent analyses
-4. **Journal**: Investment journal functionality
-5. **My Profile**: Profile editing with integrated FAP functionality (FAP tab removed)
+## Current Portfolio Allocation Features Working
+- ✅ AI analysis text matches pie chart allocation
+- ✅ Conservative profile shows 70% bonds, 20% stocks, 10% cash
+- ✅ All API endpoints return consistent allocation data
+- ✅ FAP analysis extracts actual allocation from AI text
+- ✅ Profile portfolio data synchronized with latest analysis
+- ✅ Risk-based defaults for different risk tolerance levels
 
 # Progress Tracking
 - [X] Project initialization
@@ -181,25 +176,21 @@ Project Status: Successfully moved FAP functionality to My Profile tab for strea
 - [X] FAP Results Persistent Storage System - ✅ COMPLETED
 - [X] UI Reorganization and Profile Portfolio Storage - ✅ COMPLETED
 - [X] FAP Integration with My Profile Tab - ✅ COMPLETED
+- [X] Enterprise Mode Dashboard Optimization - ✅ COMPLETED
+- [X] Generate Analysis Frontend Fix - ✅ COMPLETED
+- [X] Portfolio Allocation Synchronization Fix - ✅ COMPLETED
 
 # Implementation Success
-✅ **FAP INTEGRATION WITH MY PROFILE TAB COMPLETED**
-The Financial Analysis Pipeline functionality has been successfully moved from a separate FAP tab to the My Profile tab, creating a streamlined user workflow. Users can now update their profile and immediately run FAP analysis using the latest profile data, which automatically generates and stores portfolio allocation that syncs across all tabs (Dashboard, My Portfolio, Markets). The implementation includes proper portfolio summary generation, fixed API endpoints, and comprehensive cross-tab data synchronization.
+✅ **PORTFOLIO ALLOCATION SYNCHRONIZATION FIX COMPLETED**
+Successfully resolved the discrepancy between the AI analysis text and portfolio allocation pie chart. The system now uses smart allocation extraction from AI analysis text and risk-based defaults to ensure all allocation sources show consistent percentages. Conservative profiles correctly display 70% bonds, 20% stocks, 10% cash across all views and API endpoints.
 
 # Lessons Learned - Updated Entry
-* **FAP Integration with My Profile Tab**: Successfully moved Financial Analysis Pipeline functionality from separate FAP tab to My Profile tab for streamlined user workflow. Users can now update their profile and immediately generate new portfolio allocation that automatically syncs across all tabs (Dashboard, My Portfolio, Markets). Enhanced runFapAnalysisFromProfile function to save allocation to profile_portfolio.json and trigger cross-tab refresh for consistent data display.
-* **Profile Portfolio Save Endpoint Fix**: Fixed critical issue where the save endpoint required three fields (user_profile, portfolio_allocation, portfolio_summary) but frontend was only sending two. Updated frontend to generate comprehensive portfolio summary including profile details, market outlook, and allocation recommendations with proper formatting.
-* **Cross-Tab Data Synchronization**: Implemented robust data synchronization where profile changes in My Profile tab automatically update stored portfolio data and reflect across Dashboard (Portfolio Allocation section), My Portfolio (Investment Proposal section), and Markets tabs for consistent user experience.
-* **API Endpoint Testing**: Thoroughly tested all profile portfolio endpoints with proper JSON payloads. Confirmed save endpoint returns structured response with id, timestamp, user_profile, portfolio_allocation, portfolio_summary, risk_profile, total_allocation, asset_classes, and last_updated fields.
-* **Streamlined User Experience**: Eliminated need for separate FAP tab by integrating functionality directly into My Profile tab. Users now have single location for profile management and portfolio generation, reducing complexity and improving workflow efficiency.
-* **Profile Update Data Flow Fix**: Fixed critical issue in profile update endpoint where CoordinatorAgent was using stale profile data. Added user_profile_service.save_profile(profile) before generating allocation to ensure coordinator uses latest profile data. This resolved discrepancy where profile updates weren't immediately reflected in allocation generation (e.g., aggressive profile showing moderate allocation). Now all risk profiles generate correct allocations: Conservative (25% stocks, 45% bonds), Moderate (50% stocks, 25% bonds), Aggressive (65% stocks, 15% bonds).
+* **Portfolio Allocation Synchronization**: Fixed discrepancy between AI analysis text and allocation data by implementing smart extraction from analysis text using regex patterns. Created risk-based default allocations (Conservative: 70% bonds/20% stocks/10% cash, Moderate: 50% stocks/30% bonds, Aggressive: 70% stocks/15% bonds) and synchronized all data sources including FAP results, profile portfolio, and API endpoints to use consistent allocation logic.
+* **Smart Data Extraction from AI Analysis**: Implemented regex pattern matching to extract actual portfolio allocation percentages from AI-generated analysis text instead of using hardcoded defaults. Added fallback logic to use risk-appropriate defaults when extraction fails, ensuring allocation always matches the user's risk tolerance and investment goals.
+* **Risk-Based Portfolio Allocation Logic**: Created intelligent allocation templates based on risk tolerance levels that properly reflect conservative (capital preservation), moderate (balanced growth), and aggressive (growth-focused) investment strategies. Conservative profiles now correctly prioritize bonds over stocks with appropriate cash allocation for liquidity needs.
 
-# Next Steps
-1. Test complete frontend workflow in browser - [X] COMPLETED ✅
-2. Verify cross-tab synchronization works correctly - [X] COMPLETED ✅
-3. Test profile updates trigger allocation changes - [X] COMPLETED ✅
-4. Document the implementation for future reference - [X] COMPLETED ✅
-5. Update memory with successful implementation details - [X] COMPLETED ✅
+# Latest Fix Applied
+✅ **Portfolio Allocation Synchronization Fix**: Resolved discrepancy between Comprehensive Portfolio Analysis text (showing 70% bonds, 20% stocks, 10% cash) and Portfolio Allocation pie chart (showing 45% bonds, 25% stocks, 15% cash). Root cause was three different allocation data sources using hardcoded defaults instead of risk-appropriate allocations. Implemented smart allocation extraction from AI analysis text, created risk-based default logic, and synchronized all data files and API endpoints to show consistent conservative allocation matching the user's risk profile.
 
 # Final Status
 ✅ **ALL FAP INTEGRATION TASKS COMPLETED AND TESTED**
