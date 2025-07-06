@@ -99,61 +99,38 @@ class RiskAssessmentAgent(BaseFinancialAgent):
     
     async def _parse_profile(self, profile: str) -> RiskProfile:
         """Parse user profile information from text"""
-        # Import here to avoid circular imports
-        from src.services.user_profile_service import UserProfileService
+        # This is a simplified implementation
+        # In a real system, you would use NLP to extract structured data
+        profile_data = {
+            "age": 30,  # Default values
+            "income": 100000,
+            "risk_tolerance": "moderate",
+            "investment_goals": "retirement",
+            "time_horizon": "long_term"
+        }
         
-        # Try to load saved profile first
-        profile_service = UserProfileService()
-        saved_profile = profile_service.load_profile()
+        # Extract age
+        if "year old" in profile.lower():
+            try:
+                age = int(profile.split("year old")[0].strip().split()[-1])
+                profile_data["age"] = age
+            except:
+                pass
         
-        if saved_profile:
-            # Use saved profile data - ensure fresh data is loaded
-            profile_data = {
-                "age": saved_profile.age,
-                "income": saved_profile.income,
-                "risk_tolerance": saved_profile.risk_tolerance,
-                "investment_goals": saved_profile.investment_goal,
-                "time_horizon": saved_profile.investment_horizon
-            }
-            
-            # Log the profile data being used for debugging
-            self.logger.info(f"Using saved profile: Age {saved_profile.age}, Risk: {saved_profile.risk_tolerance}, Income: {saved_profile.income}")
-        else:
-            # Fallback to default values if no saved profile - use reasonable defaults
-            profile_data = {
-                "age": 35,
-                "income": 75000,
-                "risk_tolerance": "moderate",
-                "investment_goals": "balanced_growth",
-                "time_horizon": "medium-term"
-            }
-            
-            # Log when using defaults
-            self.logger.warning("No saved profile found, using default values")
-            
-            # Try to extract from string as backup
-            # Extract age
-            if "year old" in profile.lower():
-                try:
-                    age = int(profile.split("year old")[0].strip().split()[-1])
-                    profile_data["age"] = age
-                except:
-                    pass
-            
-            # Extract income
-            if "$" in profile:
-                try:
-                    income = int(profile.split("$")[1].split()[0].replace(",", ""))
-                    profile_data["income"] = income
-                except:
-                    pass
-            
-            # Extract risk tolerance
-            risk_levels = ["conservative", "moderate", "aggressive"]
-            for level in risk_levels:
-                if level in profile.lower():
-                    profile_data["risk_tolerance"] = level
-                    break
+        # Extract income
+        if "$" in profile:
+            try:
+                income = int(profile.split("$")[1].split()[0].replace(",", ""))
+                profile_data["income"] = income
+            except:
+                pass
+        
+        # Extract risk tolerance
+        risk_levels = ["conservative", "moderate", "aggressive"]
+        for level in risk_levels:
+            if level in profile.lower():
+                profile_data["risk_tolerance"] = level
+                break
         
         return RiskProfile(**profile_data)
     

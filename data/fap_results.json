@@ -1,83 +1,83 @@
 {
-  "id": "fap_1750905742",
-  "timestamp": "2025-06-25T21:42:22.589565",
+  "id": "fap_1751048135",
+  "timestamp": "2025-06-27T13:15:35.003555",
   "fap_context": {
     "user_profile": {
-      "name": "Kalai",
-      "age": 45,
-      "income": 150000.0,
-      "risk_tolerance": "moderate",
-      "investment_goal": "balanced_growth",
+      "name": "Chris",
+      "age": 25,
+      "income": 500000.0,
+      "risk_tolerance": "aggressive",
+      "investment_goal": "aggressive_growth",
       "investment_horizon": "long-term"
     },
-    "session_id": "22e90a23-b8dd-41af-8b7f-d016a6365abe",
+    "session_id": "d76a9165-2375-49ba-95e8-373aede7d1db",
     "risk_assessment": {
       "raw": {
-        "risk_score": 0.5,
-        "risk_level": "Moderate",
+        "risk_score": 0.8000000000000002,
+        "risk_level": "High",
         "profile_analysis": {
-          "age": "45 years",
-          "income": "$150,000",
-          "risk_tolerance": "Moderate",
-          "investment_goals": "balanced_growth",
+          "age": "25 years",
+          "income": "$500,000",
+          "risk_tolerance": "Aggressive",
+          "investment_goals": "aggressive_growth",
           "time_horizon": "long-term"
         },
         "recommendations": [
-          "Balanced portfolio of stocks and bonds",
-          "Consider index funds for core holdings",
-          "Quarterly portfolio review recommended"
+          "Consider a growth-oriented portfolio",
+          "Focus on equities with some alternative investments",
+          "Regular portfolio rebalancing recommended"
         ]
       }
     },
     "market_analysis": {
       "raw": {
-        "current_price": 607.1199951171875,
-        "daily_change": -0.78997802734375,
-        "daily_change_percent": -0.1299498383383047,
-        "volume": 61881800,
+        "current_price": 613.5650024414062,
+        "daily_change": 0.68499755859375,
+        "daily_change_percent": 0.11176699405044661,
+        "volume": 43828254,
         "market_sentiment": "Neutral",
-        "timestamp": "2025-06-25T21:42:22.587882"
+        "timestamp": "2025-06-27T13:15:35.001996"
       }
     },
     "portfolio_allocation": {
       "raw": {
-        "stocks": 0.5,
-        "bonds": 0.25,
-        "cash": 0.1,
+        "stocks": 0.65,
+        "bonds": 0.15,
+        "cash": 0.05,
         "real_estate": 0.05,
         "commodities": 0.05,
-        "cryptocurrency": 0.02,
-        "etfs": 0.02,
+        "cryptocurrency": 0.03,
+        "etfs": 0.01,
         "reits": 0.01
       }
     },
-    "report": "Financial Analysis Report\n==================================================\n\nRisk Assessment Summary:\nrisk_score=0.5 risk_level='Moderate' profile_analysis={'age': '45 years', 'income': '$150,000', 'risk_tolerance': 'Moderate', 'investment_goals': 'balanced_growth', 'time_horizon': 'long-term'} recommendations=['Balanced portfolio of stocks and bonds', 'Consider index funds for core holdings', 'Quarterly portfolio review recommended']\n\nMarket Outlook:\ncurrent_price=607.1199951171875 daily_change=-0.78997802734375 daily_change_percent=-0.1299498383383047 volume=61881800 market_sentiment='Neutral' timestamp='2025-06-25T21:42:22.587882'\n\nRecommended Portfolio Allocation:\nstocks=0.5 bonds=0.25 cash=0.1 real_estate=0.05 commodities=0.05 cryptocurrency=0.02 etfs=0.02 reits=0.01",
+    "report": "Financial Analysis Report\n==================================================\n\nRisk Assessment Summary:\nrisk_score=0.8000000000000002 risk_level='High' profile_analysis={'age': '25 years', 'income': '$500,000', 'risk_tolerance': 'Aggressive', 'investment_goals': 'aggressive_growth', 'time_horizon': 'long-term'} recommendations=['Consider a growth-oriented portfolio', 'Focus on equities with some alternative investments', 'Regular portfolio rebalancing recommended']\n\nMarket Outlook:\ncurrent_price=613.5650024414062 daily_change=0.68499755859375 daily_change_percent=0.11176699405044661 volume=43828254 market_sentiment='Neutral' timestamp='2025-06-27T13:15:35.001996'\n\nRecommended Portfolio Allocation:\nstocks=0.65 bonds=0.15 cash=0.05 real_estate=0.05 commodities=0.05 cryptocurrency=0.03 etfs=0.01 reits=0.01",
     "history": [
       {
         "user_profile": {
-          "name": "Kalai",
-          "age": 45,
-          "income": 150000.0,
-          "risk_tolerance": "moderate",
-          "investment_goal": "balanced_growth",
+          "name": "Chris",
+          "age": 25,
+          "income": 500000.0,
+          "risk_tolerance": "aggressive",
+          "investment_goal": "aggressive_growth",
           "investment_horizon": "long-term"
         },
-        "session_id": "22e90a23-b8dd-41af-8b7f-d016a6365abe",
+        "session_id": "d76a9165-2375-49ba-95e8-373aede7d1db",
         "risk_assessment": {
           "raw": {
-            "risk_score": 0.5,
-            "risk_level": "Moderate",
+            "risk_score": 0.8000000000000002,
+            "risk_level": "High",
             "profile_analysis": {
-              "age": "45 years",
-              "income": "$150,000",
-              "risk_tolerance": "Moderate",
-              "investment_goals": "balanced_growth",
+              "age": "25 years",
+              "income": "$500,000",
+              "risk_tolerance": "Aggressive",
+              "investment_goals": "aggressive_growth",
               "time_horizon": "long-term"
             },
             "recommendations": [
-              "Balanced portfolio of stocks and bonds",
-              "Consider index funds for core holdings",
-              "Quarterly portfolio review recommended"
+              "Consider a growth-oriented portfolio",
+              "Focus on equities with some alternative investments",
+              "Regular portfolio rebalancing recommended"
             ]
           }
         },
@@ -88,40 +88,40 @@
       },
       {
         "user_profile": {
-          "name": "Kalai",
-          "age": 45,
-          "income": 150000.0,
-          "risk_tolerance": "moderate",
-          "investment_goal": "balanced_growth",
+          "name": "Chris",
+          "age": 25,
+          "income": 500000.0,
+          "risk_tolerance": "aggressive",
+          "investment_goal": "aggressive_growth",
           "investment_horizon": "long-term"
         },
-        "session_id": "22e90a23-b8dd-41af-8b7f-d016a6365abe",
+        "session_id": "d76a9165-2375-49ba-95e8-373aede7d1db",
         "risk_assessment": {
           "raw": {
-            "risk_score": 0.5,
-            "risk_level": "Moderate",
+            "risk_score": 0.8000000000000002,
+            "risk_level": "High",
             "profile_analysis": {
-              "age": "45 years",
-              "income": "$150,000",
-              "risk_tolerance": "Moderate",
-              "investment_goals": "balanced_growth",
+              "age": "25 years",
+              "income": "$500,000",
+              "risk_tolerance": "Aggressive",
+              "investment_goals": "aggressive_growth",
               "time_horizon": "long-term"
             },
             "recommendations": [
-              "Balanced portfolio of stocks and bonds",
-              "Consider index funds for core holdings",
-              "Quarterly portfolio review recommended"
+              "Consider a growth-oriented portfolio",
+              "Focus on equities with some alternative investments",
+              "Regular portfolio rebalancing recommended"
             ]
           }
         },
         "market_analysis": {
           "raw": {
-            "current_price": 607.1199951171875,
-            "daily_change": -0.78997802734375,
-            "daily_change_percent": -0.1299498383383047,
-            "volume": 61881800,
+            "current_price": 613.5650024414062,
+            "daily_change": 0.68499755859375,
+            "daily_change_percent": 0.11176699405044661,
+            "volume": 43828254,
             "market_sentiment": "Neutral",
-            "timestamp": "2025-06-25T21:42:22.587882"
+            "timestamp": "2025-06-27T13:15:35.001996"
           }
         },
         "portfolio_allocation": null,
@@ -129,29 +129,29 @@
         "history": [
           {
             "user_profile": {
-              "name": "Kalai",
-              "age": 45,
-              "income": 150000.0,
-              "risk_tolerance": "moderate",
-              "investment_goal": "balanced_growth",
+              "name": "Chris",
+              "age": 25,
+              "income": 500000.0,
+              "risk_tolerance": "aggressive",
+              "investment_goal": "aggressive_growth",
               "investment_horizon": "long-term"
             },
-            "session_id": "22e90a23-b8dd-41af-8b7f-d016a6365abe",
+            "session_id": "d76a9165-2375-49ba-95e8-373aede7d1db",
             "risk_assessment": {
               "raw": {
-                "risk_score": 0.5,
-                "risk_level": "Moderate",
+                "risk_score": 0.8000000000000002,
+                "risk_level": "High",
                 "profile_analysis": {
-                  "age": "45 years",
-                  "income": "$150,000",
-                  "risk_tolerance": "Moderate",
-                  "investment_goals": "balanced_growth",
+                  "age": "25 years",
+                  "income": "$500,000",
+                  "risk_tolerance": "Aggressive",
+                  "investment_goals": "aggressive_growth",
                   "time_horizon": "long-term"
                 },
                 "recommendations": [
-                  "Balanced portfolio of stocks and bonds",
-                  "Consider index funds for core holdings",
-                  "Quarterly portfolio review recommended"
+                  "Consider a growth-oriented portfolio",
+                  "Focus on equities with some alternative investments",
+                  "Regular portfolio rebalancing recommended"
                 ]
               }
             },
@@ -164,51 +164,51 @@
       },
       {
         "user_profile": {
-          "name": "Kalai",
-          "age": 45,
-          "income": 150000.0,
-          "risk_tolerance": "moderate",
-          "investment_goal": "balanced_growth",
+          "name": "Chris",
+          "age": 25,
+          "income": 500000.0,
+          "risk_tolerance": "aggressive",
+          "investment_goal": "aggressive_growth",
           "investment_horizon": "long-term"
         },
-        "session_id": "22e90a23-b8dd-41af-8b7f-d016a6365abe",
+        "session_id": "d76a9165-2375-49ba-95e8-373aede7d1db",
         "risk_assessment": {
           "raw": {
-            "risk_score": 0.5,
-            "risk_level": "Moderate",
+            "risk_score": 0.8000000000000002,
+            "risk_level": "High",
             "profile_analysis": {
-              "age": "45 years",
-              "income": "$150,000",
-              "risk_tolerance": "Moderate",
-              "investment_goals": "balanced_growth",
+              "age": "25 years",
+              "income": "$500,000",
+              "risk_tolerance": "Aggressive",
+              "investment_goals": "aggressive_growth",
               "time_horizon": "long-term"
             },
             "recommendations": [
-              "Balanced portfolio of stocks and bonds",
-              "Consider index funds for core holdings",
-              "Quarterly portfolio review recommended"
+              "Consider a growth-oriented portfolio",
+              "Focus on equities with some alternative investments",
+              "Regular portfolio rebalancing recommended"
             ]
           }
         },
         "market_analysis": {
           "raw": {
-            "current_price": 607.1199951171875,
-            "daily_change": -0.78997802734375,
-            "daily_change_percent": -0.1299498383383047,
-            "volume": 61881800,
+            "current_price": 613.5650024414062,
+            "daily_change": 0.68499755859375,
+            "daily_change_percent": 0.11176699405044661,
+            "volume": 43828254,
             "market_sentiment": "Neutral",
-            "timestamp": "2025-06-25T21:42:22.587882"
+            "timestamp": "2025-06-27T13:15:35.001996"
           }
         },
         "portfolio_allocation": {
           "raw": {
-            "stocks": 0.5,
-            "bonds": 0.25,
-            "cash": 0.1,
+            "stocks": 0.65,
+            "bonds": 0.15,
+            "cash": 0.05,
             "real_estate": 0.05,
             "commodities": 0.05,
-            "cryptocurrency": 0.02,
-            "etfs": 0.02,
+            "cryptocurrency": 0.03,
+            "etfs": 0.01,
             "reits": 0.01
           }
         },
@@ -216,29 +216,29 @@
         "history": [
           {
             "user_profile": {
-              "name": "Kalai",
-              "age": 45,
-              "income": 150000.0,
-              "risk_tolerance": "moderate",
-              "investment_goal": "balanced_growth",
+              "name": "Chris",
+              "age": 25,
+              "income": 500000.0,
+              "risk_tolerance": "aggressive",
+              "investment_goal": "aggressive_growth",
               "investment_horizon": "long-term"
             },
-            "session_id": "22e90a23-b8dd-41af-8b7f-d016a6365abe",
+            "session_id": "d76a9165-2375-49ba-95e8-373aede7d1db",
             "risk_assessment": {
               "raw": {
-                "risk_score": 0.5,
-                "risk_level": "Moderate",
+                "risk_score": 0.8000000000000002,
+                "risk_level": "High",
                 "profile_analysis": {
-                  "age": "45 years",
-                  "income": "$150,000",
-                  "risk_tolerance": "Moderate",
-                  "investment_goals": "balanced_growth",
+                  "age": "25 years",
+                  "income": "$500,000",
+                  "risk_tolerance": "Aggressive",
+                  "investment_goals": "aggressive_growth",
                   "time_horizon": "long-term"
                 },
                 "recommendations": [
-                  "Balanced portfolio of stocks and bonds",
-                  "Consider index funds for core holdings",
-                  "Quarterly portfolio review recommended"
+                  "Consider a growth-oriented portfolio",
+                  "Focus on equities with some alternative investments",
+                  "Regular portfolio rebalancing recommended"
                 ]
               }
             },
@@ -249,40 +249,40 @@
           },
           {
             "user_profile": {
-              "name": "Kalai",
-              "age": 45,
-              "income": 150000.0,
-              "risk_tolerance": "moderate",
-              "investment_goal": "balanced_growth",
+              "name": "Chris",
+              "age": 25,
+              "income": 500000.0,
+              "risk_tolerance": "aggressive",
+              "investment_goal": "aggressive_growth",
               "investment_horizon": "long-term"
             },
-            "session_id": "22e90a23-b8dd-41af-8b7f-d016a6365abe",
+            "session_id": "d76a9165-2375-49ba-95e8-373aede7d1db",
             "risk_assessment": {
               "raw": {
-                "risk_score": 0.5,
-                "risk_level": "Moderate",
+                "risk_score": 0.8000000000000002,
+                "risk_level": "High",
                 "profile_analysis": {
-                  "age": "45 years",
-                  "income": "$150,000",
-                  "risk_tolerance": "Moderate",
-                  "investment_goals": "balanced_growth",
+                  "age": "25 years",
+                  "income": "$500,000",
+                  "risk_tolerance": "Aggressive",
+                  "investment_goals": "aggressive_growth",
                   "time_horizon": "long-term"
                 },
                 "recommendations": [
-                  "Balanced portfolio of stocks and bonds",
-                  "Consider index funds for core holdings",
-                  "Quarterly portfolio review recommended"
+                  "Consider a growth-oriented portfolio",
+                  "Focus on equities with some alternative investments",
+                  "Regular portfolio rebalancing recommended"
                 ]
               }
             },
             "market_analysis": {
               "raw": {
-                "current_price": 607.1199951171875,
-                "daily_change": -0.78997802734375,
-                "daily_change_percent": -0.1299498383383047,
-                "volume": 61881800,
+                "current_price": 613.5650024414062,
+                "daily_change": 0.68499755859375,
+                "daily_change_percent": 0.11176699405044661,
+                "volume": 43828254,
                 "market_sentiment": "Neutral",
-                "timestamp": "2025-06-25T21:42:22.587882"
+                "timestamp": "2025-06-27T13:15:35.001996"
               }
             },
             "portfolio_allocation": null,
@@ -290,29 +290,29 @@
             "history": [
               {
                 "user_profile": {
-                  "name": "Kalai",
-                  "age": 45,
-                  "income": 150000.0,
-                  "risk_tolerance": "moderate",
-                  "investment_goal": "balanced_growth",
+                  "name": "Chris",
+                  "age": 25,
+                  "income": 500000.0,
+                  "risk_tolerance": "aggressive",
+                  "investment_goal": "aggressive_growth",
                   "investment_horizon": "long-term"
                 },
-                "session_id": "22e90a23-b8dd-41af-8b7f-d016a6365abe",
+                "session_id": "d76a9165-2375-49ba-95e8-373aede7d1db",
                 "risk_assessment": {
                   "raw": {
-                    "risk_score": 0.5,
-                    "risk_level": "Moderate",
+                    "risk_score": 0.8000000000000002,
+                    "risk_level": "High",
                     "profile_analysis": {
-                      "age": "45 years",
-                      "income": "$150,000",
-                      "risk_tolerance": "Moderate",
-                      "investment_goals": "balanced_growth",
+                      "age": "25 years",
+                      "income": "$500,000",
+                      "risk_tolerance": "Aggressive",
+                      "investment_goals": "aggressive_growth",
                       "time_horizon": "long-term"
                     },
                     "recommendations": [
-                      "Balanced portfolio of stocks and bonds",
-                      "Consider index funds for core holdings",
-                      "Quarterly portfolio review recommended"
+                      "Consider a growth-oriented portfolio",
+                      "Focus on equities with some alternative investments",
+                      "Regular portfolio rebalancing recommended"
                     ]
                   }
                 },
@@ -327,81 +327,81 @@
       },
       {
         "user_profile": {
-          "name": "Kalai",
-          "age": 45,
-          "income": 150000.0,
-          "risk_tolerance": "moderate",
-          "investment_goal": "balanced_growth",
+          "name": "Chris",
+          "age": 25,
+          "income": 500000.0,
+          "risk_tolerance": "aggressive",
+          "investment_goal": "aggressive_growth",
           "investment_horizon": "long-term"
         },
-        "session_id": "22e90a23-b8dd-41af-8b7f-d016a6365abe",
+        "session_id": "d76a9165-2375-49ba-95e8-373aede7d1db",
         "risk_assessment": {
           "raw": {
-            "risk_score": 0.5,
-            "risk_level": "Moderate",
+            "risk_score": 0.8000000000000002,
+            "risk_level": "High",
             "profile_analysis": {
-              "age": "45 years",
-              "income": "$150,000",
-              "risk_tolerance": "Moderate",
-              "investment_goals": "balanced_growth",
+              "age": "25 years",
+              "income": "$500,000",
+              "risk_tolerance": "Aggressive",
+              "investment_goals": "aggressive_growth",
               "time_horizon": "long-term"
             },
             "recommendations": [
-              "Balanced portfolio of stocks and bonds",
-              "Consider index funds for core holdings",
-              "Quarterly portfolio review recommended"
+              "Consider a growth-oriented portfolio",
+              "Focus on equities with some alternative investments",
+              "Regular portfolio rebalancing recommended"
             ]
           }
         },
         "market_analysis": {
           "raw": {
-            "current_price": 607.1199951171875,
-            "daily_change": -0.78997802734375,
-            "daily_change_percent": -0.1299498383383047,
-            "volume": 61881800,
+            "current_price": 613.5650024414062,
+            "daily_change": 0.68499755859375,
+            "daily_change_percent": 0.11176699405044661,
+            "volume": 43828254,
             "market_sentiment": "Neutral",
-            "timestamp": "2025-06-25T21:42:22.587882"
+            "timestamp": "2025-06-27T13:15:35.001996"
           }
         },
         "portfolio_allocation": {
           "raw": {
-            "stocks": 0.5,
-            "bonds": 0.25,
-            "cash": 0.1,
+            "stocks": 0.65,
+            "bonds": 0.15,
+            "cash": 0.05,
             "real_estate": 0.05,
             "commodities": 0.05,
-            "cryptocurrency": 0.02,
-            "etfs": 0.02,
+            "cryptocurrency": 0.03,
+            "etfs": 0.01,
             "reits": 0.01
           }
         },
-        "report": "Financial Analysis Report\n==================================================\n\nRisk Assessment Summary:\nrisk_score=0.5 risk_level='Moderate' profile_analysis={'age': '45 years', 'income': '$150,000', 'risk_tolerance': 'Moderate', 'investment_goals': 'balanced_growth', 'time_horizon': 'long-term'} recommendations=['Balanced portfolio of stocks and bonds', 'Consider index funds for core holdings', 'Quarterly portfolio review recommended']\n\nMarket Outlook:\ncurrent_price=607.1199951171875 daily_change=-0.78997802734375 daily_change_percent=-0.1299498383383047 volume=61881800 market_sentiment='Neutral' timestamp='2025-06-25T21:42:22.587882'\n\nRecommended Portfolio Allocation:\nstocks=0.5 bonds=0.25 cash=0.1 real_estate=0.05 commodities=0.05 cryptocurrency=0.02 etfs=0.02 reits=0.01",
+        "report": "Financial Analysis Report\n==================================================\n\nRisk Assessment Summary:\nrisk_score=0.8000000000000002 risk_level='High' profile_analysis={'age': '25 years', 'income': '$500,000', 'risk_tolerance': 'Aggressive', 'investment_goals': 'aggressive_growth', 'time_horizon': 'long-term'} recommendations=['Consider a growth-oriented portfolio', 'Focus on equities with some alternative investments', 'Regular portfolio rebalancing recommended']\n\nMarket Outlook:\ncurrent_price=613.5650024414062 daily_change=0.68499755859375 daily_change_percent=0.11176699405044661 volume=43828254 market_sentiment='Neutral' timestamp='2025-06-27T13:15:35.001996'\n\nRecommended Portfolio Allocation:\nstocks=0.65 bonds=0.15 cash=0.05 real_estate=0.05 commodities=0.05 cryptocurrency=0.03 etfs=0.01 reits=0.01",
         "history": [
           {
             "user_profile": {
-              "name": "Kalai",
-              "age": 45,
-              "income": 150000.0,
-              "risk_tolerance": "moderate",
-              "investment_goal": "balanced_growth",
+              "name": "Chris",
+              "age": 25,
+              "income": 500000.0,
+              "risk_tolerance": "aggressive",
+              "investment_goal": "aggressive_growth",
               "investment_horizon": "long-term"
             },
-            "session_id": "22e90a23-b8dd-41af-8b7f-d016a6365abe",
+            "session_id": "d76a9165-2375-49ba-95e8-373aede7d1db",
             "risk_assessment": {
               "raw": {
-                "risk_score": 0.5,
-                "risk_level": "Moderate",
+                "risk_score": 0.8000000000000002,
+                "risk_level": "High",
                 "profile_analysis": {
-                  "age": "45 years",
-                  "income": "$150,000",
-                  "risk_tolerance": "Moderate",
-                  "investment_goals": "balanced_growth",
+                  "age": "25 years",
+                  "income": "$500,000",
+                  "risk_tolerance": "Aggressive",
+                  "investment_goals": "aggressive_growth",
                   "time_horizon": "long-term"
                 },
                 "recommendations": [
-                  "Balanced portfolio of stocks and bonds",
-                  "Consider index funds for core holdings",
-                  "Quarterly portfolio review recommended"
+                  "Consider a growth-oriented portfolio",
+                  "Focus on equities with some alternative investments",
+                  "Regular portfolio rebalancing recommended"
                 ]
               }
             },
@@ -412,40 +412,40 @@
           },
           {
             "user_profile": {
-              "name": "Kalai",
-              "age": 45,
-              "income": 150000.0,
-              "risk_tolerance": "moderate",
-              "investment_goal": "balanced_growth",
+              "name": "Chris",
+              "age": 25,
+              "income": 500000.0,
+              "risk_tolerance": "aggressive",
+              "investment_goal": "aggressive_growth",
               "investment_horizon": "long-term"
             },
-            "session_id": "22e90a23-b8dd-41af-8b7f-d016a6365abe",
+            "session_id": "d76a9165-2375-49ba-95e8-373aede7d1db",
             "risk_assessment": {
               "raw": {
-                "risk_score": 0.5,
-                "risk_level": "Moderate",
+                "risk_score": 0.8000000000000002,
+                "risk_level": "High",
                 "profile_analysis": {
-                  "age": "45 years",
-                  "income": "$150,000",
-                  "risk_tolerance": "Moderate",
-                  "investment_goals": "balanced_growth",
+                  "age": "25 years",
+                  "income": "$500,000",
+                  "risk_tolerance": "Aggressive",
+                  "investment_goals": "aggressive_growth",
                   "time_horizon": "long-term"
                 },
                 "recommendations": [
-                  "Balanced portfolio of stocks and bonds",
-                  "Consider index funds for core holdings",
-                  "Quarterly portfolio review recommended"
+                  "Consider a growth-oriented portfolio",
+                  "Focus on equities with some alternative investments",
+                  "Regular portfolio rebalancing recommended"
                 ]
               }
             },
             "market_analysis": {
               "raw": {
-                "current_price": 607.1199951171875,
-                "daily_change": -0.78997802734375,
-                "daily_change_percent": -0.1299498383383047,
-                "volume": 61881800,
+                "current_price": 613.5650024414062,
+                "daily_change": 0.68499755859375,
+                "daily_change_percent": 0.11176699405044661,
+                "volume": 43828254,
                 "market_sentiment": "Neutral",
-                "timestamp": "2025-06-25T21:42:22.587882"
+                "timestamp": "2025-06-27T13:15:35.001996"
               }
             },
             "portfolio_allocation": null,
@@ -453,29 +453,29 @@
             "history": [
               {
                 "user_profile": {
-                  "name": "Kalai",
-                  "age": 45,
-                  "income": 150000.0,
-                  "risk_tolerance": "moderate",
-                  "investment_goal": "balanced_growth",
+                  "name": "Chris",
+                  "age": 25,
+                  "income": 500000.0,
+                  "risk_tolerance": "aggressive",
+                  "investment_goal": "aggressive_growth",
                   "investment_horizon": "long-term"
                 },
-                "session_id": "22e90a23-b8dd-41af-8b7f-d016a6365abe",
+                "session_id": "d76a9165-2375-49ba-95e8-373aede7d1db",
                 "risk_assessment": {
                   "raw": {
-                    "risk_score": 0.5,
-                    "risk_level": "Moderate",
+                    "risk_score": 0.8000000000000002,
+                    "risk_level": "High",
                     "profile_analysis": {
-                      "age": "45 years",
-                      "income": "$150,000",
-                      "risk_tolerance": "Moderate",
-                      "investment_goals": "balanced_growth",
+                      "age": "25 years",
+                      "income": "$500,000",
+                      "risk_tolerance": "Aggressive",
+                      "investment_goals": "aggressive_growth",
                       "time_horizon": "long-term"
                     },
                     "recommendations": [
-                      "Balanced portfolio of stocks and bonds",
-                      "Consider index funds for core holdings",
-                      "Quarterly portfolio review recommended"
+                      "Consider a growth-oriented portfolio",
+                      "Focus on equities with some alternative investments",
+                      "Regular portfolio rebalancing recommended"
                     ]
                   }
                 },
@@ -488,51 +488,51 @@
           },
           {
             "user_profile": {
-              "name": "Kalai",
-              "age": 45,
-              "income": 150000.0,
-              "risk_tolerance": "moderate",
-              "investment_goal": "balanced_growth",
+              "name": "Chris",
+              "age": 25,
+              "income": 500000.0,
+              "risk_tolerance": "aggressive",
+              "investment_goal": "aggressive_growth",
               "investment_horizon": "long-term"
             },
-            "session_id": "22e90a23-b8dd-41af-8b7f-d016a6365abe",
+            "session_id": "d76a9165-2375-49ba-95e8-373aede7d1db",
             "risk_assessment": {
               "raw": {
-                "risk_score": 0.5,
-                "risk_level": "Moderate",
+                "risk_score": 0.8000000000000002,
+                "risk_level": "High",
                 "profile_analysis": {
-                  "age": "45 years",
-                  "income": "$150,000",
-                  "risk_tolerance": "Moderate",
-                  "investment_goals": "balanced_growth",
+                  "age": "25 years",
+                  "income": "$500,000",
+                  "risk_tolerance": "Aggressive",
+                  "investment_goals": "aggressive_growth",
                   "time_horizon": "long-term"
                 },
                 "recommendations": [
-                  "Balanced portfolio of stocks and bonds",
-                  "Consider index funds for core holdings",
-                  "Quarterly portfolio review recommended"
+                  "Consider a growth-oriented portfolio",
+                  "Focus on equities with some alternative investments",
+                  "Regular portfolio rebalancing recommended"
                 ]
               }
             },
             "market_analysis": {
               "raw": {
-                "current_price": 607.1199951171875,
-                "daily_change": -0.78997802734375,
-                "daily_change_percent": -0.1299498383383047,
-                "volume": 61881800,
+                "current_price": 613.5650024414062,
+                "daily_change": 0.68499755859375,
+                "daily_change_percent": 0.11176699405044661,
+                "volume": 43828254,
                 "market_sentiment": "Neutral",
-                "timestamp": "2025-06-25T21:42:22.587882"
+                "timestamp": "2025-06-27T13:15:35.001996"
               }
             },
             "portfolio_allocation": {
               "raw": {
-                "stocks": 0.5,
-                "bonds": 0.25,
-                "cash": 0.1,
+                "stocks": 0.65,
+                "bonds": 0.15,
+                "cash": 0.05,
                 "real_estate": 0.05,
                 "commodities": 0.05,
-                "cryptocurrency": 0.02,
-                "etfs": 0.02,
+                "cryptocurrency": 0.03,
+                "etfs": 0.01,
                 "reits": 0.01
               }
             },
@@ -540,29 +540,29 @@
             "history": [
               {
                 "user_profile": {
-                  "name": "Kalai",
-                  "age": 45,
-                  "income": 150000.0,
-                  "risk_tolerance": "moderate",
-                  "investment_goal": "balanced_growth",
+                  "name": "Chris",
+                  "age": 25,
+                  "income": 500000.0,
+                  "risk_tolerance": "aggressive",
+                  "investment_goal": "aggressive_growth",
                   "investment_horizon": "long-term"
                 },
-                "session_id": "22e90a23-b8dd-41af-8b7f-d016a6365abe",
+                "session_id": "d76a9165-2375-49ba-95e8-373aede7d1db",
                 "risk_assessment": {
                   "raw": {
-                    "risk_score": 0.5,
-                    "risk_level": "Moderate",
+                    "risk_score": 0.8000000000000002,
+                    "risk_level": "High",
                     "profile_analysis": {
-                      "age": "45 years",
-                      "income": "$150,000",
-                      "risk_tolerance": "Moderate",
-                      "investment_goals": "balanced_growth",
+                      "age": "25 years",
+                      "income": "$500,000",
+                      "risk_tolerance": "Aggressive",
+                      "investment_goals": "aggressive_growth",
                       "time_horizon": "long-term"
                     },
                     "recommendations": [
-                      "Balanced portfolio of stocks and bonds",
-                      "Consider index funds for core holdings",
-                      "Quarterly portfolio review recommended"
+                      "Consider a growth-oriented portfolio",
+                      "Focus on equities with some alternative investments",
+                      "Regular portfolio rebalancing recommended"
                     ]
                   }
                 },
@@ -573,40 +573,40 @@
               },
               {
                 "user_profile": {
-                  "name": "Kalai",
-                  "age": 45,
-                  "income": 150000.0,
-                  "risk_tolerance": "moderate",
-                  "investment_goal": "balanced_growth",
+                  "name": "Chris",
+                  "age": 25,
+                  "income": 500000.0,
+                  "risk_tolerance": "aggressive",
+                  "investment_goal": "aggressive_growth",
                   "investment_horizon": "long-term"
                 },
-                "session_id": "22e90a23-b8dd-41af-8b7f-d016a6365abe",
+                "session_id": "d76a9165-2375-49ba-95e8-373aede7d1db",
                 "risk_assessment": {
                   "raw": {
-                    "risk_score": 0.5,
-                    "risk_level": "Moderate",
+                    "risk_score": 0.8000000000000002,
+                    "risk_level": "High",
                     "profile_analysis": {
-                      "age": "45 years",
-                      "income": "$150,000",
-                      "risk_tolerance": "Moderate",
-                      "investment_goals": "balanced_growth",
+                      "age": "25 years",
+                      "income": "$500,000",
+                      "risk_tolerance": "Aggressive",
+                      "investment_goals": "aggressive_growth",
                       "time_horizon": "long-term"
                     },
                     "recommendations": [
-                      "Balanced portfolio of stocks and bonds",
-                      "Consider index funds for core holdings",
-                      "Quarterly portfolio review recommended"
+                      "Consider a growth-oriented portfolio",
+                      "Focus on equities with some alternative investments",
+                      "Regular portfolio rebalancing recommended"
                     ]
                   }
                 },
                 "market_analysis": {
                   "raw": {
-                    "current_price": 607.1199951171875,
-                    "daily_change": -0.78997802734375,
-                    "daily_change_percent": -0.1299498383383047,
-                    "volume": 61881800,
+                    "current_price": 613.5650024414062,
+                    "daily_change": 0.68499755859375,
+                    "daily_change_percent": 0.11176699405044661,
+                    "volume": 43828254,
                     "market_sentiment": "Neutral",
-                    "timestamp": "2025-06-25T21:42:22.587882"
+                    "timestamp": "2025-06-27T13:15:35.001996"
                   }
                 },
                 "portfolio_allocation": null,
@@ -614,29 +614,29 @@
                 "history": [
                   {
                     "user_profile": {
-                      "name": "Kalai",
-                      "age": 45,
-                      "income": 150000.0,
-                      "risk_tolerance": "moderate",
-                      "investment_goal": "balanced_growth",
+                      "name": "Chris",
+                      "age": 25,
+                      "income": 500000.0,
+                      "risk_tolerance": "aggressive",
+                      "investment_goal": "aggressive_growth",
                       "investment_horizon": "long-term"
                     },
-                    "session_id": "22e90a23-b8dd-41af-8b7f-d016a6365abe",
+                    "session_id": "d76a9165-2375-49ba-95e8-373aede7d1db",
                     "risk_assessment": {
                       "raw": {
-                        "risk_score": 0.5,
-                        "risk_level": "Moderate",
+                        "risk_score": 0.8000000000000002,
+                        "risk_level": "High",
                         "profile_analysis": {
-                          "age": "45 years",
-                          "income": "$150,000",
-                          "risk_tolerance": "Moderate",
-                          "investment_goals": "balanced_growth",
+                          "age": "25 years",
+                          "income": "$500,000",
+                          "risk_tolerance": "Aggressive",
+                          "investment_goals": "aggressive_growth",
                           "time_horizon": "long-term"
                         },
                         "recommendations": [
-                          "Balanced portfolio of stocks and bonds",
-                          "Consider index funds for core holdings",
-                          "Quarterly portfolio review recommended"
+                          "Consider a growth-oriented portfolio",
+                          "Focus on equities with some alternative investments",
+                          "Regular portfolio rebalancing recommended"
                         ]
                       }
                     },
@@ -654,14 +654,14 @@
     ]
   },
   "user_profile": {
-    "name": "Kalai",
-    "age": 45,
-    "income": 150000.0,
-    "risk_tolerance": "moderate",
-    "investment_goal": "balanced_growth",
+    "name": "Chris",
+    "age": 25,
+    "income": 500000.0,
+    "risk_tolerance": "aggressive",
+    "investment_goal": "aggressive_growth",
     "investment_horizon": "long-term"
   },
   "session_active": false,
   "session_restored": true,
-  "last_accessed": "2025-06-25T21:43:09.747578"
+  "last_accessed": "2025-06-27T23:58:52.616543"
 }

@@ -19,6 +19,14 @@ from .base_agent import BaseFinancialAgent
 
 logger = logging.getLogger(__name__)
 
+# Import LangSmith service for tool tracing
+try:
+    from src.services.langsmith_service import langsmith_service
+    LANGSMITH_AVAILABLE = True
+except ImportError:
+    LANGSMITH_AVAILABLE = False
+    langsmith_service = None
+
 class MCPEnabledAgent(BaseFinancialAgent):
     """Base class for MCP-enabled financial advisor agents"""
     
@@ -70,66 +78,78 @@ class MCPEnabledAgent(BaseFinancialAgent):
     def _create_mcp_tool_wrapper(self, tool_name: str, tool_info: Dict, category: str) -> Tool:
         """Create a LangChain tool wrapper for an MCP tool"""
         async def mcp_tool_function(query: str = "", **kwargs) -> str:
-            """Wrapper function for MCP tool calls"""
-            try:
-                # Initialize MCP client if needed
-                if not mcp_client.connected:
-                    await mcp_client.initialize()
+            """Wrapper function for MCP tool calls with LangSmith tracing"""
+            # Apply LangSmith tool tracing if available
+            if LANGSMITH_AVAILABLE:
+                @langsmith_service.trace_tool_call(f"{category}_{tool_name}")
+                async def traced_tool_call():
+                    return await self._execute_mcp_tool(tool_name, tool_info, category, query, **kwargs)
                 
-                # Prepare arguments from kwargs or query
-                arguments = kwargs.copy()
-                if query and not arguments:
-                    # Try to extract symbol from query for market data tools
-                    if "symbol" in tool_info.get("inputSchema", {}).get("properties", {}):
-                        # Simple extraction - in a real implementation, use NLP
-                        words = query.upper().split()
-                        for word in words:
-                            if len(word) <= 5 and word.isalpha():
-                                arguments["symbol"] = word
-                                break
-                        if "symbol" not in arguments:
-                            arguments["symbol"] = "SPY"  # Default
-                
-                # Call MCP tool
-                result = await mcp_client.call_tool(
-                    tool_name, 
-                    arguments, 
-                    server_type=category
-                )
-                
-                # Format result for LangChain
-                if isinstance(result, dict):
-                    if "error" in result:
-                        return f"Error: {result['error']}"
-                    else:
-                        # Format based on tool type
-                        if tool_name == "get_stock_quote":
-                            symbol = result.get("symbol", "Unknown")
-                            price = result.get("price", 0)
-                            change = result.get("change", 0)
-                            change_percent = result.get("change_percent", 0)
-                            return f"{symbol}: ${price:.2f} ({change:+.2f}, {change_percent:+.2f}%)"
-                        
-                        elif tool_name == "analyze_portfolio":
-                            allocation = result.get("portfolio_allocation", {})
-                            analysis = result.get("analysis_result", "No analysis available")
-                            return f"Portfolio Analysis: {allocation}\n\nAnalysis: {analysis}"
-                        
-                        else:
-                            return str(result)
-                else:
-                    return str(result)
-                    
-            except Exception as e:
-                error_msg = f"MCP tool error for {tool_name}: {str(e)}"
-                logger.error(error_msg)
-                return error_msg
+                return await traced_tool_call()
+            else:
+                return await self._execute_mcp_tool(tool_name, tool_info, category, query, **kwargs)
         
         return Tool(
             name=tool_name,
             func=mcp_tool_function,
             description=tool_info.get("description", f"MCP tool: {tool_name}")
         )
+    
+    async def _execute_mcp_tool(self, tool_name: str, tool_info: Dict, category: str, query: str = "", **kwargs) -> str:
+        """Execute MCP tool call with detailed error handling"""
+        try:
+            # Initialize MCP client if needed
+            if not mcp_client.connected:
+                await mcp_client.initialize()
+            
+            # Prepare arguments from kwargs or query
+            arguments = kwargs.copy()
+            if query and not arguments:
+                # Try to extract symbol from query for market data tools
+                if "symbol" in tool_info.get("inputSchema", {}).get("properties", {}):
+                    # Simple extraction - in a real implementation, use NLP
+                    words = query.upper().split()
+                    for word in words:
+                        if len(word) <= 5 and word.isalpha():
+                            arguments["symbol"] = word
+                            break
+                    if "symbol" not in arguments:
+                        arguments["symbol"] = "SPY"  # Default
+            
+            # Call MCP tool
+            result = await mcp_client.call_tool(
+                tool_name, 
+                arguments, 
+                server_type=category
+            )
+            
+            # Format result for LangChain
+            if isinstance(result, dict):
+                if "error" in result:
+                    return f"Error: {result['error']}"
+                else:
+                    # Format based on tool type
+                    if tool_name == "get_stock_quote":
+                        symbol = result.get("symbol", "Unknown")
+                        price = result.get("price", 0)
+                        change = result.get("change", 0)
+                        change_percent = result.get("change_percent", 0)
+                        return f"{symbol}: ${price:.2f} ({change:+.2f}, {change_percent:+.2f}%)"
+                    
+                    elif tool_name == "analyze_portfolio":
+                        allocation = result.get("portfolio_allocation", {})
+                        analysis = result.get("analysis_result", "No analysis available")
+                        return f"Portfolio Analysis: {allocation}\n\nAnalysis: {analysis}"
+                    
+                    else:
+                        return str(result)
+            else:
+                return str(result)
+                
+        except Exception as e:
+            error_msg = f"MCP tool error for {tool_name}: {str(e)}"
+            logger.error(error_msg)
+            return error_msg
     
     async def get_mcp_tool_result(self, tool_name: str, arguments: Dict[str, Any], category: str = None) -> Dict[str, Any]:
         """Direct MCP tool call for complex operations"""

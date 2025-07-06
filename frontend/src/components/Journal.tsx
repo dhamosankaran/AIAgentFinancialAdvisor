@@ -9,11 +9,7 @@ interface JournalEntry {
   tags: string[];
 }
 
-interface JournalProps {
-  backendMode?: 'standard' | 'enterprise';
-}
-
-const Journal: React.FC<JournalProps> = ({ backendMode = 'standard' }) => {
+const Journal: React.FC = () => {
   const [entries, setEntries] = useState<JournalEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -23,53 +19,18 @@ const Journal: React.FC<JournalProps> = ({ backendMode = 'standard' }) => {
   const [content, setContent] = useState('');
   const [symbol, setSymbol] = useState('');
   const [tags, setTags] = useState('');
-  const [aiInsights, setAiInsights] = useState<Record<string, string>>({});
-  const [generatingInsights, setGeneratingInsights] = useState<Record<string, boolean>>({});
 
 
   const fetchEntries = async () => {
     try {
       setLoading(true);
-      
-      if (backendMode === 'enterprise') {
-        console.log('🏢 Journal: Loading data from enterprise cache (zero API calls)...');
-        
-        // Single API call to get all journal data from enterprise cache
-        const response = await fetch('/api/v1/journal/data');
-        
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const data = await response.json();
-        
-        console.log('🏢 Journal: Received data from:', data.cache_info?.data_source);
-        console.log('🏢 Journal: API calls made:', data.cache_info?.api_calls_made);
-        
-        // Load journal entries from cache
-        const journalEntries = data.entries?.list || [];
-        setEntries(journalEntries);
-        
-        console.log('🏢 Journal: Loaded from cache without any external API calls');
-        
-      } else {
-        console.log('📊 Journal: Using standard mode endpoint');
-        
-        // Use standard journal endpoint
-        const response = await fetch('/api/v1/journal');
-        
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const journalEntries = await response.json();
-        setEntries(journalEntries);
-        
-        console.log('📊 Journal: Standard journal data loaded successfully');
+      const res = await fetch('/api/v1/journal');
+      if (!res.ok) {
+        throw new Error('Failed to fetch journal entries');
       }
-      
+      const data = await res.json();
+      setEntries(data);
     } catch (err) {
-      console.error('Error fetching journal entries:', err);
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setLoading(false);
@@ -109,44 +70,6 @@ const Journal: React.FC<JournalProps> = ({ backendMode = 'standard' }) => {
 
     } catch (err) {
         setError(err instanceof Error ? err.message : 'An error occurred');
-    }
-  };
-
-  const generateInsights = async (entryId: string, content: string, symbol?: string) => {
-    try {
-      setGeneratingInsights(prev => ({ ...prev, [entryId]: true }));
-      
-      const response = await fetch('/api/v1/fap/analyze', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: 'User',
-          age: 30,
-          income: 100000,
-          risk_tolerance: 'moderate',
-          investment_goal: 'growth',
-          investment_horizon: 'long-term',
-          additional_context: {
-            journal_entry: content,
-            symbol: symbol,
-            analysis_type: 'journal_insights'
-          }
-        }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        // Extract insights from different possible locations in the response
-        const insights = data.fap_context?.report || data.fallback_response || data.report || 'No specific insights generated for this entry.';
-        setAiInsights(prev => ({ ...prev, [entryId]: insights }));
-      } else {
-        setAiInsights(prev => ({ ...prev, [entryId]: 'Unable to generate insights at this time.' }));
-      }
-    } catch (error) {
-      console.error('Error generating insights:', error);
-      setAiInsights(prev => ({ ...prev, [entryId]: 'Error generating insights.' }));
-    } finally {
-      setGeneratingInsights(prev => ({ ...prev, [entryId]: false }));
     }
   };
 
@@ -228,28 +151,6 @@ const Journal: React.FC<JournalProps> = ({ backendMode = 'standard' }) => {
                         ))}
                     </div>
                 )}
-                
-                {/* AI Insights Section */}
-                <div className="mt-4 pt-3 border-t border-blue-200">
-                  {aiInsights[entry.id] ? (
-                    <div className="bg-gradient-to-r from-purple-50 to-pink-50 p-3 rounded-lg">
-                      <h4 className="font-semibold text-purple-800 mb-2">🤖 AI Investment Insights</h4>
-                      <p className="text-gray-700 text-sm whitespace-pre-wrap">{aiInsights[entry.id]}</p>
-                    </div>
-                  ) : (
-                    <button
-                      onClick={() => generateInsights(entry.id, entry.content, entry.symbol)}
-                      disabled={generatingInsights[entry.id]}
-                      className={`px-3 py-1 text-sm rounded ${
-                        generatingInsights[entry.id]
-                          ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                          : 'bg-purple-100 text-purple-700 hover:bg-purple-200'
-                      }`}
-                    >
-                      {generatingInsights[entry.id] ? '🔄 Analyzing...' : '🤖 Get AI Insights'}
-                    </button>
-                  )}
-                </div>
               </div>
             ))
           ) : (

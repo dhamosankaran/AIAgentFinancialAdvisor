@@ -55,9 +55,6 @@ const UserProfileForm: React.FC<UserProfileFormProps> = ({ onSubmit, initialValu
         const data = await res.json();
         if (onProposal) onProposal(data.proposal);
         
-        // Generate and save portfolio allocation based on updated profile
-        await generateAndSavePortfolio();
-        
         // Trigger dashboard refresh to show updated portfolio allocation
         if ((window as any).refreshDashboard) {
           (window as any).refreshDashboard();
@@ -74,38 +71,6 @@ const UserProfileForm: React.FC<UserProfileFormProps> = ({ onSubmit, initialValu
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setLoading(false);
-    }
-  };
-
-  const generateAndSavePortfolio = async () => {
-    try {
-      // Get portfolio allocation based on risk tolerance
-      const allocationResponse = await fetch(`/api/v1/profile/portfolio/allocation/${formData.risk_tolerance}`);
-      if (!allocationResponse.ok) throw new Error('Failed to get portfolio allocation');
-      const allocationData = await allocationResponse.json();
-      
-      // Generate portfolio analysis
-      const portfolioResponse = await fetch('/api/v1/portfolio/analysis');
-      if (!portfolioResponse.ok) throw new Error('Failed to get portfolio analysis');
-      const portfolioData = await portfolioResponse.json();
-      
-      // Save profile portfolio to storage
-      const saveResponse = await fetch('/api/v1/profile/portfolio/save', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          user_profile: formData,
-          portfolio_allocation: allocationData.allocation,
-          portfolio_summary: portfolioData.report || 'Portfolio analysis generated based on updated profile'
-        }),
-      });
-      
-      if (!saveResponse.ok) throw new Error('Failed to save portfolio data');
-      
-      console.log('Portfolio data saved successfully');
-    } catch (err) {
-      console.error('Error generating and saving portfolio:', err);
-      // Don't throw error here to avoid interrupting the profile update flow
     }
   };
 

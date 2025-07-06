@@ -1,39 +1,39 @@
 {
-  "id": "profile_portfolio_1750905742",
-  "timestamp": "2025-06-25T21:42:22.604254",
+  "id": "profile_portfolio_1751048135",
+  "timestamp": "2025-06-27T13:15:35.010501",
   "user_profile": {
     "user_id": "671f1cc2-1949-4842-b9dd-b87dcafa171c",
-    "name": "Kalai",
-    "age": 45,
-    "income": 150000,
-    "risk_tolerance": "moderate",
-    "investment_goal": "balanced_growth",
+    "name": "Chris",
+    "age": 25,
+    "income": 500000,
+    "risk_tolerance": "aggressive",
+    "investment_goal": "aggressive_growth",
     "investment_horizon": "long-term",
     "total_allocation": 100,
     "asset_allocation": {
-      "stocks": 50,
-      "bonds": 25,
-      "cash": 10,
+      "stocks": 65,
+      "bonds": 15,
+      "cash": 5,
       "real_estate": 5,
       "commodities": 5,
-      "cryptocurrency": 2,
-      "etfs": 2,
+      "cryptocurrency": 3,
+      "etfs": 1,
       "reits": 1
     },
-    "last_updated": "2025-06-25T21:42:11.729597"
+    "last_updated": "2025-06-27T13:15:28.225009"
   },
   "portfolio_allocation": [
     {
       "asset_type": "stocks",
-      "allocation_percentage": 50
+      "allocation_percentage": 65
     },
     {
       "asset_type": "bonds",
-      "allocation_percentage": 25
+      "allocation_percentage": 15
     },
     {
       "asset_type": "cash",
-      "allocation_percentage": 10
+      "allocation_percentage": 5
     },
     {
       "asset_type": "real_estate",
@@ -45,20 +45,20 @@
     },
     {
       "asset_type": "cryptocurrency",
-      "allocation_percentage": 2
+      "allocation_percentage": 3
     },
     {
       "asset_type": "etfs",
-      "allocation_percentage": 2
+      "allocation_percentage": 1
     },
     {
       "asset_type": "reits",
       "allocation_percentage": 1
     }
   ],
-  "portfolio_summary": "Summary:\nBased on your profile (Age: 45, Risk Tolerance: moderate, Investment Goal: balanced_growth, Time Horizon: long-term), we recommend a moderate investment approach.\n\nMarket Outlook:\nCurrent market conditions suggest a balanced approach to asset allocation. Diversification across multiple asset classes helps manage risk while maintaining growth potential.\n\nRecommendations:\nYour recommended portfolio allocation: **Stocks (50%)**, **Bonds (25%)**, **Cash (10%)**, **Real estate (5%)**, **Commodities (5%)**, **Cryptocurrency (2%)**, **Etfs (2%)**, **Reits (1%)**. This allocation balances risk and return potential based on your moderate risk profile and long-term investment horizon.",
-  "risk_profile": "moderate",
+  "portfolio_summary": "Summary:\nBased on your profile (Age: 25, Risk Tolerance: aggressive, Investment Goal: aggressive_growth, Time Horizon: long-term), we recommend a aggressive investment approach.\n\nMarket Outlook:\nCurrent market conditions suggest a balanced approach to asset allocation. Diversification across multiple asset classes helps manage risk while maintaining growth potential.\n\nRecommendations:\nYour recommended portfolio allocation: **Stocks (65%)**, **Bonds (15%)**, **Cash (5%)**, **Real estate (5%)**, **Commodities (5%)**, **Cryptocurrency (3%)**, **Etfs (1%)**, **Reits (1%)**. This allocation balances risk and return potential based on your aggressive risk profile and long-term investment horizon.",
+  "risk_profile": "aggressive",
   "total_allocation": 100,
   "asset_classes": 8,
-  "last_updated": "2025-06-25T21:42:22.604264"
+  "last_updated": "2025-06-27T13:15:35.010506"
 }

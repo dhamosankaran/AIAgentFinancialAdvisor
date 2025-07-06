@@ -22,6 +22,15 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+# Import LangSmith service for tracing
+try:
+    from src.services.langsmith_service import langsmith_service
+    LANGSMITH_AVAILABLE = True
+    logger.info("✅ LangSmith tracing enabled for MCP Client")
+except ImportError:
+    LANGSMITH_AVAILABLE = False
+    logger.warning("⚠️ LangSmith not available - tracing disabled")
+
 class MCPClient:
     """Unified MCP Client for AgenticAI application with REAL API calls"""
     
@@ -111,12 +120,24 @@ class MCPClient:
         logger.info(f"📊 Discovered {len(self.available_tools)} tool categories with REAL API integration")
     
     async def call_tool(self, tool_name: str, arguments: Dict[str, Any] = None, server_type: str = None) -> Dict[str, Any]:
-        """Call a tool using REAL API calls"""
+        """Call a tool using REAL API calls with LangSmith tracing"""
         if not self.connected:
             raise RuntimeError("MCP Client not connected. Call initialize() first.")
         
         logger.info(f"🔄 Making REAL API call: {tool_name}")
         
+        # Apply LangSmith tracing if available
+        if LANGSMITH_AVAILABLE:
+            @langsmith_service.trace_mcp_request(server_type or "unknown", tool_name)
+            async def traced_call():
+                return await self._execute_tool_call(tool_name, arguments, server_type)
+            
+            return await traced_call()
+        else:
+            return await self._execute_tool_call(tool_name, arguments, server_type)
+    
+    async def _execute_tool_call(self, tool_name: str, arguments: Dict[str, Any], server_type: str) -> Dict[str, Any]:
+        """Execute the actual tool call"""
         try:
             if server_type == "market_data" or tool_name in ["get_stock_quote", "get_historical_data", "get_market_indices", "get_market_summary"]:
                 return await self._real_market_data_call(tool_name, arguments or {})
@@ -334,7 +355,7 @@ class MCPClient:
             raise
     
     async def _real_analyze_portfolio(self, user_profile: Dict[str, Any], market_data: Dict[str, Any] = None, analysis_type: str = "comprehensive") -> Dict[str, Any]:
-        """Real portfolio analysis using OpenAI API"""
+        """Real portfolio analysis using OpenAI API with LangSmith tracing"""
         prompt = ChatPromptTemplate.from_template(
             """As a professional financial advisor, analyze this portfolio and user profile:
 
@@ -360,16 +381,33 @@ Keep recommendations practical and specific to their profile."""
         )
         
         try:
-            chain = prompt | self.llm
-            response = await chain.ainvoke({
-                "age": user_profile.get("age", "N/A"),
-                "income": user_profile.get("income", 0),
-                "risk_tolerance": user_profile.get("risk_tolerance", "moderate"),
-                "investment_goal": user_profile.get("investment_goal", "long-term growth"),
-                "investment_horizon": user_profile.get("investment_horizon", "long-term"),
-                "market_data": json.dumps(market_data) if market_data else "Current market conditions",
-                "analysis_type": analysis_type
-            })
+            # Apply LangSmith LLM tracing if available
+            if LANGSMITH_AVAILABLE:
+                @langsmith_service.trace_llm_call("portfolio_analysis")
+                async def traced_llm_call():
+                    chain = prompt | self.llm
+                    return await chain.ainvoke({
+                        "age": user_profile.get("age", "N/A"),
+                        "income": user_profile.get("income", 0),
+                        "risk_tolerance": user_profile.get("risk_tolerance", "moderate"),
+                        "investment_goal": user_profile.get("investment_goal", "long-term growth"),
+                        "investment_horizon": user_profile.get("investment_horizon", "long-term"),
+                        "market_data": json.dumps(market_data) if market_data else "Current market conditions",
+                        "analysis_type": analysis_type
+                    })
+                
+                response = await traced_llm_call()
+            else:
+                chain = prompt | self.llm
+                response = await chain.ainvoke({
+                    "age": user_profile.get("age", "N/A"),
+                    "income": user_profile.get("income", 0),
+                    "risk_tolerance": user_profile.get("risk_tolerance", "moderate"),
+                    "investment_goal": user_profile.get("investment_goal", "long-term growth"),
+                    "investment_horizon": user_profile.get("investment_horizon", "long-term"),
+                    "market_data": json.dumps(market_data) if market_data else "Current market conditions",
+                    "analysis_type": analysis_type
+                })
             
             result = {
                 "analysis": response.content,
@@ -412,15 +450,31 @@ Be specific and actionable in your recommendations."""
         )
         
         try:
-            chain = prompt | self.llm
-            response = await chain.ainvoke({
-                "age": user_profile.get("age", "N/A"),
-                "income": user_profile.get("income", 0),
-                "risk_tolerance": user_profile.get("risk_tolerance", "moderate"),
-                "investment_goal": user_profile.get("investment_goal", "long-term growth"),
-                "investment_horizon": user_profile.get("investment_horizon", "long-term"),
-                "current_portfolio": json.dumps(current_portfolio) if current_portfolio else "No current portfolio data"
-            })
+            # Apply LangSmith LLM tracing if available
+            if LANGSMITH_AVAILABLE:
+                @langsmith_service.trace_llm_call("risk_assessment")
+                async def traced_llm_call():
+                    chain = prompt | self.llm
+                    return await chain.ainvoke({
+                        "age": user_profile.get("age", "N/A"),
+                        "income": user_profile.get("income", 0),
+                        "risk_tolerance": user_profile.get("risk_tolerance", "moderate"),
+                        "investment_goal": user_profile.get("investment_goal", "long-term growth"),
+                        "investment_horizon": user_profile.get("investment_horizon", "long-term"),
+                        "current_portfolio": json.dumps(current_portfolio) if current_portfolio else "No current portfolio data"
+                    })
+                
+                response = await traced_llm_call()
+            else:
+                chain = prompt | self.llm
+                response = await chain.ainvoke({
+                    "age": user_profile.get("age", "N/A"),
+                    "income": user_profile.get("income", 0),
+                    "risk_tolerance": user_profile.get("risk_tolerance", "moderate"),
+                    "investment_goal": user_profile.get("investment_goal", "long-term growth"),
+                    "investment_horizon": user_profile.get("investment_horizon", "long-term"),
+                    "current_portfolio": json.dumps(current_portfolio) if current_portfolio else "No current portfolio data"
+                })
             
             result = {
                 "risk_assessment": response.content,

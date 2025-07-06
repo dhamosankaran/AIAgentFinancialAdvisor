@@ -26,7 +26,7 @@ class BaseFinancialAgent:
         """Initialize the base agent"""
         self.logger = logging.getLogger(self.__class__.__name__)
         self.llm = llm or ChatOpenAI(
-            model="gpt-4o-mini",
+            model="gpt-4-turbo-preview",
             temperature=0.7
         )
         self.tools = tools or []

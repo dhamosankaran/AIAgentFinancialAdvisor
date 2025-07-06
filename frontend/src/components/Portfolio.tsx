@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaSync, FaPlus, FaEdit, FaTrash, FaChartLine } from 'react-icons/fa';
-import RecentAnalyses from './RecentAnalyses';
+import { FaSync } from 'react-icons/fa';
 
 interface Holding {
   symbol: string;
@@ -46,11 +45,7 @@ const normalizeAssetName = (assetType: string): string => {
   }
 };
 
-interface PortfolioProps {
-  backendMode?: 'standard' | 'enterprise';
-}
-
-const Portfolio: React.FC<PortfolioProps> = ({ backendMode = 'standard' }) => {
+const Portfolio: React.FC = () => {
   const [holdings, setHoldings] = useState<Holding[]>([]);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [quotes, setQuotes] = useState<Record<string, Quote>>({});
@@ -68,67 +63,30 @@ const Portfolio: React.FC<PortfolioProps> = ({ backendMode = 'standard' }) => {
   const fetchData = async () => {
     try {
       setLoading(true);
-      
-      if (backendMode === 'enterprise') {
-        console.log('🏢 Portfolio: Loading data from enterprise cache (zero API calls)...');
-        
-        // Single API call to get all portfolio data from enterprise cache
-        const response = await fetch('/api/v1/portfolio/data');
-        
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const data = await response.json();
-        
-        console.log('🏢 Portfolio: Received data from:', data.cache_info?.data_source);
-        console.log('🏢 Portfolio: API calls made:', data.cache_info?.api_calls_made);
-        
-        // Load holdings
-        const holdingsData = data.holdings?.list || [];
-        setHoldings(holdingsData);
-        
-        // Load transactions
-        const transactionsData = data.transactions?.list || [];
-        setTransactions(transactionsData);
-        
-        // Load recommended allocations
-        const allocationsData = data.allocation || [];
-        setRecommendedAllocations(allocationsData);
-        
-        console.log('🏢 Portfolio: Loaded from cache without any external API calls');
-        
-      } else {
-        console.log('📊 Portfolio: Using standard mode endpoints');
-        
-        // Use standard individual endpoints
-        const [holdingsRes, transactionsRes, analysisRes] = await Promise.all([
-          fetch('/api/v1/portfolio/holdings'),
-          fetch('/api/v1/portfolio/transactions'),
-          fetch('/api/v1/portfolio/analysis')
-        ]);
-        
-        if (holdingsRes.ok) {
-          const holdingsData = await holdingsRes.json();
-          setHoldings(holdingsData);
-        }
-        
-        if (transactionsRes.ok) {
-          const transactionsData = await transactionsRes.json();
-          setTransactions(transactionsData);
-        }
-        
-        if (analysisRes.ok) {
-          const analysisData = await analysisRes.json();
-          const allocationsData = analysisData.allocation || [];
-          setRecommendedAllocations(allocationsData);
-        }
-        
-        console.log('📊 Portfolio: Standard portfolio data loaded successfully');
+      const [holdingsRes, transactionsRes, allocationsRes] = await Promise.all([
+        fetch('/api/v1/portfolio/holdings'),
+        fetch('/api/v1/portfolio/transactions'),
+        fetch('/api/v1/portfolio/analysis'),
+      ]);
+
+      if (!holdingsRes.ok || !transactionsRes.ok) {
+        throw new Error('Failed to fetch portfolio data');
       }
-      
+
+      const holdingsData = await holdingsRes.json();
+      const transactionsData = await transactionsRes.json();
+
+      setHoldings(holdingsData);
+      setTransactions(transactionsData);
+
+      // Fetch recommended allocations if available
+      if (allocationsRes.ok) {
+        const allocationsData = await allocationsRes.json();
+        if (allocationsData.allocation) {
+          setRecommendedAllocations(allocationsData.allocation);
+        }
+      }
     } catch (err) {
-      console.error('Error fetching portfolio data:', err);
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setLoading(false);
@@ -339,20 +297,6 @@ const Portfolio: React.FC<PortfolioProps> = ({ backendMode = 'standard' }) => {
             Add Holding
           </button>
         </form>
-      </div>
-
-      {/* Recent Market Analyses Section */}
-      <div className="mt-8">
-        <RecentAnalyses 
-          limit={3} 
-          showTitle={true}
-          disableApiCalls={true}
-          analysesData={[]}
-          onAnalysisSelect={(analysis) => {
-            console.log('Selected analysis:', analysis);
-            // Could implement modal or navigation to Markets tab with selected analysis
-          }}
-        />
       </div>
     </div>
   );

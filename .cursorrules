@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 # Instructions
 
 During your interaction with the user, if you find anything reusable in this project (e.g., version of a library, model name), especially about a fix to a mistake you made or a correction you received, you should take note in the `Lessons` section in the `.cursorrules` file so you will not make the same mistake again.
@@ -87,6 +89,7 @@ ALPHA_VANTAGE_API_KEY=
 * **Testing**: pytest, pytest-asyncio, httpx
 * **Documentation**: Markdown, Swagger/OpenAPI
 
+>>>>>>> feature/dynamic-portfolio-allocation
 # Lessons
 
 * **API Keys**: Always use environment variables for API keys. Never commit API keys.
@@ -102,67 +105,50 @@ ALPHA_VANTAGE_API_KEY=
 * **Logging**: Implement basic logging for debugging.
 * **Performance**: Optimize basic performance.
 * **Maintainability**: Follow clean code principles.
+<<<<<<< HEAD
 * **GIT SECURITY CRITICAL**: When API keys are accidentally committed to git history, use git filter-branch or create clean orphan branches and force push to completely remove sensitive data from GitHub. Always enhance .gitignore to prevent future exposures.
-* **EMERGENCY API KEY PROCEDURES**: If API keys are exposed in git history: 1) Immediately revoke the exposed key, 2) Create new API key, 3) Use git filter-branch or orphan branch approach to completely rewrite git history, 4) Force push to replace remote history, 5) Clear local reflog and run aggressive garbage collection, 6) Enhance .gitignore with comprehensive exclusions.
-* **OpenAI 500 Error and MCP Tool Async Fixes**: OpenAI API 500 Internal Server Errors are intermittent and handled by automatic retry logic in the OpenAI client. Main issue was MCP tools in plugin registry using async functions with LangChain's synchronous Tool interface, causing "coroutine was never awaited" errors. Fixed by creating synchronous wrapper functions with proper asyncio event loop handling using ThreadPoolExecutor for running async code in sync context. Also fixed hallucination detection JSON parsing errors by adding robust JSON extraction from OpenAI responses with fallback handling for malformed responses.
-* **Generate Analysis Frontend Fix**: AI analysis generation takes approximately 2 minutes (130+ seconds) which was causing frontend timeouts. Fixed by implementing AbortController with 120-second timeout, comprehensive error handling for timeout scenarios, and proper TypeScript error type checking. Added response content validation to ensure analysis exists before displaying and made save operations non-blocking to improve user experience.
-* **Portfolio Allocation Synchronization**: Fixed discrepancy between AI analysis text and allocation data by implementing smart extraction from analysis text using regex patterns. Created risk-based default allocations (Conservative: 70% bonds/20% stocks/10% cash, Moderate: 50% stocks/30% bonds, Aggressive: 70% stocks/15% bonds) and synchronized all data sources including FAP results, profile portfolio, and API endpoints to use consistent allocation logic.
-* **Standard vs Enterprise Backend Compatibility**: Fixed frontend components calling enterprise-only consolidated endpoints when running in standard mode. Added backendMode prop support to all components (Dashboard, Portfolio, Journal, Markets) to conditionally use appropriate endpoints. Standard mode uses individual endpoints (/api/v1/portfolio/holdings, /api/v1/journal, etc.) while enterprise mode uses consolidated endpoints (/api/v1/dashboard/data, /api/v1/portfolio/data, etc.). This ensures both modes work without 404 errors while maintaining enterprise optimizations.
-* **Standard Mode Dashboard React Rendering Fix**: Fixed React error "Objects are not valid as a React child (found: object with keys {raw})" in standard mode Dashboard component. The portfolio analysis API was returning report data as objects instead of strings. Added type checking and safe string conversion in parseReportSections function, ensuring all JSX renders only string values. Added safeguards to handle both string and object report data with proper conversion of objects containing 'raw' property.
+* **EMERGENCY API KEY PROCEDURES**: If API keys are exposed in git history: 1) Immediately revoke the exposed key, 2) Create new API key, 3) Use git filter-branch or orphan branch approach to completely rewrite git history, 4) Force push to replace remote history, 5) Clear local reflog and run aggressive garbage collection, 6) Enhance .gitignore with comprehensive exclusions. 
+=======
 
 # Scratchpad
 
-Current Task: [X] Standard Mode Dashboard React Rendering Fix - COMPLETED ✅
-Project Status: Fixed React rendering error in standard mode Dashboard component
+Current Task: [X] Rename MCP to FAP (Financial Analysis Pipeline) - COMPLETED ✅
+Project Status: Refactoring Phase - System Successfully Renamed to Avoid Confusion with Model Context Protocol
 
-## Standard Mode Fix Task Breakdown
-[X] Identify root cause (frontend components calling enterprise-only endpoints in standard mode)
-[X] Add backendMode prop support to all components (Dashboard, Portfolio, Journal, Markets)
-[X] Update Dashboard component to use individual endpoints in standard mode
-[X] Update Portfolio component to use standard endpoints (holdings, transactions, analysis)
-[X] Update Journal component to use standard journal endpoint
-[X] Update Markets component to use standard market indices endpoint with fallback data
-[X] Update App component to pass backendMode to all child components
-[X] Test standard mode functionality without disturbing enterprise mode
+## Current Task Breakdown - FAP Renaming
+[X] Rename Python files (mcp_context.py → fap_context.py, mcp_nodes.py → fap_nodes.py, mcp_graph.py → fap_pipeline.py)
+[X] Update class names (MCPContext → FAPContext)
+[X] Update API endpoints (/api/v1/mcp/analyze → /api/v1/fap/analyze)
+[X] Update frontend components (App.tsx, Dashboard.tsx)
+[X] Update test files (test_mcp.py → test_fap.py)
+[X] Update documentation and comments
+[X] Clean up mcp_host directory (contains mock/unused MCP implementation)
+[X] Test the renamed FAP system
+[X] Update any remaining references
 
-## Portfolio Allocation Synchronization Fix Task Breakdown
-[X] Identify root cause (three different allocation sources with different values)
-[X] Implement smart allocation extraction from AI analysis text
-[X] Create risk-based default allocations for conservative/moderate/aggressive profiles
-[X] Update all API endpoints to use consistent allocation logic
-[X] Synchronize data files (profile_portfolio.json, fap_results.json)
-[X] Test complete workflow with consistent allocation display
+## Final Implementation Verification Results
+✅ **8 Asset Classes Working**: stocks, bonds, cash, real_estate, commodities, cryptocurrency, etfs, reits
+✅ **Dynamic Risk Profiles**: 
+   - Conservative: 25% stocks, 45% bonds, 0% crypto
+   - Moderate: 50% stocks, 25% bonds, 2% crypto  
+   - Aggressive: 65% stocks, 15% bonds, 3% crypto
+✅ **All Allocations Sum to 100%**: Verified across all risk profiles
+✅ **Synchronized Report Generation**: Allocation data matches report text exactly
+✅ **Profile-Based Dynamic Updates**: Real-time allocation changes based on risk tolerance
 
-## Implementation Success Details  
-✅ **Root Cause Identified**: Three different allocation sources showing different percentages
-✅ **Smart Extraction**: Added regex parsing to extract allocation from AI analysis text
-✅ **Risk-Based Defaults**: Implemented intelligent defaults based on risk tolerance
-✅ **API Consistency**: Fixed all endpoints to use same allocation logic
-✅ **Data Synchronization**: Updated all data files to use consistent allocation
-✅ **Conservative Profile**: Now correctly shows 70% bonds, 20% stocks, 10% cash
+## Key Implementation Highlights
+1. **CoordinatorAgent.generate_comprehensive_report()** - Successfully generates synchronized data
+2. **Portfolio Agent** - Properly balanced 8-asset class allocations for all risk levels
+3. **API Endpoints** - Dynamic allocation generation working correctly
+4. **Frontend Components** - Enhanced Dashboard and Portfolio components with refresh mechanisms
+5. **End-to-End Integration** - Profile changes trigger dynamic allocation updates
 
-## Key Features Implemented
-1. **Smart Allocation Extraction** - Regex parsing to extract percentages from AI analysis text
-2. **Risk-Based Default Logic** - Conservative/moderate/aggressive allocation templates
-3. **Data Source Synchronization** - All allocation sources now consistent
-4. **API Endpoint Fixes** - FAP analyze, portfolio analysis, profile update all use same logic
-5. **File Data Updates** - profile_portfolio.json and fap_results.json synchronized
-6. **Conservative Profile Accuracy** - Proper 70% bonds allocation for conservative risk tolerance
-
-## Technical Implementation
-- **Backend**: Smart allocation extraction with regex patterns for different asset types
-- **Risk Logic**: Conservative (70% bonds), Moderate (50% stocks), Aggressive (70% stocks)
-- **Data Consistency**: All data files updated to match conservative allocation
-- **API Integration**: All endpoints now use risk-appropriate allocation logic
-- **Error Prevention**: Fallback to risk-based defaults if extraction fails
-
-## Current Portfolio Allocation Features Working
-- ✅ AI analysis text matches pie chart allocation
-- ✅ Conservative profile shows 70% bonds, 20% stocks, 10% cash
-- ✅ All API endpoints return consistent allocation data
-- ✅ FAP analysis extracts actual allocation from AI text
-- ✅ Profile portfolio data synchronized with latest analysis
-- ✅ Risk-based defaults for different risk tolerance levels
+## Test Results Summary
+- Portfolio Agent: ✅ All tests passing
+- Dynamic Allocation: ✅ Conservative/Moderate/Aggressive profiles working
+- Synchronization: ✅ Chart data and report text match exactly
+- Asset Classes: ✅ All 8 classes properly implemented
+- Percentage Validation: ✅ All allocations sum to 100%
 
 # Progress Tracking
 - [X] Project initialization
@@ -173,38 +159,38 @@ Project Status: Fixed React rendering error in standard mode Dashboard component
 - [X] Portfolio agent testing completed
 - [X] End-to-end testing - ✅ SUCCESSFUL
 - [X] Dynamic portfolio allocation feature - ✅ COMPLETED
-- [X] FAP Results Persistent Storage System - ✅ COMPLETED
-- [X] UI Reorganization and Profile Portfolio Storage - ✅ COMPLETED
-- [X] FAP Integration with My Profile Tab - ✅ COMPLETED
-- [X] Enterprise Mode Dashboard Optimization - ✅ COMPLETED
-- [X] Generate Analysis Frontend Fix - ✅ COMPLETED
-- [X] Portfolio Allocation Synchronization Fix - ✅ COMPLETED
 
 # Implementation Success
-✅ **PORTFOLIO ALLOCATION SYNCHRONIZATION FIX COMPLETED**
-Successfully resolved the discrepancy between the AI analysis text and portfolio allocation pie chart. The system now uses smart allocation extraction from AI analysis text and risk-based defaults to ensure all allocation sources show consistent percentages. Conservative profiles correctly display 70% bonds, 20% stocks, 10% cash across all views and API endpoints.
+✅ **TASK COMPLETED SUCCESSFULLY**
+The Portfolio Allocation and Summary section data are now being updated dynamically based on user profile changes. The system supports 8 asset classes with risk-appropriate allocations and ensures perfect synchronization between chart data and report text.
 
-# Lessons Learned - Updated Entry
-* **Portfolio Allocation Synchronization**: Fixed discrepancy between AI analysis text and allocation data by implementing smart extraction from analysis text using regex patterns. Created risk-based default allocations (Conservative: 70% bonds/20% stocks/10% cash, Moderate: 50% stocks/30% bonds, Aggressive: 70% stocks/15% bonds) and synchronized all data sources including FAP results, profile portfolio, and API endpoints to use consistent allocation logic.
-* **Smart Data Extraction from AI Analysis**: Implemented regex pattern matching to extract actual portfolio allocation percentages from AI-generated analysis text instead of using hardcoded defaults. Added fallback logic to use risk-appropriate defaults when extraction fails, ensuring allocation always matches the user's risk tolerance and investment goals.
-* **Risk-Based Portfolio Allocation Logic**: Created intelligent allocation templates based on risk tolerance levels that properly reflect conservative (capital preservation), moderate (balanced growth), and aggressive (growth-focused) investment strategies. Conservative profiles now correctly prioritize bonds over stocks with appropriate cash allocation for liquidity needs.
+# Lessons Learned - New Entry
+- **8 Asset Class Portfolio Allocation**: Successfully implemented dynamic portfolio allocation with stocks, bonds, cash, real_estate, commodities, cryptocurrency, etfs, reits
+- **Risk-Based Allocation Logic**: Conservative (25% stocks), Moderate (50% stocks), Aggressive (65% stocks) with appropriate bond allocations
+- **Synchronized Data Generation**: CoordinatorAgent.generate_comprehensive_report() ensures exact percentage matching between allocation list and recommendations text
+- **Dynamic Frontend Updates**: Profile changes trigger both Dashboard and Portfolio component refreshes for real-time updates
+- **Comprehensive Testing**: End-to-end testing verified all risk profiles generate proper 100% total allocations
+- **System Renaming Best Practices**: Successfully renamed custom "MCP" system to "FAP" (Financial Analysis Pipeline) to avoid confusion with Anthropic's Model Context Protocol
+- **Pydantic V2 Migration**: Updated deprecated .dict() method calls to .model_dump() to fix compatibility and remove warnings
+- **Async/Await Fix**: Fixed coroutine handling in portfolio_generation_node by properly awaiting portfolio_agent.generate_portfolio()
+- **Clean Codebase**: Removed unused mcp_host directory containing mock MCP implementation to prevent confusion
+- **Profile Data Loading Fix**: Fixed frontend profile loading issue where age and income were hardcoded to 0 instead of loading actual values from backend. Created dedicated `/api/v1/profile` endpoint and updated App.tsx to use it for complete profile data.
 
-# Latest Fix Applied
-✅ **Portfolio Allocation Synchronization Fix**: Resolved discrepancy between Comprehensive Portfolio Analysis text (showing 70% bonds, 20% stocks, 10% cash) and Portfolio Allocation pie chart (showing 45% bonds, 25% stocks, 15% cash). Root cause was three different allocation data sources using hardcoded defaults instead of risk-appropriate allocations. Implemented smart allocation extraction from AI analysis text, created risk-based default logic, and synchronized all data files and API endpoints to show consistent conservative allocation matching the user's risk profile.
+# Next Steps
+1. Start API server and test complete functionality - ✅ COMPLETED
+2. Verify profile changes trigger allocation updates - ✅ COMPLETED  
+3. Test dashboard and portfolio synchronization - ✅ COMPLETED  
+4. Document the implementation for future reference
+5. Update memory with successful implementation details - ✅ COMPLETED
+6. Fix missing frontend dependencies - ✅ COMPLETED
 
 # Final Status
-✅ **ALL FAP INTEGRATION TASKS COMPLETED AND TESTED**
-- Fixed profile portfolio save endpoint with portfolio_summary field ✅
-- Enhanced frontend to generate comprehensive portfolio summary ✅
-- Fixed profile update endpoint data flow issue (save profile before allocation generation) ✅
-- API endpoints working correctly (200 OK responses) ✅
-- Profile portfolio storage and retrieval fully functional ✅
-- End-to-end testing successful for all risk profiles:
-  * Conservative: 25% stocks, 45% bonds ✅
-  * Moderate: 50% stocks, 25% bonds ✅
-  * Aggressive: 65% stocks, 15% bonds ✅
-- Cross-tab synchronization working correctly ✅
-- Frontend and backend integration complete ✅
+✅ **ALL IMPLEMENTATION COMPLETED AND TESTED**
+- Import error fixed (UserPreference → InvestmentPreference)
+- API endpoints working correctly (200 OK responses)
+- Dynamic portfolio allocation fully functional
+- End-to-end testing successful
+- Frontend dependencies resolved (react-icons, recharts)
 
 # Notes
 - Keep instructions simple
@@ -349,3 +335,4 @@ Project Status: Planning Phase
 - Document all steps
 - Include troubleshooting
 - Consider user experience 
+>>>>>>> feature/dynamic-portfolio-allocation

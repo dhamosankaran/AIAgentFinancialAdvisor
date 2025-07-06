@@ -539,10 +539,19 @@ async def add_journal_entry(entry: JournalEntry):
 async def get_market_quote(symbol: str):
     """Get a real-time quote for a given stock symbol"""
     try:
-        quote = await market_data_service.get_market_data([symbol])
-        if not quote or symbol not in quote:
-            raise HTTPException(status_code=404, detail="Symbol not found or API error")
-        return quote[symbol]
+        # Use get_stock_data for comprehensive stock information
+        quote_data = await market_data_service.get_stock_data(symbol)
+        
+        # Check for API errors
+        if "error" in quote_data:
+            raise HTTPException(status_code=400, detail=quote_data["error"])
+        
+        # Ensure symbol is always included in response for frontend validation
+        quote_data["symbol"] = symbol.upper()
+        
+        return quote_data
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error(f"Error getting market quote for {symbol}: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))

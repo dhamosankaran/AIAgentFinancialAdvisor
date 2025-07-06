@@ -78,22 +78,11 @@ class PortfolioAgent(BaseFinancialAgent):
     async def generate_portfolio(self, profile: Dict | str) -> PortfolioAllocation:
         """Generate a portfolio based on user profile and risk assessment."""
         try:
-            # Import here to avoid circular imports
-            from src.services.user_profile_service import UserProfileService
-            
-            # Try to load saved profile first
-            profile_service = UserProfileService()
-            saved_profile = profile_service.load_profile()
-            
-            if saved_profile:
-                # Use saved profile's risk tolerance
-                risk_level = saved_profile.risk_tolerance.lower()
+            # Handle both string and dictionary inputs
+            if isinstance(profile, str):
+                risk_level = profile.lower()
             else:
-                # Handle both string and dictionary inputs as fallback
-                if isinstance(profile, str):
-                    risk_level = profile.lower()
-                else:
-                    risk_level = profile.get("risk_level", "moderate").lower()
+                risk_level = profile.get("risk_level", "moderate").lower()
             
             # Define target allocations based on risk level
             allocations = {

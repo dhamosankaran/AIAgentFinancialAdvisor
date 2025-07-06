@@ -90,8 +90,6 @@ class UserProfileService:
             return {
                 "user_id": profile.user_id,
                 "name": profile.name,
-                "age": profile.age,
-                "income": profile.income,
                 "risk_tolerance": profile.risk_tolerance,
                 "investment_goal": profile.investment_goal,
                 "investment_horizon": profile.investment_horizon,
